@@ -2,6 +2,7 @@
 
 namespace Oggetto\News\Controller\Adminhtml\News;
 
+use Magento\Backend\Model\View\Result\Page;
 use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\View\Result\PageFactory;
@@ -51,6 +52,10 @@ class Index implements HttpGetActionInterface
      */
     public function execute()
     {
-        return $this->pageFactory->create();
+        /** @var Page $resultPage */
+        $resultPage = $this->pageFactory->create();
+        $resultPage->getConfig()->getTitle()->prepend(__('News'));
+
+        return $resultPage;
     }
 }
