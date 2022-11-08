@@ -7,7 +7,6 @@ use Magento\Framework\Exception\NoSuchEntityException;
 use Oggetto\News\Api\Data\NewsInterfaceFactory;
 use Oggetto\News\Api\NewsRepositoryInterface;
 use Oggetto\News\Model\ResourceModel\News as ResourceNews;
-use Oggetto\News\Model\ResourceModel\News\Collection;
 use Oggetto\News\Model\ResourceModel\News\CollectionFactory;
 
 class NewsRepository implements NewsRepositoryInterface

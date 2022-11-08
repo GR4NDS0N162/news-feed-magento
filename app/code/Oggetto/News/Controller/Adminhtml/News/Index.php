@@ -4,7 +4,6 @@ namespace Oggetto\News\Controller\Adminhtml\News;
 
 use Magento\Backend\Model\View\Result\Page;
 use Magento\Framework\App\Action\HttpGetActionInterface;
-use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\View\Result\PageFactory;
 use Oggetto\News\Api\Data\NewsInterfaceFactory;
 use Oggetto\News\Api\NewsRepositoryInterface;
