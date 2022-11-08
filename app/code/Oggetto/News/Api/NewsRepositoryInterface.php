@@ -4,6 +4,7 @@ namespace Oggetto\News\Api;
 
 use Magento\Framework\Exception\LocalizedException;
 use Oggetto\News\Api\Data\NewsInterface;
+use Oggetto\News\Model\ResourceModel\News\Collection;
 
 interface NewsRepositoryInterface
 {
@@ -24,4 +25,11 @@ interface NewsRepositoryInterface
      * @throws LocalizedException
      */
     public function save($news);
+
+    /**
+     * Retrieve news collection
+     *
+     * @return Collection
+     */
+    public function getList();
 }
