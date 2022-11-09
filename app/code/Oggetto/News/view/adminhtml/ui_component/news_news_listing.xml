@@ -7,7 +7,7 @@
         </item>
     </argument>
     <settings>
-        <spinner>test_columns</spinner>
+        <spinner>news_columns</spinner>
         <deps>
             <dep>news_news_listing.news_news_listing_data_source</dep>
         </deps>
@@ -46,7 +46,7 @@
         </filters>
         <paging name="listing_paging" />
     </listingToolbar>
-    <columns name="test_columns">
+    <columns name="news_columns">
         <column name="id">
             <settings>
                 <filter>textRange</filter>
