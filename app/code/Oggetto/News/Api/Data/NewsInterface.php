@@ -10,7 +10,7 @@ interface NewsInterface
     public const CONTENT = 'content';
     public const CREATION_TIME = 'creation_time';
     public const UPDATE_TIME = 'update_time';
-    public const IS_ACTIVE = 'is_active';
+    public const STATUS = 'status';
     public const IMAGE = 'image';
 
     /**
@@ -56,11 +56,11 @@ interface NewsInterface
     public function getUpdateTime();
 
     /**
-     * Is active
+     * Get status
      *
-     * @return bool|null
+     * @return int|null
      */
-    public function isActive();
+    public function getStatus();
 
     /**
      * Get image
@@ -118,12 +118,12 @@ interface NewsInterface
     public function setUpdateTime($updateTime);
 
     /**
-     * Set is active
+     * Set status
      *
-     * @param bool|int $isActive
+     * @param int $status
      * @return NewsInterface
      */
-    public function setIsActive($isActive);
+    public function setStatus($status);
 
     /**
      * Set image

@@ -7,7 +7,7 @@
             "content": true,
             "creation_time": true,
             "update_time": true,
-            "is_active": true,
+            "status": true,
             "image": true
         },
         "constraint": {

@@ -96,9 +96,9 @@
                 <label translate="true">Description</label>
             </settings>
         </column>
-        <column name="is_active" component="Magento_Ui/js/grid/columns/select">
+        <column name="status" component="Magento_Ui/js/grid/columns/select">
             <settings>
-                <options class="Oggetto\News\Model\News\Source\IsActive" />
+                <options class="Oggetto\News\Model\News\Source\Status" />
                 <filter>select</filter>
                 <editor>
                     <editorType>select</editorType>

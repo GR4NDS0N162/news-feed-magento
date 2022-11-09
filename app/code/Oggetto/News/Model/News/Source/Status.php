@@ -5,7 +5,7 @@ namespace Oggetto\News\Model\News\Source;
 use Magento\Framework\Data\OptionSourceInterface;
 use Oggetto\News\Model\News;
 
-class IsActive implements OptionSourceInterface
+class Status implements OptionSourceInterface
 {
     /**
      * @var News

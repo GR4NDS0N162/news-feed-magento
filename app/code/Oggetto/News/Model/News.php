@@ -70,9 +70,9 @@ class News extends AbstractModel implements NewsInterface
     /**
      * @inheritDoc
      */
-    public function isActive()
+    public function getStatus()
     {
-        return (bool)$this->getData(self::IS_ACTIVE);
+        return (int)$this->getData(self::STATUS);
     }
 
     /**
@@ -134,9 +134,9 @@ class News extends AbstractModel implements NewsInterface
     /**
      * @inheritDoc
      */
-    public function setIsActive($isActive)
+    public function setStatus($status)
     {
-        return $this->setData(self::IS_ACTIVE, $isActive);
+        return $this->setData(self::STATUS, $status);
     }
 
     /**

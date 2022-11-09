@@ -11,8 +11,8 @@
                 comment="News Creation Time" />
         <column xsi:type="timestamp" name="update_time" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
                 comment="News Modification Time" />
-        <column xsi:type="smallint" name="is_active" unsigned="false" nullable="false" identity="false"
-                default="1" comment="Is News Active" />
+        <column xsi:type="smallint" name="status" unsigned="false" nullable="false" identity="false"
+                default="1" comment="News Status" />
         <column xsi:type="varchar" name="image" nullable="true" length="255" comment="News Image" />
         <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="id" />
