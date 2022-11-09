@@ -8,6 +8,9 @@ use Oggetto\News\Model\ResourceModel\News as NewsResourceModel;
 
 class News extends AbstractModel implements NewsInterface
 {
+    public const STATUS_ENABLED = 1;
+    public const STATUS_DISABLED = 0;
+
     /**
      * @inheritDoc
      */
@@ -142,5 +145,18 @@ class News extends AbstractModel implements NewsInterface
     public function setImage($image)
     {
         return $this->setData(self::IMAGE, $image);
+    }
+
+    /**
+     * Prepare news's statuses.
+     *
+     * @return array
+     */
+    public function getAvailableStatuses()
+    {
+        return [
+            self::STATUS_ENABLED  => __('Enabled'),
+            self::STATUS_DISABLED => __('Disabled'),
+        ];
     }
 }

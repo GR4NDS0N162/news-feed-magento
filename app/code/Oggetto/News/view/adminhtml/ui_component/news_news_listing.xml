@@ -98,7 +98,7 @@
         </column>
         <column name="is_active" component="Magento_Ui/js/grid/columns/select">
             <settings>
-                <options class="Magento\Cms\Model\Block\Source\IsActive" />
+                <options class="Oggetto\News\Model\News\Source\IsActive" />
                 <filter>select</filter>
                 <editor>
                     <editorType>select</editorType>
