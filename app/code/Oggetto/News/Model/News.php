@@ -24,7 +24,7 @@ class News extends AbstractModel implements NewsInterface
      */
     public function getId()
     {
-        return $this->getData(self::ID);
+        return (int)$this->getData(self::ID);
     }
 
     /**
