@@ -10,7 +10,7 @@ use Oggetto\News\Model\ResourceModel\News\Collection;
 interface NewsRepositoryInterface
 {
     /**
-     * Receive news by id
+     * Retrieve news by ID
      *
      * @param int $newsId
      * @return NewsInterface
