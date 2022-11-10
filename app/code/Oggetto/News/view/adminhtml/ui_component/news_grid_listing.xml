@@ -90,6 +90,20 @@
         <paging name="listing_paging" />
     </listingToolbar>
     <columns name="news_columns">
+        <settings>
+            <childDefaults>
+                <param name="fieldAction" xsi:type="array">
+                    <item name="provider" xsi:type="string">
+                        news_grid_listing.news_grid_listing.news_columns.actions
+                    </item>
+                    <item name="target" xsi:type="string">applyAction</item>
+                    <item name="params" xsi:type="array">
+                        <item name="0" xsi:type="string">edit</item>
+                        <item name="1" xsi:type="string">${ $.$data.rowIndex }</item>
+                    </item>
+                </param>
+            </childDefaults>
+        </settings>
         <selectionsColumn name="ids">
             <settings>
                 <indexField>id</indexField>
@@ -153,5 +167,10 @@
                 <label translate="true">Modified</label>
             </settings>
         </column>
+        <actionsColumn name="actions" class="Oggetto\News\Ui\Component\Listing\Columns\NewsActions">
+            <settings>
+                <indexField>id</indexField>
+            </settings>
+        </actionsColumn>
     </columns>
 </listing>
