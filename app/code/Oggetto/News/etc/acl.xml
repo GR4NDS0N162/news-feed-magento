@@ -9,6 +9,14 @@
                         <resource id="Oggetto_News::news" title="News" translate="title" sortOrder="1000" />
                     </resource>
                 </resource>
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="Magento_Config::config">
+                            <resource id="Oggetto_News::config_news" title="News Section" translate="title"
+                                      sortOrder="2000" />
+                        </resource>
+                    </resource>
+                </resource>
             </resource>
         </resources>
     </acl>

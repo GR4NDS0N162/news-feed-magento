@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="news" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1"
+                 showInStore="1">
+            <label>News</label>
+            <tab>general</tab>
+            <resource>Oggetto_News::config_news</resource>
+            <group id="news_config" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>News Grid</label>
+                <field id="news_per_page" translate="label comment" type="text" sortOrder="100" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>News count per page</label>
+                    <validate>validate-number validate-digits validate-greater-than-one</validate>
+                    <comment><![CDATA[The number of news items displayed on one page.]]></comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
