@@ -7,6 +7,13 @@
         </item>
     </argument>
     <settings>
+        <buttons>
+            <button name="add">
+                <url path="*/*/new" />
+                <class>primary</class>
+                <label translate="true">Add News</label>
+            </button>
+        </buttons>
         <spinner>news_columns</spinner>
         <deps>
             <dep>news_news_listing.news_news_listing_data_source</dep>
