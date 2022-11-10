@@ -3,7 +3,7 @@
          xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
     <argument name="data" xsi:type="array">
         <item name="js_config" xsi:type="array">
-            <item name="provider" xsi:type="string">news_news_listing.news_news_listing_data_source</item>
+            <item name="provider" xsi:type="string">news_grid_listing.news_grid_listing_data_source</item>
         </item>
     </argument>
     <settings>
@@ -16,10 +16,10 @@
         </buttons>
         <spinner>news_columns</spinner>
         <deps>
-            <dep>news_news_listing.news_news_listing_data_source</dep>
+            <dep>news_grid_listing.news_grid_listing_data_source</dep>
         </deps>
     </settings>
-    <dataSource name="news_news_listing_data_source" component="Magento_Ui/js/grid/provider">
+    <dataSource name="news_grid_listing_data_source" component="Magento_Ui/js/grid/provider">
         <settings>
             <storageConfig>
                 <param name="indexField" xsi:type="string">id</param>
@@ -27,7 +27,7 @@
             <updateUrl path="mui/index/render" />
         </settings>
         <aclResource>Oggetto_News::news</aclResource>
-        <dataProvider class="Oggetto\News\Ui\Component\DataProvider" name="news_news_listing_data_source">
+        <dataProvider class="Oggetto\News\Ui\Component\DataProvider" name="news_grid_listing_data_source">
             <settings>
                 <requestFieldName>id</requestFieldName>
                 <primaryFieldName>id</primaryFieldName>
