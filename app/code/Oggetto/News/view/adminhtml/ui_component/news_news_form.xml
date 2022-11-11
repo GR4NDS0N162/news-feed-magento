@@ -86,5 +86,20 @@
                 <dataScope>title</dataScope>
             </settings>
         </field>
+        <field name="description" formElement="textarea">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">news</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">News Description</label>
+                <dataScope>description</dataScope>
+            </settings>
+        </field>
     </fieldset>
 </form>
