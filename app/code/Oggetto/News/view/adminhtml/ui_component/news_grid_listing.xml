@@ -133,7 +133,7 @@
                 <filter>text</filter>
                 <editor>
                     <validation>
-                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                        <rule name="required-entry" xsi:type="boolean">false</rule>
                     </validation>
                     <editorType>text</editorType>
                 </editor>
