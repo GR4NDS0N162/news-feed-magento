@@ -5,9 +5,8 @@ namespace Oggetto\News\Controller\Adminhtml\News;
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Backend\Model\View\Result\Page;
-use Magento\Backend\Model\View\Result\Redirect;
 use Magento\Framework\App\Action\HttpGetActionInterface;
-use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\View\Result\PageFactory;
 use Oggetto\News\Api\Data\NewsInterface;
 use Oggetto\News\Api\NewsRepositoryInterface;
@@ -45,13 +44,14 @@ class Edit extends Action implements HttpGetActionInterface
     {
         $id = $this->getRequest()->getParam(NewsInterface::ID);
 
-        try {
-            $model = $this->newsRepository->getById($id);
-        } catch (LocalizedException $ex) {
-            $this->messageManager->addErrorMessage(__($ex->getMessage()));
-            /** @var Redirect $resultRedirect */
-            $resultRedirect = $this->resultRedirectFactory->create();
-            return $resultRedirect->setPath('*/*/');
+        if ($id) {
+            try {
+                $model = $this->newsRepository->getById($id);
+            } catch (NoSuchEntityException) {
+                $this->messageManager->addErrorMessage(__('This block no longer exists.'));
+                $resultRedirect = $this->resultRedirectFactory->create();
+                return $resultRedirect->setPath('*/*/');
+            }
         }
 
         /** @var Page $resultPage */
