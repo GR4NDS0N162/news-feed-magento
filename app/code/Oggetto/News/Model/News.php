@@ -22,14 +22,6 @@ class News extends AbstractModel implements NewsInterface
     /**
      * @inheritDoc
      */
-    public function getId()
-    {
-        return (int)$this->getData(self::ID);
-    }
-
-    /**
-     * @inheritDoc
-     */
     public function getTitle()
     {
         return $this->getData(self::TITLE);
@@ -81,14 +73,6 @@ class News extends AbstractModel implements NewsInterface
     public function getImage()
     {
         return $this->getData(self::IMAGE);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function setId($id)
-    {
-        return $this->setData(self::ID, $id);
     }
 
     /**
