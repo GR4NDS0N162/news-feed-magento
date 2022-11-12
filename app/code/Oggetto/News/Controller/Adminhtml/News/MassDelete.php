@@ -10,6 +10,7 @@ use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Ui\Component\MassAction\Filter;
+use Oggetto\News\Api\Data\NewsInterface;
 use Oggetto\News\Api\NewsRepositoryInterface;
 use Oggetto\News\Model\ResourceModel\News\CollectionFactory;
 
@@ -59,6 +60,7 @@ class MassDelete extends Action implements HttpPostActionInterface
         $collection = $this->filter->getCollection($this->collectionFactory->create());
         $collectionSize = $collection->getSize();
 
+        /** @var NewsInterface $news */
         foreach ($collection as $news) {
             $this->newsRepository->delete($news);
         }
