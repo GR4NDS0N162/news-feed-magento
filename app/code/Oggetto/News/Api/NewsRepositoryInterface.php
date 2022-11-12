@@ -11,7 +11,7 @@ interface NewsRepositoryInterface
     /**
      * Retrieve news by ID
      *
-     * @param int $newsId
+     * @param string $newsId
      * @return NewsInterface
      * @throws LocalizedException
      */
