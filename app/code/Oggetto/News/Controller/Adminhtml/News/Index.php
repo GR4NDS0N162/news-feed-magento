@@ -5,8 +5,9 @@ namespace Oggetto\News\Controller\Adminhtml\News;
 use Magento\Backend\Model\View\Result\Page;
 use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\View\Result\PageFactory;
+use Oggetto\News\Controller\Adminhtml\News;
 
-class Index implements HttpGetActionInterface
+class Index extends News implements HttpGetActionInterface
 {
     /**
      * @var PageFactory

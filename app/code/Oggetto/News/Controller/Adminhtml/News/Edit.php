@@ -2,7 +2,6 @@
 
 namespace Oggetto\News\Controller\Adminhtml\News;
 
-use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Backend\Model\View\Result\Page;
 use Magento\Framework\App\Action\HttpGetActionInterface;
@@ -10,8 +9,9 @@ use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\View\Result\PageFactory;
 use Oggetto\News\Api\Data\NewsInterface;
 use Oggetto\News\Api\NewsRepositoryInterface;
+use Oggetto\News\Controller\Adminhtml\News;
 
-class Edit extends Action implements HttpGetActionInterface
+class Edit extends News implements HttpGetActionInterface
 {
     /**
      * @var PageFactory

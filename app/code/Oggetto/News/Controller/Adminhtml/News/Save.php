@@ -2,16 +2,16 @@
 
 namespace Oggetto\News\Controller\Adminhtml\News;
 
-use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Backend\Model\View\Result\Redirect;
 use Magento\Framework\App\Action\HttpPostActionInterface;
 use Magento\Framework\Exception\LocalizedException;
 use Oggetto\News\Api\Data\NewsInterface;
 use Oggetto\News\Api\NewsRepositoryInterface;
+use Oggetto\News\Controller\Adminhtml\News;
 use Oggetto\News\Model\NewsFactory;
 
-class Save extends Action implements HttpPostActionInterface
+class Save extends News implements HttpPostActionInterface
 {
     /**
      * @var NewsFactory
