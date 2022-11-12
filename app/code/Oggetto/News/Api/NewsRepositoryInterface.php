@@ -3,6 +3,7 @@
 namespace Oggetto\News\Api;
 
 use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Oggetto\News\Api\Data\NewsInterface;
 use Oggetto\News\Model\ResourceModel\News\Collection;
 
@@ -13,7 +14,7 @@ interface NewsRepositoryInterface
      *
      * @param string $newsId
      * @return NewsInterface
-     * @throws LocalizedException
+     * @throws NoSuchEntityException
      */
     public function getById($newsId);
 
@@ -30,6 +31,7 @@ interface NewsRepositoryInterface
      * Retrieve news collection
      *
      * @return Collection
+     * @throws LocalizedException
      */
     public function getList();
 
