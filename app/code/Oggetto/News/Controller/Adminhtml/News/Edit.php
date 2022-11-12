@@ -56,7 +56,7 @@ class Edit extends News implements HttpGetActionInterface
 
         /** @var Page $resultPage */
         $resultPage = $this->resultPageFactory->create();
-        $resultPage->addBreadcrumb(
+        $this->initPage($resultPage)->addBreadcrumb(
             $id ? __('Edit News') : __('Add News'),
             $id ? __('Edit News') : __('Add News'),
         );

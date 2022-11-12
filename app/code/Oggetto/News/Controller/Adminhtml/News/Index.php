@@ -30,7 +30,7 @@ class Index extends News implements HttpGetActionInterface
     {
         /** @var Page $resultPage */
         $resultPage = $this->resultPageFactory->create();
-        $resultPage->getConfig()->getTitle()->prepend(__('News'));
+        $this->initPage($resultPage)->getConfig()->getTitle()->prepend(__('News'));
         return $resultPage;
     }
 }
