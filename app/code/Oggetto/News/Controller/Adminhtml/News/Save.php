@@ -5,10 +5,12 @@ namespace Oggetto\News\Controller\Adminhtml\News;
 use Magento\Backend\App\Action\Context;
 use Magento\Backend\Model\View\Result\Redirect;
 use Magento\Framework\App\Action\HttpPostActionInterface;
+use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\LocalizedException;
 use Oggetto\News\Api\Data\NewsInterface;
 use Oggetto\News\Api\NewsRepositoryInterface;
 use Oggetto\News\Controller\Adminhtml\News as NewsAction;
+use Oggetto\News\Model\News;
 use Oggetto\News\Model\NewsFactory;
 
 class Save extends NewsAction implements HttpPostActionInterface
@@ -67,7 +69,7 @@ class Save extends NewsAction implements HttpPostActionInterface
             try {
                 $this->newsRepository->save($model);
                 $this->messageManager->addSuccessMessage(__('You saved the news.'));
-                return $resultRedirect->setPath('*/*/');
+                return $this->processNewsReturn($model, $data, $resultRedirect);
             } catch (LocalizedException $e) {
                 $this->messageManager->addErrorMessage($e->getMessage());
             } catch (\Exception $e) {
@@ -77,5 +79,34 @@ class Save extends NewsAction implements HttpPostActionInterface
             return $resultRedirect->setPath('*/*/edit', [NewsInterface::ID => $id]);
         }
         return $resultRedirect->setPath('*/*/');
+    }
+
+    /**
+     * Process and set the block return
+     *
+     * @param News $model
+     * @param array $data
+     * @param \Magento\Framework\Controller\Result\Redirect $resultRedirect
+     * @return \Magento\Framework\Controller\Result\Redirect
+     * @throws CouldNotSaveException
+     */
+    private function processNewsReturn($model, $data, $resultRedirect)
+    {
+        $redirect = $data['back'] ?? 'close';
+
+        if ($redirect === 'continue') {
+            $resultRedirect->setPath('*/*/edit', [NewsInterface::ID => $model->getId()]);
+        } elseif ($redirect === 'close') {
+            $resultRedirect->setPath('*/*/');
+        } elseif ($redirect === 'duplicate') {
+            $duplicateModel = $this->newsFactory->create(['data' => $data]);
+            $duplicateModel->setId(null);
+            $duplicateModel->setStatus(News::STATUS_DISABLED);
+            $this->newsRepository->save($duplicateModel);
+            $id = $duplicateModel->getId();
+            $this->messageManager->addSuccessMessage(__('You duplicated the news.'));
+            $resultRedirect->setPath('*/*/edit', [NewsInterface::ID => $id]);
+        }
+        return $resultRedirect;
     }
 }
