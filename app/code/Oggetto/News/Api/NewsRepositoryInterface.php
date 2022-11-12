@@ -2,6 +2,8 @@
 
 namespace Oggetto\News\Api;
 
+use Magento\Framework\Exception\CouldNotDeleteException;
+use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Oggetto\News\Api\Data\NewsInterface;
@@ -23,7 +25,7 @@ interface NewsRepositoryInterface
      *
      * @param NewsInterface $news
      * @return NewsInterface
-     * @throws LocalizedException
+     * @throws CouldNotSaveException
      */
     public function save(NewsInterface $news);
 
@@ -40,7 +42,7 @@ interface NewsRepositoryInterface
      *
      * @param NewsInterface $news
      * @return bool true on success
-     * @throws LocalizedException
+     * @throws CouldNotDeleteException
      */
     public function delete(NewsInterface $news);
 
@@ -49,7 +51,7 @@ interface NewsRepositoryInterface
      *
      * @param string $newsId
      * @return bool true on success
-     * @throws LocalizedException
+     * @throws CouldNotDeleteException
      */
     public function deleteById($newsId);
 }

@@ -8,9 +8,7 @@ use Magento\Ui\Component\Control\Container;
 class SaveButton extends GenericButton implements ButtonProviderInterface
 {
     /**
-     * Get button data
-     *
-     * @return array
+     * @inheritDoc
      */
     public function getButtonData()
     {
