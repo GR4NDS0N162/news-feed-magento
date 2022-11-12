@@ -5,6 +5,7 @@ namespace Oggetto\News\Model;
 use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\NoSuchEntityException;
+use Oggetto\News\Api\Data\NewsInterface;
 use Oggetto\News\Api\Data\NewsInterfaceFactory;
 use Oggetto\News\Api\NewsRepositoryInterface;
 use Oggetto\News\Model\ResourceModel\News as ResourceNews;
@@ -63,7 +64,7 @@ class NewsRepository implements NewsRepositoryInterface
     /**
      * @inheritDoc
      */
-    public function save($news)
+    public function save(NewsInterface $news)
     {
         try {
             $this->resource->save($news);
@@ -84,7 +85,7 @@ class NewsRepository implements NewsRepositoryInterface
     /**
      * @inheritDoc
      */
-    public function delete($news)
+    public function delete(NewsInterface $news)
     {
         try {
             $this->resource->delete($news);

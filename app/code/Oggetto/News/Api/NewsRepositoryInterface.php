@@ -24,7 +24,7 @@ interface NewsRepositoryInterface
      * @return NewsInterface
      * @throws LocalizedException
      */
-    public function save($news);
+    public function save(NewsInterface $news);
 
     /**
      * Retrieve news collection
@@ -40,7 +40,7 @@ interface NewsRepositoryInterface
      * @return bool true on success
      * @throws LocalizedException
      */
-    public function delete($news);
+    public function delete(NewsInterface $news);
 
     /**
      * Delete news by ID
