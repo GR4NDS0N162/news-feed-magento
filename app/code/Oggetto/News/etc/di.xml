@@ -12,4 +12,37 @@
             </argument>
         </arguments>
     </type>
+    <type name="Magento\Framework\Model\Entity\RepositoryFactory">
+        <arguments>
+            <argument name="entities" xsi:type="array">
+                <item name="Oggetto\News\Api\Data\NewsInterface" xsi:type="string">
+                    Oggetto\News\Api\NewsRepositoryInterface
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\EntityManager\MetadataPool">
+        <arguments>
+            <argument name="metadata" xsi:type="array">
+                <item name="Oggetto\News\Api\Data\NewsInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="string">news</item>
+                    <item name="identifierField" xsi:type="string">id</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\EntityManager\HydratorPool">
+        <arguments>
+            <argument name="hydrators" xsi:type="array">
+                <item name="Oggetto\News\Api\Data\NewsInterface" xsi:type="string">
+                    Magento\Framework\EntityManager\AbstractModelHydrator
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Oggetto\News\Model\NewsRepository">
+        <arguments>
+            <argument name="hydrator" xsi:type="object">Magento\Framework\EntityManager\AbstractModelHydrator</argument>
+        </arguments>
+    </type>
 </config>
