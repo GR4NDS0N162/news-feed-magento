@@ -10,7 +10,9 @@
     </argument>
     <settings>
         <buttons>
-            <button name="save" class="Oggetto\News\Block\Adminhtml\News\Edit\SaveButton"/>
+            <button name="save" class="Oggetto\News\Block\Adminhtml\News\Edit\SaveButton" />
+            <button name="delete" class="Oggetto\News\Block\Adminhtml\News\Edit\DeleteButton" />
+            <button name="back" class="Oggetto\News\Block\Adminhtml\News\Edit\BackButton" />
         </buttons>
         <namespace>news_news_form</namespace>
         <dataScope>data</dataScope>
