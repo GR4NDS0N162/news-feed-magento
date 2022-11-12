@@ -5,44 +5,36 @@ namespace Oggetto\News\Controller\Adminhtml\News;
 use Magento\Backend\Model\View\Result\Page;
 use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\View\Result\PageFactory;
-use Oggetto\News\Api\Data\NewsInterfaceFactory;
 use Oggetto\News\Api\NewsRepositoryInterface;
-use Oggetto\News\Model\NewsFactory;
+use Oggetto\News\Model\NewsFactory as NewsFactory;
 
 class Index implements HttpGetActionInterface
 {
     /**
      * @var PageFactory
      */
-    protected $pageFactory;
+    protected $resultPageFactory;
     /**
      * @var NewsFactory
      */
     protected $newsFactory;
-    /**
-     * @var NewsInterfaceFactory
-     */
-    protected $dataNewsFactory;
     /**
      * @var NewsRepositoryInterface
      */
     protected $newsRepository;
 
     /**
-     * @param PageFactory $pageFactory
+     * @param PageFactory $resultPageFactory
      * @param NewsFactory $newsFactory
-     * @param NewsInterfaceFactory $dataNewsFactory
      * @param NewsRepositoryInterface $newsRepository
      */
     public function __construct(
-        PageFactory $pageFactory,
+        PageFactory $resultPageFactory,
         NewsFactory $newsFactory,
-        NewsInterfaceFactory $dataNewsFactory,
         NewsRepositoryInterface $newsRepository,
     ) {
-        $this->pageFactory = $pageFactory;
+        $this->resultPageFactory = $resultPageFactory;
         $this->newsFactory = $newsFactory;
-        $this->dataNewsFactory = $dataNewsFactory;
         $this->newsRepository = $newsRepository;
     }
 
@@ -52,9 +44,8 @@ class Index implements HttpGetActionInterface
     public function execute()
     {
         /** @var Page $resultPage */
-        $resultPage = $this->pageFactory->create();
+        $resultPage = $this->resultPageFactory->create();
         $resultPage->getConfig()->getTitle()->prepend(__('News'));
-
         return $resultPage;
     }
 }
