@@ -7,7 +7,10 @@ use Magento\Backend\App\Action\Context;
 use Magento\Backend\Model\View\Result\Redirect;
 use Magento\Framework\App\Action\HttpPostActionInterface;
 use Magento\Framework\Controller\ResultFactory;
+use Magento\Framework\Exception\CouldNotDeleteException;
+use Magento\Framework\Exception\LocalizedException;
 use Magento\Ui\Component\MassAction\Filter;
+use Oggetto\News\Api\NewsRepositoryInterface;
 use Oggetto\News\Model\ResourceModel\News\CollectionFactory;
 
 class MassDelete extends Action implements HttpPostActionInterface
@@ -22,24 +25,34 @@ class MassDelete extends Action implements HttpPostActionInterface
      * @var CollectionFactory
      */
     protected $collectionFactory;
+    /**
+     * @var NewsRepositoryInterface
+     */
+    protected $newsRepository;
 
     /**
      * @param Context $context
      * @param Filter $filter
      * @param CollectionFactory $collectionFactory
+     * @param NewsRepositoryInterface $newsRepository
      */
     public function __construct(
         Context $context,
         Filter $filter,
         CollectionFactory $collectionFactory,
+        NewsRepositoryInterface $newsRepository,
     ) {
         parent::__construct($context);
         $this->filter = $filter;
         $this->collectionFactory = $collectionFactory;
+        $this->newsRepository = $newsRepository;
     }
 
     /**
      * @inheritDoc
+     *
+     * @throws CouldNotDeleteException
+     * @throws LocalizedException
      */
     public function execute()
     {
@@ -47,7 +60,7 @@ class MassDelete extends Action implements HttpPostActionInterface
         $collectionSize = $collection->getSize();
 
         foreach ($collection as $news) {
-            $news->delete();
+            $this->newsRepository->delete($news);
         }
 
         $this->messageManager->addSuccessMessage(__('A total of %1 record(s) have been deleted.', $collectionSize));
