@@ -106,37 +106,5 @@
                 <dataScope>description</dataScope>
             </settings>
         </field>
-        <field name="creation_time" formElement="input">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="source" xsi:type="string">news</item>
-                </item>
-            </argument>
-            <settings>
-                <validation>
-                    <rule name="required-entry" xsi:type="boolean">true</rule>
-                </validation>
-                <dataType>dateTime</dataType>
-                <label translate="true">News Creation Time</label>
-                <dataScope>creation_time</dataScope>
-                <disabled>true</disabled>
-            </settings>
-        </field>
-        <field name="update_time" formElement="input">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="source" xsi:type="string">news</item>
-                </item>
-            </argument>
-            <settings>
-                <validation>
-                    <rule name="required-entry" xsi:type="boolean">true</rule>
-                </validation>
-                <dataType>dateTime</dataType>
-                <label translate="true">News Modification Time</label>
-                <dataScope>update_time</dataScope>
-                <disabled>true</disabled>
-            </settings>
-        </field>
     </fieldset>
 </form>
