@@ -4,7 +4,7 @@ namespace Oggetto\News\Controller\Adminhtml\News;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
-use Magento\Backend\Model\View\Result\Page;
+use Magento\Backend\Model\View\Result\ForwardFactory;
 use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\View\Result\PageFactory;
 
@@ -14,17 +14,24 @@ class NewAction extends Action implements HttpGetActionInterface
      * @var PageFactory
      */
     protected $resultPageFactory;
+    /**
+     * @var ForwardFactory
+     */
+    protected $resultForwardFactory;
 
     /**
      * @param Context $context
      * @param PageFactory $resultPageFactory
+     * @param ForwardFactory $resultForwardFactory
      */
     public function __construct(
         Context $context,
         PageFactory $resultPageFactory,
+        ForwardFactory $resultForwardFactory,
     ) {
         parent::__construct($context);
         $this->resultPageFactory = $resultPageFactory;
+        $this->resultForwardFactory = $resultForwardFactory;
     }
 
     /**
@@ -32,11 +39,7 @@ class NewAction extends Action implements HttpGetActionInterface
      */
     public function execute()
     {
-        /** @var Page $resultPage */
-        $resultPage = $this->resultPageFactory->create();
-        $resultPage->addBreadcrumb(__('Add News'), __('Add News'));
-        $resultPage->getConfig()->getTitle()->prepend(__('News'));
-        $resultPage->getConfig()->getTitle()->prepend(__('Add News'));
-        return $resultPage;
+        $resultForward = $this->resultForwardFactory->create();
+        return $resultForward->forward('edit');
     }
 }
