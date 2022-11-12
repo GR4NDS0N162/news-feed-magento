@@ -56,9 +56,12 @@ class Edit extends Action implements HttpGetActionInterface
 
         /** @var Page $resultPage */
         $resultPage = $this->resultPageFactory->create();
-        $resultPage->addBreadcrumb(__('Edit News'), __('Edit News'));
+        $resultPage->addBreadcrumb(
+            $id ? __('Edit News') : __('Add News'),
+            $id ? __('Edit News') : __('Add News'),
+        );
         $resultPage->getConfig()->getTitle()->prepend(__('News'));
-        $resultPage->getConfig()->getTitle()->prepend($model->getTitle());
+        $resultPage->getConfig()->getTitle()->prepend($id ? $model->getTitle() : __('Add News'));
         return $resultPage;
     }
 }
