@@ -6,9 +6,9 @@ use Magento\Backend\App\Action\Context;
 use Magento\Backend\Model\View\Result\ForwardFactory;
 use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\View\Result\PageFactory;
-use Oggetto\News\Controller\Adminhtml\News;
+use Oggetto\News\Controller\Adminhtml\News as NewsAction;
 
-class NewAction extends News implements HttpGetActionInterface
+class NewAction extends NewsAction implements HttpGetActionInterface
 {
     /**
      * @var PageFactory

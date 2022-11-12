@@ -9,9 +9,9 @@ use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\View\Result\PageFactory;
 use Oggetto\News\Api\Data\NewsInterface;
 use Oggetto\News\Api\NewsRepositoryInterface;
-use Oggetto\News\Controller\Adminhtml\News;
+use Oggetto\News\Controller\Adminhtml\News as NewsAction;
 
-class Edit extends News implements HttpGetActionInterface
+class Edit extends NewsAction implements HttpGetActionInterface
 {
     /**
      * @var PageFactory

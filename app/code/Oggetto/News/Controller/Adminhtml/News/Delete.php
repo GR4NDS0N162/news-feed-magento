@@ -7,9 +7,9 @@ use Magento\Backend\Model\View\Result\Redirect;
 use Magento\Framework\App\Action\HttpPostActionInterface;
 use Oggetto\News\Api\Data\NewsInterface;
 use Oggetto\News\Api\NewsRepositoryInterface;
-use Oggetto\News\Controller\Adminhtml\News;
+use Oggetto\News\Controller\Adminhtml\News as NewsAction;
 
-class Delete extends News implements HttpPostActionInterface
+class Delete extends NewsAction implements HttpPostActionInterface
 {
     /**
      * @var NewsRepositoryInterface

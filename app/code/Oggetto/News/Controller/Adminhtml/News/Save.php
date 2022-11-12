@@ -8,10 +8,10 @@ use Magento\Framework\App\Action\HttpPostActionInterface;
 use Magento\Framework\Exception\LocalizedException;
 use Oggetto\News\Api\Data\NewsInterface;
 use Oggetto\News\Api\NewsRepositoryInterface;
-use Oggetto\News\Controller\Adminhtml\News;
+use Oggetto\News\Controller\Adminhtml\News as NewsAction;
 use Oggetto\News\Model\NewsFactory;
 
-class Save extends News implements HttpPostActionInterface
+class Save extends NewsAction implements HttpPostActionInterface
 {
     /**
      * @var NewsFactory
