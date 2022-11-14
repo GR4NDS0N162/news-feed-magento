@@ -6,7 +6,12 @@
             <item name="provider" xsi:type="string">news_news_form.news_form_data_source</item>
         </item>
         <item name="label" xsi:type="string" translate="true">General Information</item>
+        <item name="reverseMetadataMerge" xsi:type="boolean">true</item>
         <item name="template" xsi:type="string">templates/form/collapsible</item>
+        <item name="config" xsi:type="array">
+            <item name="dataScope" xsi:type="string">data</item>
+            <item name="namespace" xsi:type="string">news_news_form</item>
+        </item>
     </argument>
     <settings>
         <buttons>
@@ -27,7 +32,7 @@
             </item>
         </argument>
         <settings>
-            <submitUrl path="news/news/save" />
+            <submitUrl path="*/*/save" />
         </settings>
         <dataProvider class="Oggetto\News\Model\News\DataProvider" name="news_form_data_source">
             <settings>
@@ -125,6 +130,26 @@
                         <wysiwyg>true</wysiwyg>
                     </settings>
                 </wysiwyg>
+            </formElements>
+        </field>
+        <field name="image" formElement="imageUploader">
+            <settings>
+                <label translate="true">News Image</label>
+                <componentType>imageUploader</componentType>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+            </settings>
+            <formElements>
+                <imageUploader>
+                    <settings>
+                        <allowedExtensions>jpg jpeg png</allowedExtensions>
+                        <maxFileSize>2097152</maxFileSize>
+                        <uploaderConfig>
+                            <param xsi:type="string" name="url">news/news/tempUpload</param>
+                        </uploaderConfig>
+                    </settings>
+                </imageUploader>
             </formElements>
         </field>
     </fieldset>
