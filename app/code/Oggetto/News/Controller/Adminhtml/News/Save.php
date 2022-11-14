@@ -9,6 +9,7 @@ use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\FileSystemException;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Filesystem;
+use Magento\Framework\Validation\ValidationException;
 use Magento\MediaStorage\Model\File\UploaderFactory;
 use Oggetto\News\Api\Data\NewsInterface;
 use Oggetto\News\Api\NewsRepositoryInterface;
@@ -59,6 +60,8 @@ class Save extends NewsAction implements HttpPostActionInterface
 
     /**
      * @inheritDoc
+     *
+     * @throws LocalizedException
      */
     public function execute()
     {
@@ -79,6 +82,32 @@ class Save extends NewsAction implements HttpPostActionInterface
                 } catch (LocalizedException $e) {
                     $this->messageManager->addErrorMessage(__('This news no longer exists.'));
                     return $resultRedirect->setPath('*/*/');
+                }
+            }
+
+            if (isset($data[NewsInterface::IMAGE]) && count($data[NewsInterface::IMAGE])) {
+                try {
+                    $imageId = $data[NewsInterface::IMAGE][0];
+                    if (!file_exists($imageId['tmp_name'])) {
+                        $imageId['tmp_name'] = $imageId['path'] . '/' . $imageId['file'];
+                    }
+
+                    $fileUploader = $this->uploaderFactory->create(['fileId' => $imageId]);
+                    $fileUploader->setAllowedExtensions(['jpg', 'jpeg', 'png']);
+                    $fileUploader->setAllowRenameFiles(true);
+                    $fileUploader->setAllowCreateFolders(true);
+                    $fileUploader->validateFile();
+
+                    $info = $fileUploader->save($this->mediaDirectory->getAbsolutePath('imageUploader/images'));
+                    $data[NewsInterface::IMAGE] = $this->mediaDirectory->getRelativePath(
+                        'imageUploader/images',
+                    ) . '/' . $info['file'];
+                } catch (ValidationException) {
+                    throw new LocalizedException(__(
+                        'Image extension is not supported. Only extensions allowed are jpg, jpeg and png',
+                    ));
+                } catch (\Exception) {
+                    throw new LocalizedException(__('Image is required'));
                 }
             }
 
