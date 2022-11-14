@@ -6,7 +6,10 @@ use Magento\Backend\App\Action\Context;
 use Magento\Backend\Model\View\Result\Redirect;
 use Magento\Framework\App\Action\HttpPostActionInterface;
 use Magento\Framework\Exception\CouldNotSaveException;
+use Magento\Framework\Exception\FileSystemException;
 use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Filesystem;
+use Magento\MediaStorage\Model\File\UploaderFactory;
 use Oggetto\News\Api\Data\NewsInterface;
 use Oggetto\News\Api\NewsRepositoryInterface;
 use Oggetto\News\Controller\Adminhtml\News as NewsAction;
@@ -23,20 +26,35 @@ class Save extends NewsAction implements HttpPostActionInterface
      * @var NewsRepositoryInterface
      */
     protected $newsRepository;
+    /**
+     * @var UploaderFactory
+     */
+    protected $uploaderFactory;
+    /**
+     * @var Filesystem\Directory\WriteInterface
+     */
+    protected $mediaDirectory;
 
     /**
      * @param Context $context
      * @param NewsFactory $newsFactory
      * @param NewsRepositoryInterface $newsRepository
+     * @param UploaderFactory $uploaderFactory
+     * @param Filesystem $fileSystem
+     * @throws FileSystemException
      */
     public function __construct(
         Context $context,
         NewsFactory $newsFactory,
         NewsRepositoryInterface $newsRepository,
+        UploaderFactory $uploaderFactory,
+        FileSystem $fileSystem,
     ) {
         parent::__construct($context);
         $this->newsFactory = $newsFactory;
         $this->newsRepository = $newsRepository;
+        $this->uploaderFactory = $uploaderFactory;
+        $this->mediaDirectory = $fileSystem->getDirectoryWrite(\Magento\Framework\App\Filesystem\DirectoryList::MEDIA);
     }
 
     /**
