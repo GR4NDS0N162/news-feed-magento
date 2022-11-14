@@ -91,6 +91,8 @@ class Save extends NewsAction implements HttpPostActionInterface
             } catch (LocalizedException $e) {
                 $this->messageManager->addErrorMessage($e->getMessage());
             } catch (\Exception $e) {
+                error_log($e->getMessage());
+                error_log($e->getTraceAsString());
                 $this->messageManager->addExceptionMessage($e, __('Something went wrong while saving the news.'));
             }
 
