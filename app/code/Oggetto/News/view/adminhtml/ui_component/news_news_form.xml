@@ -111,6 +111,26 @@
                 <dataScope>description</dataScope>
             </settings>
         </field>
+        <field name="image" formElement="imageUploader">
+            <settings>
+                <label translate="true">News Image</label>
+                <componentType>imageUploader</componentType>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+            </settings>
+            <formElements>
+                <imageUploader>
+                    <settings>
+                        <allowedExtensions>jpg jpeg png</allowedExtensions>
+                        <maxFileSize>2097152</maxFileSize>
+                        <uploaderConfig>
+                            <param xsi:type="string" name="url">news/news/tempUpload</param>
+                        </uploaderConfig>
+                    </settings>
+                </imageUploader>
+            </formElements>
+        </field>
         <field name="content" formElement="wysiwyg">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
@@ -130,26 +150,6 @@
                         <wysiwyg>true</wysiwyg>
                     </settings>
                 </wysiwyg>
-            </formElements>
-        </field>
-        <field name="image" formElement="imageUploader">
-            <settings>
-                <label translate="true">News Image</label>
-                <componentType>imageUploader</componentType>
-                <validation>
-                    <rule name="required-entry" xsi:type="boolean">false</rule>
-                </validation>
-            </settings>
-            <formElements>
-                <imageUploader>
-                    <settings>
-                        <allowedExtensions>jpg jpeg png</allowedExtensions>
-                        <maxFileSize>2097152</maxFileSize>
-                        <uploaderConfig>
-                            <param xsi:type="string" name="url">news/news/tempUpload</param>
-                        </uploaderConfig>
-                    </settings>
-                </imageUploader>
             </formElements>
         </field>
     </fieldset>
