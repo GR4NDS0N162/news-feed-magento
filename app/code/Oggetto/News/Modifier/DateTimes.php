@@ -2,11 +2,26 @@
 
 namespace Oggetto\News\Modifier;
 
+use Magento\Framework\App\Request\Http;
 use Magento\Ui\Component\Form\Field;
 use Magento\Ui\DataProvider\Modifier\ModifierInterface;
 
 class DateTimes implements ModifierInterface
 {
+    /**
+     * @var Http
+     */
+    protected $request;
+
+    /**
+     * @param Http $request
+     */
+    public function __construct(
+        Http $request,
+    ) {
+        $this->request = $request;
+    }
+
     /**
      * @inheritDoc
      */
