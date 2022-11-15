@@ -158,7 +158,7 @@ class Save extends NewsAction implements HttpPostActionInterface
     }
 
     /**
-     * Process and set the block return
+     * Process and set the news return
      *
      * @param News $model
      * @param array $data
