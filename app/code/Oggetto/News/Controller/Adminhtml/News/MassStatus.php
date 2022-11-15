@@ -54,7 +54,6 @@ class MassStatus extends Action implements HttpPostActionInterface
     /**
      * @inheritDoc
      *
-     * @throws CouldNotSaveException
      * @throws LocalizedException
      */
     public function execute()
@@ -65,8 +64,12 @@ class MassStatus extends Action implements HttpPostActionInterface
 
         /** @var NewsInterface $news */
         foreach ($collection as $news) {
-            $news->setStatus($status);
-            $this->newsRepository->save($news);
+            try {
+                $news->setStatus($status);
+                $this->newsRepository->save($news);
+            } catch (CouldNotSaveException) {
+                $this->messageManager->addErrorMessage(__('Failed to modify news with the "%1" ID', $news->getId()));
+            }
         }
 
         $this->messageManager->addSuccessMessage(__('A total of %1 record(s) have been updated.', $collectionSize));
