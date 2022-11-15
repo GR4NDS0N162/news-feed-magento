@@ -150,6 +150,10 @@ class Save extends NewsAction implements HttpPostActionInterface
             }
         }
 
+        if (isset($data[NewsInterface::IMAGE]) && !is_string($data[NewsInterface::IMAGE])) {
+            unset($data[NewsInterface::IMAGE]);
+        }
+
         return $data;
     }
 
