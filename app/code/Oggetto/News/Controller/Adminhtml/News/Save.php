@@ -18,6 +18,7 @@ use Oggetto\News\Api\NewsRepositoryInterface;
 use Oggetto\News\Controller\Adminhtml\News as NewsAction;
 use Oggetto\News\Model\News;
 use Oggetto\News\Model\NewsFactory;
+use Psr\Log\LoggerInterface;
 
 class Save extends NewsAction implements HttpPostActionInterface
 {
@@ -37,6 +38,10 @@ class Save extends NewsAction implements HttpPostActionInterface
      * @var Filesystem\Directory\WriteInterface
      */
     protected $mediaDirectory;
+    /**
+     * @var LoggerInterface
+     */
+    protected LoggerInterface $logger;
 
     /**
      * @param Context $context
@@ -44,6 +49,7 @@ class Save extends NewsAction implements HttpPostActionInterface
      * @param NewsRepositoryInterface $newsRepository
      * @param UploaderFactory $uploaderFactory
      * @param Filesystem $fileSystem
+     * @param LoggerInterface $logger
      * @throws FileSystemException
      */
     public function __construct(
@@ -52,11 +58,13 @@ class Save extends NewsAction implements HttpPostActionInterface
         NewsRepositoryInterface $newsRepository,
         UploaderFactory $uploaderFactory,
         FileSystem $fileSystem,
+        LoggerInterface $logger
     ) {
         parent::__construct($context);
         $this->newsFactory = $newsFactory;
         $this->newsRepository = $newsRepository;
         $this->uploaderFactory = $uploaderFactory;
+        $this->logger = $logger;
         $this->mediaDirectory = $fileSystem->getDirectoryWrite(\Magento\Framework\App\Filesystem\DirectoryList::MEDIA);
     }
 
