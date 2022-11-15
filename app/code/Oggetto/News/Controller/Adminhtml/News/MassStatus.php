@@ -69,7 +69,7 @@ class MassStatus extends Action implements HttpPostActionInterface
                 $this->newsRepository->save($news);
                 $countSuccess++;
             } catch (CouldNotSaveException) {
-                $this->messageManager->addErrorMessage(__('Failed to modify news with the "%1" ID', $news->getId()));
+                $this->messageManager->addErrorMessage(__('Failed to modify news with the "%1" ID.', $news->getId()));
             }
         }
 

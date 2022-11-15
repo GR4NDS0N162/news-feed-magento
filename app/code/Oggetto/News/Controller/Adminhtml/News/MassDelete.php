@@ -67,7 +67,7 @@ class MassDelete extends Action implements HttpPostActionInterface
                 $this->newsRepository->delete($news);
                 $countSuccess++;
             } catch (CouldNotDeleteException) {
-                $this->messageManager->addErrorMessage(__('Failed to delete news with the "%1" ID', $news->getId()));
+                $this->messageManager->addErrorMessage(__('Failed to delete news with the "%1" ID.', $news->getId()));
             }
         }
 
