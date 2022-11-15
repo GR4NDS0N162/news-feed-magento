@@ -14,6 +14,7 @@ use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Filesystem;
 use Magento\MediaStorage\Model\File\UploaderFactory;
 use Magento\Store\Model\StoreManagerInterface;
+use Psr\Log\LoggerInterface;
 
 class TempUpload extends Action
 {
@@ -29,12 +30,17 @@ class TempUpload extends Action
      * @var StoreManagerInterface
      */
     protected StoreManagerInterface $storeManager;
+    /**
+     * @var LoggerInterface
+     */
+    protected LoggerInterface $logger;
 
     /**
      * @param Context $context
      * @param UploaderFactory $uploaderFactory
      * @param Filesystem $filesystem
      * @param StoreManagerInterface $storeManager
+     * @param LoggerInterface $logger
      * @throws FileSystemException
      */
     public function __construct(
@@ -42,11 +48,13 @@ class TempUpload extends Action
         UploaderFactory $uploaderFactory,
         Filesystem $filesystem,
         StoreManagerInterface $storeManager,
+        LoggerInterface $logger,
     ) {
         parent::__construct($context);
         $this->uploaderFactory = $uploaderFactory;
         $this->mediaDirectory = $filesystem->getDirectoryWrite(\Magento\Framework\App\Filesystem\DirectoryList::MEDIA);
         $this->storeManager = $storeManager;
+        $this->logger = $logger;
     }
 
     /**
@@ -70,8 +78,7 @@ class TempUpload extends Action
         } catch (LocalizedException $e) {
             return $jsonResult->setData(['errorcode' => 0, 'error' => $e->getMessage()]);
         } catch (\Exception $e) {
-            error_log($e->getMessage());
-            error_log($e->getTraceAsString());
+            $this->logger->error($e->getMessage());
             return $jsonResult->setData([
                 'errorcode' => 0,
                 'error'     => __('An error occurred, please try again later.'),
