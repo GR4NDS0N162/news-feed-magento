@@ -45,9 +45,4 @@
             <argument name="hydrator" xsi:type="object">Magento\Framework\EntityManager\AbstractModelHydrator</argument>
         </arguments>
     </type>
-    <type name="Oggetto\News\Model\News\DataProvider">
-        <arguments>
-            <argument name="pool" xsi:type="object">Oggetto\News\DataProvider\Modifier\Pool</argument>
-        </arguments>
-    </type>
 </config>

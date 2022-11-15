@@ -11,4 +11,9 @@
             </argument>
         </arguments>
     </virtualType>
+    <type name="Oggetto\News\Model\News\DataProvider">
+        <arguments>
+            <argument name="pool" xsi:type="object">Oggetto\News\DataProvider\Modifier\Pool</argument>
+        </arguments>
+    </type>
 </config>
