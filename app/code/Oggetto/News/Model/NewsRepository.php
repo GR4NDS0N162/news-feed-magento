@@ -10,6 +10,7 @@ use Magento\Framework\Exception\NoSuchEntityException;
 use Oggetto\News\Api\Data\NewsInterface;
 use Oggetto\News\Api\NewsRepositoryInterface;
 use Oggetto\News\Model\ResourceModel\News as ResourceNews;
+use Oggetto\News\Model\ResourceModel\News\Collection;
 use Oggetto\News\Model\ResourceModel\News\CollectionFactory;
 
 class NewsRepository implements NewsRepositoryInterface
@@ -17,15 +18,15 @@ class NewsRepository implements NewsRepositoryInterface
     /**
      * @var ResourceNews
      */
-    protected $resource;
+    protected ResourceNews $resource;
     /**
      * @var NewsFactory
      */
-    protected $newsFactory;
+    protected NewsFactory $newsFactory;
     /**
      * @var CollectionFactory
      */
-    protected $newsCollectionFactory;
+    protected CollectionFactory $newsCollectionFactory;
 
     /**
      * @param ResourceNews $resource
@@ -45,7 +46,7 @@ class NewsRepository implements NewsRepositoryInterface
     /**
      * @inheritDoc
      */
-    public function getById($newsId)
+    public function getById(string $newsId): News
     {
         $news = $this->newsFactory->create();
         $this->resource->load($news, $newsId);
@@ -58,7 +59,7 @@ class NewsRepository implements NewsRepositoryInterface
     /**
      * @inheritDoc
      */
-    public function save(NewsInterface $news)
+    public function save(NewsInterface $news): NewsInterface
     {
         try {
             $this->resource->save($news);
@@ -71,7 +72,7 @@ class NewsRepository implements NewsRepositoryInterface
     /**
      * @inheritDoc
      */
-    public function getList()
+    public function getList(): Collection
     {
         return $this->newsCollectionFactory->create();
     }
@@ -79,7 +80,7 @@ class NewsRepository implements NewsRepositoryInterface
     /**
      * @inheritDoc
      */
-    public function delete(NewsInterface $news)
+    public function delete(NewsInterface $news): bool
     {
         try {
             $this->resource->delete($news);
@@ -92,7 +93,7 @@ class NewsRepository implements NewsRepositoryInterface
     /**
      * @inheritDoc
      */
-    public function deleteById($newsId)
+    public function deleteById(string $newsId): bool
     {
         return $this->delete($this->getById($newsId));
     }

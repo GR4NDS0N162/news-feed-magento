@@ -21,12 +21,12 @@ class DataProvider extends ModifierPoolDataProvider
     /**
      * @var DataPersistorInterface
      */
-    protected $dataPersistor;
+    protected DataPersistorInterface $dataPersistor;
 
     /**
      * @var array
      */
-    protected $loadedData;
+    protected array $loadedData;
 
     /**
      * Constructor
@@ -60,7 +60,7 @@ class DataProvider extends ModifierPoolDataProvider
      *
      * @return array
      */
-    public function getData()
+    public function getData(): array
     {
         if (isset($this->loadedData)) {
             return $this->loadedData;

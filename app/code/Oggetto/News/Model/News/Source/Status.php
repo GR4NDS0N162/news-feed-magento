@@ -12,7 +12,7 @@ class Status implements OptionSourceInterface
     /**
      * @var News
      */
-    protected $news;
+    protected News $news;
 
     /**
      * @param News $news
@@ -25,7 +25,7 @@ class Status implements OptionSourceInterface
     /**
      * @inheritDoc
      */
-    public function toOptionArray()
+    public function toOptionArray(): array
     {
         $availableOptions = $this->news->getAvailableStatuses();
         $options = [];

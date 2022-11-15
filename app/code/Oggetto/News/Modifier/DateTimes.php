@@ -14,7 +14,7 @@ class DateTimes implements ModifierInterface
     /**
      * @var Http
      */
-    protected $request;
+    protected Http $request;
 
     /**
      * @param Http $request
@@ -28,7 +28,7 @@ class DateTimes implements ModifierInterface
     /**
      * @inheritDoc
      */
-    public function modifyData(array $data)
+    public function modifyData(array $data): array
     {
         return $data;
     }
@@ -36,7 +36,7 @@ class DateTimes implements ModifierInterface
     /**
      * @inheritDoc
      */
-    public function modifyMeta(array $meta)
+    public function modifyMeta(array $meta): array
     {
         if ($this->request->getParam(NewsInterface::ID)) {
             $meta['general'] = [

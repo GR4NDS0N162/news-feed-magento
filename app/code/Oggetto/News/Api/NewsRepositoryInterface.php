@@ -18,7 +18,7 @@ interface NewsRepositoryInterface
      * @return NewsInterface
      * @throws NoSuchEntityException
      */
-    public function getById($newsId);
+    public function getById(string $newsId): NewsInterface;
 
     /**
      * Save news
@@ -27,7 +27,7 @@ interface NewsRepositoryInterface
      * @return NewsInterface
      * @throws CouldNotSaveException
      */
-    public function save(NewsInterface $news);
+    public function save(NewsInterface $news): NewsInterface;
 
     /**
      * Retrieve news collection
@@ -35,7 +35,7 @@ interface NewsRepositoryInterface
      * @return Collection
      * @throws LocalizedException
      */
-    public function getList();
+    public function getList(): Collection;
 
     /**
      * Delete news
@@ -44,7 +44,7 @@ interface NewsRepositoryInterface
      * @return bool true on success
      * @throws CouldNotDeleteException
      */
-    public function delete(NewsInterface $news);
+    public function delete(NewsInterface $news): bool;
 
     /**
      * Delete news by ID
@@ -53,5 +53,5 @@ interface NewsRepositoryInterface
      * @return bool true on success
      * @throws CouldNotDeleteException
      */
-    public function deleteById($newsId);
+    public function deleteById(string $newsId): bool;
 }

@@ -138,7 +138,7 @@ class News extends AbstractModel implements NewsInterface
      *
      * @return array
      */
-    public function getAvailableStatuses()
+    public function getAvailableStatuses(): array
     {
         return [
             self::STATUS_ENABLED  => __('Enabled'),
