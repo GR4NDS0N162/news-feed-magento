@@ -132,7 +132,10 @@ class Save extends NewsAction implements HttpPostActionInterface
      */
     private function validateImage(array $data): array
     {
-        if (isset($data[NewsInterface::IMAGE]) && count($data[NewsInterface::IMAGE])) {
+        if (isset($data[NewsInterface::IMAGE])
+            && is_array($data[NewsInterface::IMAGE])
+            && count($data[NewsInterface::IMAGE])
+        ) {
             try {
                 $imageId = $data[NewsInterface::IMAGE][0];
                 if (!file_exists($imageId['tmp_name'])) {
