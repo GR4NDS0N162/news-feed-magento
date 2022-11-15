@@ -12,7 +12,7 @@ class DataProvider extends \Magento\Framework\View\Element\UiComponent\DataProvi
     /**
      * @inheritDoc
      */
-    protected function searchResultToOutput(SearchResultInterface $searchResult)
+    protected function searchResultToOutput(SearchResultInterface $searchResult): array
     {
         $arrItems = [];
 
