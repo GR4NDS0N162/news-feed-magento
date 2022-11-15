@@ -35,9 +35,9 @@ class GenericButton
     /**
      * Return news ID
      *
-     * @return int|null
+     * @return string|null
      */
-    public function getNewsId(): ?int
+    public function getNewsId(): ?string
     {
         $id = $this->context->getRequest()->getParam(NewsInterface::ID);
         if ($id) {

@@ -16,7 +16,7 @@ interface NewsInterface
     /**
      * Get id
      *
-     * @return int|null
+     * @return string|null
      */
     public function getId();
 
