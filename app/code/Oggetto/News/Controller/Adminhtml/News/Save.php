@@ -95,31 +95,7 @@ class Save extends NewsAction implements HttpPostActionInterface
                 }
             }
 
-            if (isset($data[NewsInterface::IMAGE]) && count($data[NewsInterface::IMAGE])) {
-                try {
-                    $imageId = $data[NewsInterface::IMAGE][0];
-                    if (!file_exists($imageId['tmp_name'])) {
-                        $imageId['tmp_name'] = $imageId['path'] . '/' . $imageId['file'];
-                    }
-
-                    $fileUploader = $this->uploaderFactory->create(['fileId' => $imageId]);
-                    $fileUploader->setAllowedExtensions(['jpg', 'jpeg', 'png']);
-                    $fileUploader->setAllowRenameFiles(true);
-                    $fileUploader->setAllowCreateFolders(true);
-                    $fileUploader->validateFile();
-
-                    $info = $fileUploader->save($this->mediaDirectory->getAbsolutePath('imageUploader/images'));
-                    $data[NewsInterface::IMAGE] = $this->mediaDirectory->getRelativePath(
-                        'imageUploader/images',
-                    ) . '/' . $info['file'];
-                } catch (ValidationException) {
-                    throw new LocalizedException(__(
-                        'Image extension is not supported. Only extensions allowed are jpg, jpeg and png',
-                    ));
-                } catch (\Exception) {
-                    throw new LocalizedException(__('Image is required'));
-                }
-            }
+            $data = $this->validateImage($data);
 
             $model->setData($data);
 
@@ -137,6 +113,44 @@ class Save extends NewsAction implements HttpPostActionInterface
             return $resultRedirect->setPath('*/*/edit', [NewsInterface::ID => $id]);
         }
         return $resultRedirect->setPath('*/*/');
+    }
+
+    /**
+     * Validate image
+     *
+     * @param array $data
+     * @return array
+     * @throws LocalizedException
+     */
+    private function validateImage(array $data): array
+    {
+        if (isset($data[NewsInterface::IMAGE]) && count($data[NewsInterface::IMAGE])) {
+            try {
+                $imageId = $data[NewsInterface::IMAGE][0];
+                if (!file_exists($imageId['tmp_name'])) {
+                    $imageId['tmp_name'] = $imageId['path'] . '/' . $imageId['file'];
+                }
+
+                $fileUploader = $this->uploaderFactory->create(['fileId' => $imageId]);
+                $fileUploader->setAllowedExtensions(['jpg', 'jpeg', 'png']);
+                $fileUploader->setAllowRenameFiles(true);
+                $fileUploader->setAllowCreateFolders(true);
+                $fileUploader->validateFile();
+
+                $info = $fileUploader->save($this->mediaDirectory->getAbsolutePath('imageUploader/images'));
+                $data[NewsInterface::IMAGE] = $this->mediaDirectory->getRelativePath(
+                    'imageUploader/images',
+                ) . '/' . $info['file'];
+            } catch (ValidationException) {
+                throw new LocalizedException(__(
+                    'Image extension is not supported. Only extensions allowed are jpg, jpeg and png',
+                ));
+            } catch (\Exception) {
+                throw new LocalizedException(__('Image is required'));
+            }
+        }
+
+        return $data;
     }
 
     /**
