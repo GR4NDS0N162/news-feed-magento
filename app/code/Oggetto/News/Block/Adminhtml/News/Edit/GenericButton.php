@@ -39,13 +39,15 @@ class GenericButton
      */
     public function getNewsId(): ?int
     {
-        try {
-            return $this->newsRepository->getById(
-                $this->context->getRequest()->getParam(NewsInterface::ID),
-            )->getId();
-        } catch (NoSuchEntityException) {
-            return null;
+        $id = $this->context->getRequest()->getParam(NewsInterface::ID);
+        if ($id) {
+            try {
+                return $this->newsRepository->getById($id)->getId();
+            } catch (NoSuchEntityException) {
+                return null;
+            }
         }
+        return null;
     }
 
     /**
