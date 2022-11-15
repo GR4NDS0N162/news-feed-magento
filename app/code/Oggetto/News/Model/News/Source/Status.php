@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Oggetto\News\Model\News\Source;
 
 use Magento\Framework\Data\OptionSourceInterface;

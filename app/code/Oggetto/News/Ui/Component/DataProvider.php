@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Oggetto\News\Ui\Component;
 
 use Magento\Framework\Api\Search\SearchResultInterface;

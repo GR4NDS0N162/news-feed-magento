@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Oggetto\News\Model\News;
 
 use Magento\Framework\App\Request\DataPersistorInterface;

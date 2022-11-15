@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Oggetto\News\Controller\Adminhtml\News;
 
 use Magento\Backend\App\Action\Context;

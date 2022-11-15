@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Oggetto\News\Model\ResourceModel\News\Grid;
 
 use Magento\Framework\Api\Search\AggregationInterface;

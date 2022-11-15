@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Oggetto\News\Modifier;
 
 use Magento\Framework\App\Request\Http;

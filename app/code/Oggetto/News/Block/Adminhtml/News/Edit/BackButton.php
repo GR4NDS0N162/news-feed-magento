@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Oggetto\News\Block\Adminhtml\News\Edit;
 
 use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
