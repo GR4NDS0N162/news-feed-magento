@@ -174,20 +174,24 @@ class Save extends NewsAction implements HttpPostActionInterface
         array $data,
         Redirect $resultRedirect,
     ): Redirect {
-        $redirect = $data[SaveButton::REDIRECT_KEY] ?? SaveButton::REDIRECT_CLOSE;
+        $redirect = $data[SaveButton::REDIRECT_KEY];
 
-        if ($redirect === SaveButton::REDIRECT_CONTINUE) {
-            $resultRedirect->setPath('*/*/edit', [NewsInterface::ID => $model->getId()]);
-        } elseif ($redirect === SaveButton::REDIRECT_CLOSE) {
-            $resultRedirect->setPath('*/*/');
-        } elseif ($redirect === SaveButton::REDIRECT_DUPLICATE) {
-            $duplicateModel = $this->newsFactory->create(['data' => $data]);
-            $duplicateModel->setId(null);
-            $duplicateModel->setStatus(News::STATUS_DISABLED);
-            $this->newsRepository->save($duplicateModel);
-            $id = $duplicateModel->getId();
-            $this->messageManager->addSuccessMessage(__('You duplicated the news.'));
-            $resultRedirect->setPath('*/*/edit', [NewsInterface::ID => $id]);
+        switch ($redirect) {
+            case SaveButton::REDIRECT_CONTINUE:
+                $resultRedirect->setPath('*/*/edit', [NewsInterface::ID => $model->getId()]);
+                break;
+            case SaveButton::REDIRECT_DUPLICATE:
+                $duplicateModel = $this->newsFactory->create(['data' => $data]);
+                $duplicateModel->setId(null);
+                $duplicateModel->setStatus(News::STATUS_DISABLED);
+                $this->newsRepository->save($duplicateModel);
+                $id = $duplicateModel->getId();
+                $this->messageManager->addSuccessMessage(__('You duplicated the news.'));
+                $resultRedirect->setPath('*/*/edit', [NewsInterface::ID => $id]);
+                break;
+            case SaveButton::REDIRECT_CLOSE:
+            default:
+                $resultRedirect->setPath('*/*/');
         }
         return $resultRedirect;
     }
