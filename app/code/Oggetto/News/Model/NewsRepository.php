@@ -92,6 +92,8 @@ class NewsRepository implements NewsRepositoryInterface
 
     /**
      * @inheritDoc
+     *
+     * @throws NoSuchEntityException
      */
     public function deleteById(string $newsId): bool
     {
