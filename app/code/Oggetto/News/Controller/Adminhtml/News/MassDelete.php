@@ -24,10 +24,12 @@ class MassDelete extends Action implements HttpPostActionInterface
      * @var Filter
      */
     protected Filter $filter;
+
     /**
      * @var CollectionFactory
      */
     protected CollectionFactory $collectionFactory;
+
     /**
      * @var NewsRepositoryInterface
      */

@@ -16,6 +16,7 @@ class NewAction extends NewsAction implements HttpGetActionInterface
      * @var PageFactory
      */
     protected PageFactory $resultPageFactory;
+
     /**
      * @var ForwardFactory
      */

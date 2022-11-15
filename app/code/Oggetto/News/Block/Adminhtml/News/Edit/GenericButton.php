@@ -15,6 +15,7 @@ class GenericButton
      * @var Context
      */
     protected Context $context;
+
     /**
      * @var NewsRepositoryInterface
      */

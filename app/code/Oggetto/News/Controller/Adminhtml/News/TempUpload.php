@@ -7,6 +7,7 @@ namespace Oggetto\News\Controller\Adminhtml\News;
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Backend\Model\UrlInterface;
+use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Framework\Controller\Result\Json;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Exception\FileSystemException;
@@ -24,14 +25,17 @@ class TempUpload extends Action
      * @var UploaderFactory
      */
     protected UploaderFactory $uploaderFactory;
+
     /**
      * @var Filesystem\Directory\WriteInterface
      */
     protected Filesystem\Directory\WriteInterface $mediaDirectory;
+
     /**
      * @var StoreManagerInterface
      */
     protected StoreManagerInterface $storeManager;
+
     /**
      * @var LoggerInterface
      */
@@ -54,7 +58,7 @@ class TempUpload extends Action
     ) {
         parent::__construct($context);
         $this->uploaderFactory = $uploaderFactory;
-        $this->mediaDirectory = $filesystem->getDirectoryWrite(\Magento\Framework\App\Filesystem\DirectoryList::MEDIA);
+        $this->mediaDirectory = $filesystem->getDirectoryWrite(DirectoryList::MEDIA);
         $this->storeManager = $storeManager;
         $this->logger = $logger;
     }

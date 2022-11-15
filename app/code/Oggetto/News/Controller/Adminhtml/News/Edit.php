@@ -19,6 +19,7 @@ class Edit extends NewsAction implements HttpGetActionInterface
      * @var PageFactory
      */
     protected PageFactory $resultPageFactory;
+
     /**
      * @var NewsRepositoryInterface
      */

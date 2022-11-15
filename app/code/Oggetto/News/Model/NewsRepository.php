@@ -19,10 +19,12 @@ class NewsRepository implements NewsRepositoryInterface
      * @var ResourceNews
      */
     protected ResourceNews $resource;
+
     /**
      * @var NewsFactory
      */
     protected NewsFactory $newsFactory;
+
     /**
      * @var CollectionFactory
      */

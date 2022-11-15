@@ -7,6 +7,7 @@ namespace Oggetto\News\Controller\Adminhtml\News;
 use Magento\Backend\App\Action\Context;
 use Magento\Backend\Model\View\Result\Redirect;
 use Magento\Framework\App\Action\HttpPostActionInterface;
+use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\FileSystemException;
 use Magento\Framework\Exception\LocalizedException;
@@ -30,18 +31,22 @@ class Save extends NewsAction implements HttpPostActionInterface
      * @var NewsFactory
      */
     protected NewsFactory $newsFactory;
+
     /**
      * @var NewsRepositoryInterface
      */
     protected NewsRepositoryInterface $newsRepository;
+
     /**
      * @var UploaderFactory
      */
     protected UploaderFactory $uploaderFactory;
+
     /**
      * @var Filesystem\Directory\WriteInterface
      */
     protected Filesystem\Directory\WriteInterface $mediaDirectory;
+
     /**
      * @var LoggerInterface
      */
@@ -69,7 +74,7 @@ class Save extends NewsAction implements HttpPostActionInterface
         $this->newsRepository = $newsRepository;
         $this->uploaderFactory = $uploaderFactory;
         $this->logger = $logger;
-        $this->mediaDirectory = $fileSystem->getDirectoryWrite(\Magento\Framework\App\Filesystem\DirectoryList::MEDIA);
+        $this->mediaDirectory = $fileSystem->getDirectoryWrite(DirectoryList::MEDIA);
     }
 
     /**
