@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Oggetto\News\Modifier;
 
 use Magento\Framework\App\Request\Http;
+use Magento\Ui\Component\Form\Element\Input;
 use Magento\Ui\Component\Form\Field;
 use Magento\Ui\DataProvider\Modifier\ModifierInterface;
 use Oggetto\News\Api\Data\NewsInterface;
@@ -45,11 +46,11 @@ class DateTimes implements ModifierInterface
                         'arguments' => [
                             'data' => [
                                 'config' => [
-                                    'formElement'   => 'input',
+                                    'formElement'   => Input::NAME,
                                     'componentType' => Field::NAME,
                                     'label'         => __('News Creation Time'),
-                                    'visible'       => 1,
-                                    'required'      => 1,
+                                    'visible'       => true,
+                                    'required'      => true,
                                     'disabled'      => true,
                                 ],
                             ],
@@ -59,11 +60,11 @@ class DateTimes implements ModifierInterface
                         'arguments' => [
                             'data' => [
                                 'config' => [
-                                    'formElement'   => 'input',
+                                    'formElement'   => Input::NAME,
                                     'componentType' => Field::NAME,
                                     'label'         => __('News Modification Time'),
-                                    'visible'       => 1,
-                                    'required'      => 1,
+                                    'visible'       => true,
+                                    'required'      => true,
                                     'disabled'      => true,
                                 ],
                             ],
