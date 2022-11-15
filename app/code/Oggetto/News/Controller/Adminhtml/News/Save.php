@@ -58,7 +58,7 @@ class Save extends NewsAction implements HttpPostActionInterface
         NewsRepositoryInterface $newsRepository,
         UploaderFactory $uploaderFactory,
         FileSystem $fileSystem,
-        LoggerInterface $logger
+        LoggerInterface $logger,
     ) {
         parent::__construct($context);
         $this->newsFactory = $newsFactory;
