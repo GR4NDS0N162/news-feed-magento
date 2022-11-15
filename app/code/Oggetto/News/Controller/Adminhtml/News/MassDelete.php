@@ -59,18 +59,19 @@ class MassDelete extends Action implements HttpPostActionInterface
     public function execute()
     {
         $collection = $this->filter->getCollection($this->collectionFactory->create());
-        $collectionSize = $collection->getSize();
+        $countSuccess = 0;
 
         /** @var NewsInterface $news */
         foreach ($collection as $news) {
             try {
                 $this->newsRepository->delete($news);
+                $countSuccess++;
             } catch (CouldNotDeleteException) {
                 $this->messageManager->addErrorMessage(__('Failed to delete news with the "%1" ID', $news->getId()));
             }
         }
 
-        $this->messageManager->addSuccessMessage(__('A total of %1 record(s) have been deleted.', $collectionSize));
+        $this->messageManager->addSuccessMessage(__('A total of %1 record(s) have been deleted.', $countSuccess));
 
         /** @var Redirect $resultRedirect */
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);

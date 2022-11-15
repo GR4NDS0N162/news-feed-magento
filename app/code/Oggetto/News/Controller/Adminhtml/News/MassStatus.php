@@ -60,19 +60,20 @@ class MassStatus extends Action implements HttpPostActionInterface
     {
         $collection = $this->filter->getCollection($this->collectionFactory->create());
         $status = (int)$this->getRequest()->getParam(NewsInterface::STATUS);
-        $collectionSize = $collection->getSize();
+        $countSuccess = 0;
 
         /** @var NewsInterface $news */
         foreach ($collection as $news) {
             try {
                 $news->setStatus($status);
                 $this->newsRepository->save($news);
+                $countSuccess++;
             } catch (CouldNotSaveException) {
                 $this->messageManager->addErrorMessage(__('Failed to modify news with the "%1" ID', $news->getId()));
             }
         }
 
-        $this->messageManager->addSuccessMessage(__('A total of %1 record(s) have been updated.', $collectionSize));
+        $this->messageManager->addSuccessMessage(__('A total of %1 record(s) have been updated.', $countSuccess));
 
         /** @var Redirect $resultRedirect */
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
