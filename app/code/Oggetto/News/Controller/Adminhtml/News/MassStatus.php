@@ -73,7 +73,9 @@ class MassStatus extends Action implements HttpPostActionInterface
             }
         }
 
-        $this->messageManager->addSuccessMessage(__('A total of %1 record(s) have been updated.', $countSuccess));
+        if ($countSuccess) {
+            $this->messageManager->addSuccessMessage(__('A total of %1 record(s) have been updated.', $countSuccess));
+        }
 
         /** @var Redirect $resultRedirect */
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
