@@ -48,7 +48,7 @@ class Edit extends NewsAction implements HttpGetActionInterface
             try {
                 $model = $this->newsRepository->getById($id);
             } catch (NoSuchEntityException) {
-                $this->messageManager->addErrorMessage(__('This block no longer exists.'));
+                $this->messageManager->addErrorMessage(__('This news no longer exists.'));
                 $resultRedirect = $this->resultRedirectFactory->create();
                 return $resultRedirect->setPath('*/*/');
             }
