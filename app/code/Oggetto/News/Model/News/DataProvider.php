@@ -24,9 +24,9 @@ class DataProvider extends ModifierPoolDataProvider
     protected DataPersistorInterface $dataPersistor;
 
     /**
-     * @var array
+     * @var array|null
      */
-    protected array $loadedData;
+    protected ?array $loadedData = null;
 
     /**
      * Constructor
@@ -52,18 +52,17 @@ class DataProvider extends ModifierPoolDataProvider
     ) {
         $this->collection = $newsCollectionFactory->create();
         $this->dataPersistor = $dataPersistor;
-        $this->loadedData = $this->getData();
         parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data, $pool);
     }
 
     /**
      * Get data
      *
-     * @return array
+     * @return array|null
      */
-    public function getData(): array
+    public function getData(): ?array
     {
-        if (isset($this->loadedData)) {
+        if (!is_null($this->loadedData)) {
             return $this->loadedData;
         }
         $items = $this->collection->getItems();
