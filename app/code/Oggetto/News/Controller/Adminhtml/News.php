@@ -22,7 +22,7 @@ abstract class News extends Action
      * @param Page $resultPage
      * @return Page
      */
-    protected function initPage($resultPage)
+    protected function initPage(Page $resultPage): Page
     {
         $resultPage->setActiveMenu('Oggetto_News::news')
             ->addBreadcrumb(__('News Module'), __('News Module'));
