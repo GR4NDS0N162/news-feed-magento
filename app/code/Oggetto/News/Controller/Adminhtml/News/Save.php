@@ -89,8 +89,7 @@ class Save extends NewsAction implements HttpPostActionInterface
 
             $model = $this->newsFactory->create();
 
-            $id = $this->getRequest()->getParam(NewsInterface::ID);
-            if ($id) {
+            if ($id = $this->getRequest()->getParam(NewsInterface::ID)) {
                 try {
                     $model = $this->newsRepository->getById($id);
                 } catch (LocalizedException) {
