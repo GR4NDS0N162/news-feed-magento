@@ -15,7 +15,7 @@ class Index extends NewsAction implements HttpGetActionInterface
     /**
      * @var PageFactory
      */
-    protected $resultPageFactory;
+    protected PageFactory $resultPageFactory;
 
     /**
      * @param Context $context

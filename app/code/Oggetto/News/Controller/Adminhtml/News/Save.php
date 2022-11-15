@@ -25,19 +25,19 @@ class Save extends NewsAction implements HttpPostActionInterface
     /**
      * @var NewsFactory
      */
-    protected $newsFactory;
+    protected NewsFactory $newsFactory;
     /**
      * @var NewsRepositoryInterface
      */
-    protected $newsRepository;
+    protected NewsRepositoryInterface $newsRepository;
     /**
      * @var UploaderFactory
      */
-    protected $uploaderFactory;
+    protected UploaderFactory $uploaderFactory;
     /**
      * @var Filesystem\Directory\WriteInterface
      */
-    protected $mediaDirectory;
+    protected Filesystem\Directory\WriteInterface $mediaDirectory;
     /**
      * @var LoggerInterface
      */
@@ -144,12 +144,15 @@ class Save extends NewsAction implements HttpPostActionInterface
      *
      * @param News $model
      * @param array $data
-     * @param \Magento\Framework\Controller\Result\Redirect $resultRedirect
-     * @return \Magento\Framework\Controller\Result\Redirect
+     * @param Redirect $resultRedirect
+     * @return Redirect
      * @throws CouldNotSaveException
      */
-    private function processNewsReturn($model, $data, $resultRedirect)
-    {
+    private function processNewsReturn(
+        News $model,
+        array $data,
+        Redirect $resultRedirect,
+    ): Redirect {
         $redirect = $data['back'] ?? 'close';
 
         if ($redirect === 'continue') {

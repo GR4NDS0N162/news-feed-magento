@@ -23,15 +23,15 @@ class MassStatus extends Action implements HttpPostActionInterface
     /**
      * @var Filter
      */
-    protected $filter;
+    protected Filter $filter;
     /**
      * @var CollectionFactory
      */
-    protected $collectionFactory;
+    protected CollectionFactory $collectionFactory;
     /**
      * @var NewsRepositoryInterface
      */
-    protected $newsRepository;
+    protected NewsRepositoryInterface $newsRepository;
 
     /**
      * @param Context $context

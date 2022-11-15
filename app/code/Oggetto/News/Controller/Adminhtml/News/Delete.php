@@ -16,7 +16,7 @@ class Delete extends NewsAction implements HttpPostActionInterface
     /**
      * @var NewsRepositoryInterface
      */
-    protected $newsRepository;
+    protected NewsRepositoryInterface $newsRepository;
 
     /**
      * @param Context $context
