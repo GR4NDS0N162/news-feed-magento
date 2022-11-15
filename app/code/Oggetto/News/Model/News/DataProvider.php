@@ -52,6 +52,7 @@ class DataProvider extends ModifierPoolDataProvider
     ) {
         $this->collection = $newsCollectionFactory->create();
         $this->dataPersistor = $dataPersistor;
+        $this->loadedData = $this->getData();
         parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data, $pool);
     }
 
