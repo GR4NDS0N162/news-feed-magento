@@ -15,6 +15,7 @@ use Magento\Framework\Validation\ValidationException;
 use Magento\MediaStorage\Model\File\UploaderFactory;
 use Oggetto\News\Api\Data\NewsInterface;
 use Oggetto\News\Api\NewsRepositoryInterface;
+use Oggetto\News\Block\Adminhtml\News\Edit\SaveButton;
 use Oggetto\News\Controller\Adminhtml\News as NewsAction;
 use Oggetto\News\Model\News;
 use Oggetto\News\Model\NewsFactory;
@@ -22,6 +23,9 @@ use Psr\Log\LoggerInterface;
 
 class Save extends NewsAction implements HttpPostActionInterface
 {
+    public const PATH = 'imageUploader/images';
+    public const PATH_SEPARATOR = '/';
+
     /**
      * @var NewsFactory
      */
@@ -128,7 +132,7 @@ class Save extends NewsAction implements HttpPostActionInterface
             try {
                 $imageId = $data[NewsInterface::IMAGE][0];
                 if (!file_exists($imageId['tmp_name'])) {
-                    $imageId['tmp_name'] = $imageId['path'] . '/' . $imageId['file'];
+                    $imageId['tmp_name'] = $imageId['path'] . self::PATH_SEPARATOR . $imageId['file'];
                 }
 
                 $fileUploader = $this->uploaderFactory->create(['fileId' => $imageId]);
@@ -137,10 +141,9 @@ class Save extends NewsAction implements HttpPostActionInterface
                 $fileUploader->setAllowCreateFolders(true);
                 $fileUploader->validateFile();
 
-                $info = $fileUploader->save($this->mediaDirectory->getAbsolutePath('imageUploader/images'));
-                $data[NewsInterface::IMAGE] = $this->mediaDirectory->getRelativePath(
-                    'imageUploader/images',
-                ) . '/' . $info['file'];
+                $info = $fileUploader->save($this->mediaDirectory->getAbsolutePath(self::PATH));
+                $data[NewsInterface::IMAGE] = $this->mediaDirectory->getRelativePath(self::PATH)
+                    . self::PATH_SEPARATOR . $info['file'];
             } catch (ValidationException) {
                 throw new LocalizedException(__(
                     'Image extension is not supported. Only extensions allowed are jpg, jpeg and png',
@@ -171,13 +174,13 @@ class Save extends NewsAction implements HttpPostActionInterface
         array $data,
         Redirect $resultRedirect,
     ): Redirect {
-        $redirect = $data['back'] ?? 'close';
+        $redirect = $data[SaveButton::REDIRECT_KEY] ?? SaveButton::REDIRECT_CLOSE;
 
-        if ($redirect === 'continue') {
+        if ($redirect === SaveButton::REDIRECT_CONTINUE) {
             $resultRedirect->setPath('*/*/edit', [NewsInterface::ID => $model->getId()]);
-        } elseif ($redirect === 'close') {
+        } elseif ($redirect === SaveButton::REDIRECT_CLOSE) {
             $resultRedirect->setPath('*/*/');
-        } elseif ($redirect === 'duplicate') {
+        } elseif ($redirect === SaveButton::REDIRECT_DUPLICATE) {
             $duplicateModel = $this->newsFactory->create(['data' => $data]);
             $duplicateModel->setId(null);
             $duplicateModel->setStatus(News::STATUS_DISABLED);

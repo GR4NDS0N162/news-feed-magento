@@ -9,6 +9,11 @@ use Magento\Ui\Component\Control\Container;
 
 class SaveButton extends GenericButton implements ButtonProviderInterface
 {
+    public const REDIRECT_KEY = 'back';
+    public const REDIRECT_CONTINUE = 'continue';
+    public const REDIRECT_DUPLICATE = 'duplicate';
+    public const REDIRECT_CLOSE = 'close';
+
     /**
      * @inheritDoc
      */
@@ -27,7 +32,7 @@ class SaveButton extends GenericButton implements ButtonProviderInterface
                                 'params'     => [
                                     true,
                                     [
-                                        'back' => 'continue',
+                                        self::REDIRECT_KEY => self::REDIRECT_CONTINUE,
                                     ],
                                 ],
                             ],
@@ -62,7 +67,7 @@ class SaveButton extends GenericButton implements ButtonProviderInterface
                                     'params'     => [
                                         true,
                                         [
-                                            'back' => 'duplicate',
+                                            self::REDIRECT_KEY => self::REDIRECT_DUPLICATE,
                                         ],
                                     ],
                                 ],
@@ -84,7 +89,7 @@ class SaveButton extends GenericButton implements ButtonProviderInterface
                                     'params'     => [
                                         true,
                                         [
-                                            'back' => 'close',
+                                            self::REDIRECT_KEY => self::REDIRECT_CLOSE,
                                         ],
                                     ],
                                 ],

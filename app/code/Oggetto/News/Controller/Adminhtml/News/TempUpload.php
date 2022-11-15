@@ -18,6 +18,8 @@ use Psr\Log\LoggerInterface;
 
 class TempUpload extends Action
 {
+    public const TMP_PATH = 'tmp/imageUploader/images';
+
     /**
      * @var UploaderFactory
      */
@@ -71,9 +73,9 @@ class TempUpload extends Action
             $fileUploader->setAllowCreateFolders(true);
             $fileUploader->setFilesDispersion(false);
             $fileUploader->validateFile();
-            $result = $fileUploader->save($this->mediaDirectory->getAbsolutePath('tmp/imageUploader/images'));
+            $result = $fileUploader->save($this->mediaDirectory->getAbsolutePath(self::TMP_PATH));
             $result['url'] = $this->storeManager->getStore()->getBaseUrl(UrlInterface::URL_TYPE_MEDIA)
-                . 'tmp/imageUploader/images/' . ltrim(str_replace('\\', '/', $result['file']), '/');
+                . self::TMP_PATH . '/' . ltrim(str_replace('\\', '/', $result['file']), '/');
             return $jsonResult->setData($result);
         } catch (LocalizedException $e) {
             return $jsonResult->setData(['errorcode' => 0, 'error' => $e->getMessage()]);
