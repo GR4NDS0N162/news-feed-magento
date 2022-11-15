@@ -89,7 +89,7 @@ class Save extends NewsAction implements HttpPostActionInterface
             if ($id) {
                 try {
                     $model = $this->newsRepository->getById($id);
-                } catch (LocalizedException $e) {
+                } catch (LocalizedException) {
                     $this->messageManager->addErrorMessage(__('This news no longer exists.'));
                     return $resultRedirect->setPath('*/*/');
                 }
