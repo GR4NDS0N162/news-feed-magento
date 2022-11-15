@@ -8,7 +8,6 @@ use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Oggetto\News\Api\Data\NewsInterface;
-use Oggetto\News\Api\Data\NewsInterfaceFactory;
 use Oggetto\News\Api\NewsRepositoryInterface;
 use Oggetto\News\Model\ResourceModel\News as ResourceNews;
 use Oggetto\News\Model\ResourceModel\News\CollectionFactory;
@@ -24,10 +23,6 @@ class NewsRepository implements NewsRepositoryInterface
      */
     protected $newsFactory;
     /**
-     * @var NewsInterfaceFactory
-     */
-    protected $dataNewsFactory;
-    /**
      * @var CollectionFactory
      */
     protected $newsCollectionFactory;
@@ -35,18 +30,15 @@ class NewsRepository implements NewsRepositoryInterface
     /**
      * @param ResourceNews $resource
      * @param NewsFactory $newsFactory
-     * @param NewsInterfaceFactory $dataNewsFactory
      * @param CollectionFactory $newsCollectionFactory
      */
     public function __construct(
         ResourceNews $resource,
         NewsFactory $newsFactory,
-        NewsInterfaceFactory $dataNewsFactory,
         CollectionFactory $newsCollectionFactory,
     ) {
         $this->resource = $resource;
         $this->newsFactory = $newsFactory;
-        $this->dataNewsFactory = $dataNewsFactory;
         $this->newsCollectionFactory = $newsCollectionFactory;
     }
 
