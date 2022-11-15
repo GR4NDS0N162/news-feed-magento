@@ -54,7 +54,6 @@ class MassDelete extends Action implements HttpPostActionInterface
     /**
      * @inheritDoc
      *
-     * @throws CouldNotDeleteException
      * @throws LocalizedException
      */
     public function execute()
@@ -64,7 +63,11 @@ class MassDelete extends Action implements HttpPostActionInterface
 
         /** @var NewsInterface $news */
         foreach ($collection as $news) {
-            $this->newsRepository->delete($news);
+            try {
+                $this->newsRepository->delete($news);
+            } catch (CouldNotDeleteException) {
+                $this->messageManager->addErrorMessage(__('Failed to delete news with the "%1" ID', $news->getId()));
+            }
         }
 
         $this->messageManager->addSuccessMessage(__('A total of %1 record(s) have been deleted.', $collectionSize));
