@@ -14,17 +14,17 @@ class DataProvider extends \Magento\Framework\View\Element\UiComponent\DataProvi
      */
     protected function searchResultToOutput(SearchResultInterface $searchResult): array
     {
-        $arrItems = [];
+        $resultArray = [];
 
-        $arrItems['items'] = [];
+        $resultArray['items'] = [];
         foreach ($searchResult->getItems() as $item) {
             if ($item instanceof AbstractModel) {
-                $arrItems['items'][] = $item->getData();
+                $resultArray['items'][] = $item->getData();
             }
         }
 
-        $arrItems['totalRecords'] = $searchResult->getTotalCount();
+        $resultArray['totalRecords'] = $searchResult->getTotalCount();
 
-        return $arrItems;
+        return $resultArray;
     }
 }
