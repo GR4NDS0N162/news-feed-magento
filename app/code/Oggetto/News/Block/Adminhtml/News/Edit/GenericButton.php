@@ -14,11 +14,11 @@ class GenericButton
     /**
      * @var Context
      */
-    protected $context;
+    protected Context $context;
     /**
      * @var NewsRepositoryInterface
      */
-    protected $newsRepository;
+    protected NewsRepositoryInterface $newsRepository;
 
     /**
      * @param Context $context
@@ -37,7 +37,7 @@ class GenericButton
      *
      * @return int|null
      */
-    public function getNewsId()
+    public function getNewsId(): ?int
     {
         try {
             return $this->newsRepository->getById(
@@ -55,7 +55,7 @@ class GenericButton
      * @param array $params
      * @return string
      */
-    public function getUrl($route = '', $params = [])
+    public function getUrl(string $route = '', array $params = []): string
     {
         return $this->context->getUrlBuilder()->getUrl($route, $params);
     }
