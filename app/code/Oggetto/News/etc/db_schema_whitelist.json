@@ -1,0 +1,17 @@
+{
+    "news": {
+        "column": {
+            "id": true,
+            "title": true,
+            "description": true,
+            "content": true,
+            "creation_time": true,
+            "update_time": true,
+            "status": true,
+            "image": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

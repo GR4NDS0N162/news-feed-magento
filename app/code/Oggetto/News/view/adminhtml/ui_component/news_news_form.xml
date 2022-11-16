@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">news_news_form.news_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">General Information</item>
+        <item name="reverseMetadataMerge" xsi:type="boolean">true</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+        <item name="config" xsi:type="array">
+            <item name="dataScope" xsi:type="string">data</item>
+            <item name="namespace" xsi:type="string">news_news_form</item>
+        </item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="save" class="Oggetto\News\Block\Adminhtml\News\Edit\SaveButton" />
+            <button name="delete" class="Oggetto\News\Block\Adminhtml\News\Edit\DeleteButton" />
+            <button name="back" class="Oggetto\News\Block\Adminhtml\News\Edit\BackButton" />
+        </buttons>
+        <namespace>news_news_form</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>news_news_form.news_form_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="news_form_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="*/*/save" />
+        </settings>
+        <dataProvider class="Oggetto\News\Model\News\DataProvider" name="news_form_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="general">
+        <settings>
+            <label />
+        </settings>
+        <field name="id" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">news</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <visible>false</visible>
+                <dataScope>id</dataScope>
+            </settings>
+        </field>
+        <field name="status" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">news</item>
+                    <item name="default" xsi:type="number">1</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Enable News</label>
+                <dataScope>status</dataScope>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+        <field name="title" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">news</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">News Title</label>
+                <dataScope>title</dataScope>
+            </settings>
+        </field>
+        <field name="description" formElement="textarea">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">news</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">News Description</label>
+                <dataScope>description</dataScope>
+            </settings>
+        </field>
+        <field name="image" formElement="imageUploader">
+            <settings>
+                <label translate="true">News Image</label>
+                <componentType>imageUploader</componentType>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+            </settings>
+            <formElements>
+                <imageUploader>
+                    <settings>
+                        <allowedExtensions>jpg jpeg png</allowedExtensions>
+                        <maxFileSize>2097152</maxFileSize>
+                        <uploaderConfig>
+                            <param xsi:type="string" name="url">news/news/tempUpload</param>
+                        </uploaderConfig>
+                    </settings>
+                </imageUploader>
+            </formElements>
+        </field>
+        <field name="content" formElement="wysiwyg">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">news</item>
+                </item>
+            </argument>
+            <settings>
+                <additionalClasses>
+                    <class name="admin__field-wide">true</class>
+                </additionalClasses>
+                <label translate="true">News Content</label>
+                <dataScope>content</dataScope>
+            </settings>
+            <formElements>
+                <wysiwyg>
+                    <settings>
+                        <wysiwyg>true</wysiwyg>
+                    </settings>
+                </wysiwyg>
+            </formElements>
+        </field>
+    </fieldset>
+</form>
