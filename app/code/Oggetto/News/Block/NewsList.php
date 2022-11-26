@@ -11,6 +11,7 @@ use Magento\Theme\Block\Html\Pager;
 use Oggetto\News\Api\Data\NewsInterface;
 use Oggetto\News\Api\NewsRepositoryInterface;
 use Oggetto\News\Helper\Data;
+use Oggetto\News\Model\News;
 use Oggetto\News\Model\ResourceModel\News\Collection as NewsCollection;
 
 /**
@@ -58,6 +59,7 @@ class NewsList extends Template
     {
         parent::_construct();
         $collection = $this->newsRepository->getList()
+            ->addFieldToFilter(NewsInterface::STATUS, ['eq' => News::STATUS_ENABLED])
             ->setOrder(NewsInterface::ID, Collection::SORT_ORDER_ASC);
         $this->setCollection($collection);
     }
