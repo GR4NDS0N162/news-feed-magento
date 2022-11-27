@@ -6,7 +6,8 @@
         <referenceContainer name="content">
             <block class="Oggetto\News\Block\NewsList"
                    name="oggetto_news_news_list"
-                   template="Oggetto_News::list.phtml" />
+                   template="Oggetto_News::news/list.phtml">
+            </block>
         </referenceContainer>
     </body>
 </page>
