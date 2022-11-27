@@ -4,7 +4,7 @@
     <update handle="news_news" />
     <body>
         <referenceContainer name="content">
-            <block class="Oggetto\News\Block\News\NewsList"
+            <block class="Oggetto\News\Block\News\ListNews"
                    name="oggetto_news_news_list"
                    template="Oggetto_News::news/list.phtml">
             </block>

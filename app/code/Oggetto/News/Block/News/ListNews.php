@@ -18,10 +18,19 @@ use Oggetto\News\Model\ResourceModel\News\Collection as NewsCollection;
  * @method setCollection(NewsCollection $collection)
  * @method NewsCollection getCollection()
  */
-class NewsList extends Template
+class ListNews extends Template
 {
-    const PAGER_NAME  = 'news.news.list.pager';
-    const PAGER_ALIAS = 'pager';
+    /** Equal */
+    public const CONDITION_TYPE_EQ = 'eq';
+    /** Not Equal */
+    public const CONDITION_TYPE_NEQ = 'neq';
+    /** In */
+    public const CONDITION_TYPE_IN = 'in';
+    /** Not In */
+    public const CONDITION_TYPE_NIN = 'nin';
+
+    public const PAGER_NAME  = 'news.news.list.pager';
+    public const PAGER_ALIAS = 'pager';
 
     /**
      * @var NewsRepositoryInterface
@@ -59,7 +68,7 @@ class NewsList extends Template
     {
         parent::_construct();
         $collection = $this->newsRepository->getList()
-            ->addFieldToFilter(NewsInterface::STATUS, ['eq' => News::STATUS_ENABLED])
+            ->addFieldToFilter(NewsInterface::STATUS, [self::CONDITION_TYPE_EQ => News::STATUS_ENABLED])
             ->setOrder(NewsInterface::ID, Collection::SORT_ORDER_ASC);
         $this->setCollection($collection);
     }
@@ -69,7 +78,7 @@ class NewsList extends Template
      *
      * @throws LocalizedException
      */
-    protected function _prepareLayout(): NewsList
+    protected function _prepareLayout(): ListNews
     {
         parent::_prepareLayout();
 

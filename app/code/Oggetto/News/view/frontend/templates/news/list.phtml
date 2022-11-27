@@ -1,8 +1,14 @@
 <?php
-/** @var NewsList $block */
+/**
+ * @var ListNews $block
+ * @var Escaper $escaper
+ * @var SecureHtmlRenderer $secureRenderer
+ */
 
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Helper\SecureHtmlRenderer;
 use Oggetto\News\Api\Data\NewsInterface;
-use Oggetto\News\Block\News\NewsList;
+use Oggetto\News\Block\News\ListNews;
 
 ?>
 <div class="news">
