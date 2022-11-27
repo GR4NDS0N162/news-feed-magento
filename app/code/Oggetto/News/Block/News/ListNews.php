@@ -20,17 +20,9 @@ use Oggetto\News\Model\ResourceModel\News\Collection as NewsCollection;
  */
 class ListNews extends Template
 {
-    /** Equal */
-    public const CONDITION_TYPE_EQ = 'eq';
-    /** Not Equal */
-    public const CONDITION_TYPE_NEQ = 'neq';
-    /** In */
-    public const CONDITION_TYPE_IN = 'in';
-    /** Not In */
-    public const CONDITION_TYPE_NIN = 'nin';
-
-    public const PAGER_NAME  = 'news.news.list.pager';
-    public const PAGER_ALIAS = 'pager';
+    public const PAGER_NAME          = 'news_list_pager';
+    public const PAGER_ALIAS         = 'pager';
+    public const KEY_ORDER_DIRECTION = 'order_direction';
 
     /**
      * @var NewsRepositoryInterface
@@ -67,10 +59,26 @@ class ListNews extends Template
     protected function _construct()
     {
         parent::_construct();
+        $orderDirection = $this->getOrderDirection();
         $collection = $this->newsRepository->getList()
-            ->addFieldToFilter(NewsInterface::STATUS, [self::CONDITION_TYPE_EQ => News::STATUS_ENABLED])
-            ->setOrder(NewsInterface::ID, Collection::SORT_ORDER_ASC);
+            ->addFilter(NewsInterface::STATUS, News::STATUS_ENABLED)
+            ->setOrder(NewsInterface::CREATION_TIME, $orderDirection);
         $this->setCollection($collection);
+    }
+
+    /**
+     * Get order by
+     *
+     * @return string
+     */
+    public function getOrderDirection(): string
+    {
+        $orderBy = $this->getRequest()->getParam(self::KEY_ORDER_DIRECTION);
+        if (isset($orderBy) && $orderBy == Collection::SORT_ORDER_ASC) {
+            return Collection::SORT_ORDER_ASC;
+        } else {
+            return Collection::SORT_ORDER_DESC;
+        }
     }
 
     /**
