@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Oggetto\News\Block;
+namespace Oggetto\News\Block\News;
 
 use Magento\Framework\Data\Collection;
 use Magento\Framework\Exception\LocalizedException;
