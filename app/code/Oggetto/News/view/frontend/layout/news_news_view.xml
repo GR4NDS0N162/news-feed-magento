@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="news_news" />
+    <body>
+        <referenceContainer name="content">
+            <block class="Oggetto\News\Block\News\View"
+                   name="oggetto_news_news_view"
+                   template="Oggetto_News::news/view.phtml">
+            </block>
+        </referenceContainer>
+    </body>
+</page>
