@@ -6,6 +6,7 @@ namespace Oggetto\News\Block\News;
 
 use Magento\Framework\Data\Collection;
 use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\UrlInterface;
 use Magento\Framework\View\Element\Template;
 use Magento\Theme\Block\Html\Pager;
 use Oggetto\News\Api\Data\NewsInterface;
@@ -74,11 +75,22 @@ class ListNews extends Template
     public function getOrderDirection(): string
     {
         $orderBy = $this->getRequest()->getParam(self::KEY_ORDER_DIRECTION);
-        if (isset($orderBy) && $orderBy == Collection::SORT_ORDER_ASC) {
+        if ($orderBy === Collection::SORT_ORDER_ASC) {
             return Collection::SORT_ORDER_ASC;
         } else {
             return Collection::SORT_ORDER_DESC;
         }
+    }
+
+    /**
+     * Get image url
+     *
+     * @param string $imagePath
+     * @return string
+     */
+    public function getImageUrl(string $imagePath): string
+    {
+        return $this->_urlBuilder->getBaseUrl(['_type' => UrlInterface::URL_TYPE_MEDIA]) . $imagePath;
     }
 
     /**

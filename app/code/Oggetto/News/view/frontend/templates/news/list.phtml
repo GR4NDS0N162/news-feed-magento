@@ -32,10 +32,21 @@ use Oggetto\News\Block\News\ListNews;
             foreach ($newsCollection as $news) : ?>
                 <li>
                     <div class="news-list">
+                        <?php if ($news->getImage()): ?>
+                            <img class="photo image news-list-image"
+                                 src="<?= $escaper->escapeUrl($block->getImageUrl($news->getImage())); ?>"
+                                 loading="lazy"
+                                 alt="<?= $escaper->escapeHtmlAttr(__('News Image')) ?>"/>
+                        <?php endif; ?>
                         <a class="news-title" href="<?= $this->getUrl('news/news/view',
-                            [NewsInterface::ID => $news->getId()]); ?>"><?= $news->getTitle(); ?></a>
+                            [NewsInterface::ID => $news->getId()]); ?>"><?= $escaper->escapeHtml($news->getTitle()); ?></a>
+                        <div class="news-list-creation-time">
+                            <?= $escaper->escapeHtml(__('Creation date:')); ?>
+                            <?= $escaper->escapeHtml(date("l, F d, Y", strtotime($news->getCreationTime()))); ?>
+                        </div>
                         <div class="news-list-content">
-                            <?= $news->getDescription(); ?>
+                            <?= $escaper->escapeHtml(__('Description:')); ?>
+                            <?= $escaper->escapeHtml($news->getDescription()); ?>
                         </div>
                     </div>
                 </li>
