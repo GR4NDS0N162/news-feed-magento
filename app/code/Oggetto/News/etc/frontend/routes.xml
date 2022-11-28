@@ -3,7 +3,7 @@
         xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
     <router id="standard">
         <route id="news" frontName="news">
-            <module name="Oggetto_News"/>
+            <module name="Oggetto_News" />
         </route>
     </router>
 </config>
