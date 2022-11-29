@@ -11,7 +11,7 @@ use Magento\Framework\View\Element\Template;
 use Magento\Theme\Block\Html\Pager;
 use Oggetto\News\Api\Data\NewsInterface;
 use Oggetto\News\Api\NewsRepositoryInterface;
-use Oggetto\News\Helper\Data;
+use Oggetto\News\Model\Config\Data;
 use Oggetto\News\Model\News;
 use Oggetto\News\Model\ResourceModel\News\Collection as NewsCollection;
 

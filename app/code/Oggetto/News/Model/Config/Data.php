@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Oggetto\News\Helper;
+namespace Oggetto\News\Model\Config;
 
 use Magento\Framework\App\Helper\AbstractHelper;
 use Magento\Store\Model\ScopeInterface;
