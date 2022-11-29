@@ -103,8 +103,6 @@ class ListNews extends Template
 
     /**
      * @inheritDoc
-     *
-     * @throws LocalizedException
      */
     protected function _prepareLayout(): ListNews
     {

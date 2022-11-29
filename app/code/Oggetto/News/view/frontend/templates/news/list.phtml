@@ -17,12 +17,12 @@ use Oggetto\News\Block\News\ListNews;
     <?php if ($newsCollection->getSize() > 0) : ?>
         <div class="toolbar-sorter sorter">
             <span class="sorter-label"><?= $escaper->escapeHtml(__('Sort Direction')) ?></span>
-            <?php if ($block->getOrderDirection() === Collection::SORT_ORDER_DESC): ?>
+            <?php if ($block->getOrderDirection() === Collection::SORT_ORDER_DESC) : ?>
                 <a href="<?= $this->getUrl('news/news/index',
                     [ListNews::KEY_ORDER_DIRECTION => Collection::SORT_ORDER_ASC]); ?>"
                    class="action sorter-action sort-desc"
                    data-role="direction-switcher"></a>
-            <?php else: ?>
+            <?php else : ?>
                 <a href="<?= $this->getUrl('news/news/index'); ?>"
                    class="action sorter-action sort-asc"
                    data-role="direction-switcher"></a>
@@ -33,7 +33,7 @@ use Oggetto\News\Block\News\ListNews;
             foreach ($newsCollection as $news) : ?>
                 <li>
                     <div class="news-list">
-                        <?php if ($news->getImage()): ?>
+                        <?php if ($news->getImage()) : ?>
                             <img class="photo image news-list-image"
                                  src="<?= $escaper->escapeUrl($block->getImageUrl($news->getImage())); ?>"
                                  loading="lazy"
