@@ -80,6 +80,21 @@ class ListNews extends Template
     }
 
     /**
+     * Get sorter url
+     *
+     * @return string
+     */
+    public function getSorterUrl(): string
+    {
+        return $this->getUrl(
+            'news/news/index',
+            ($this->getOrderDirection() === Collection::SORT_ORDER_DESC)
+                ? [self::KEY_ORDER_DIRECTION => Collection::SORT_ORDER_ASC]
+                : [],
+        );
+    }
+
+    /**
      * Get image url
      *
      * @param string $imagePath
