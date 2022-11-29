@@ -92,6 +92,17 @@ class ListNews extends Template
     }
 
     /**
+     * Convert date format
+     *
+     * @param string $date
+     * @return string
+     */
+    public function convertDateFormat(string $date): string
+    {
+        return date("l, F d, Y", strtotime($date));
+    }
+
+    /**
      * @inheritDoc
      *
      * @throws LocalizedException

@@ -43,7 +43,7 @@ use Oggetto\News\Block\News\ListNews;
                             [NewsInterface::ID => $news->getId()]); ?>"><?= $escaper->escapeHtml($news->getTitle()); ?></a>
                         <div class="news-list-creation-time">
                             <?= $escaper->escapeHtml(__('Creation date:')); ?>
-                            <?= $escaper->escapeHtml(date("l, F d, Y", strtotime($news->getCreationTime()))); ?>
+                            <?= $escaper->escapeHtml($block->convertDateFormat($news->getCreationTime())); ?>
                         </div>
                         <div class="news-list-content">
                             <?= $escaper->escapeHtml(__('Description:')); ?>
