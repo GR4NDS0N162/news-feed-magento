@@ -21,7 +21,6 @@ use Oggetto\News\Model\ResourceModel\News\Collection as NewsCollection;
  */
 class ListNews extends Template
 {
-    public const PAGER_NAME          = 'news_list_pager';
     public const PAGER_ALIAS         = 'pager';
     public const KEY_ORDER_DIRECTION = 'order_direction';
 
@@ -112,7 +111,7 @@ class ListNews extends Template
         parent::_prepareLayout();
 
         /** @var Pager $pager */
-        $pager = $this->getLayout()->createBlock(Pager::class, self::PAGER_NAME);
+        $pager = $this->getChildBlock(self::PAGER_ALIAS);
         $pager->setLimit($this->dataHelper->getNewsPerPage())
             ->setShowPerPage(false)
             ->setCollection($this->getCollection());

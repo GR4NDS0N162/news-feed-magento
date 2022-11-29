@@ -7,6 +7,9 @@
             <block class="Oggetto\News\Block\News\ListNews"
                    name="oggetto_news_news_list"
                    template="Oggetto_News::news/list.phtml">
+                <block class="Magento\Theme\Block\Html\Pager"
+                       name="news_list_pager"
+                       as="pager" />
             </block>
         </referenceContainer>
     </body>
