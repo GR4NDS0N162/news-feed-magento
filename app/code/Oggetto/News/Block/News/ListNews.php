@@ -75,11 +75,9 @@ class ListNews extends Template
     public function getOrderDirection(): string
     {
         $orderBy = $this->getRequest()->getParam(self::KEY_ORDER_DIRECTION);
-        if ($orderBy === Collection::SORT_ORDER_ASC) {
-            return Collection::SORT_ORDER_ASC;
-        } else {
-            return Collection::SORT_ORDER_DESC;
-        }
+        return ($orderBy === Collection::SORT_ORDER_ASC)
+            ? Collection::SORT_ORDER_ASC
+            : Collection::SORT_ORDER_DESC;
     }
 
     /**
