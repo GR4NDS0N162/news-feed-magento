@@ -18,7 +18,7 @@ class Data extends AbstractHelper
      */
     public function getNewsPerPage(): int
     {
-        return (int)$this->scopeConfig->getValue(
+        return (int) $this->scopeConfig->getValue(
             self::XML_PATH_NEWS_PER_PAGE,
             ScopeInterface::SCOPE_STORE,
         );
