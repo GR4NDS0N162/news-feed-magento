@@ -1,0 +1,15 @@
+<?php
+/**
+ * @var View $block
+ * @var Escaper $escaper
+ * @var SecureHtmlRenderer $secureRenderer
+ */
+
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Helper\SecureHtmlRenderer;
+use Oggetto\News\Block\News\View;
+
+?>
+<div class="news-content">
+    <?= $block->getNewsContent(); ?>
+</div>

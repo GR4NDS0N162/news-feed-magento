@@ -1,0 +1,63 @@
+<?php
+/**
+ * @var ListNews $block
+ * @var Escaper $escaper
+ * @var SecureHtmlRenderer $secureRenderer
+ */
+
+use Magento\Framework\Data\Collection;
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Helper\SecureHtmlRenderer;
+use Oggetto\News\Api\Data\NewsInterface;
+use Oggetto\News\Block\News\ListNews;
+
+?>
+<div class="news">
+    <?php $newsCollection = $block->getCollection(); ?>
+    <?php if ($newsCollection->getSize() > 0) : ?>
+        <div class="toolbar-sorter sorter">
+            <span class="sorter-label"><?= $escaper->escapeHtml(__('Sort Direction')) ?></span>
+            <a href="<?= $escaper->escapeUrl($block->getSorterUrl()); ?>"
+               class="action sorter-action sort-<?= ($block->getOrderDirection() === Collection::SORT_ORDER_DESC)
+                   ? 'desc' : 'asc' ?>"
+               data-role="direction-switcher"></a>
+        </div>
+        <ul>
+            <?php /** @var NewsInterface $news */
+            foreach ($newsCollection as $news) : ?>
+                <li>
+                    <div class="news-list">
+                        <?php if ($news->getImage()) : ?>
+                            <img class="photo image news-list-image"
+                                 src="<?= $escaper->escapeUrl($block->getImageUrl($news->getImage())); ?>"
+                                 loading="lazy"
+                                 alt="<?= $escaper->escapeHtmlAttr(__('News Image')) ?>"/>
+                        <?php endif; ?>
+                        <a class="news-title"
+                           href="<?= $escaper->escapeUrl($block->getViewNewsUrl($news->getId())); ?>">
+                            <?= $escaper->escapeHtml($news->getTitle()); ?>
+                        </a>
+                        <div class="news-list-creation-time">
+                            <?= $escaper->escapeHtml(__('Creation date:')); ?>
+                            <?= $escaper->escapeHtml($block->convertDateFormat($news->getCreationTime())); ?>
+                        </div>
+                        <div class="news-list-content">
+                            <?= $escaper->escapeHtml(__('Description:')); ?>
+                            <?= $escaper->escapeHtml($news->getDescription()); ?>
+                        </div>
+                    </div>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+
+        <div style="clear: both"></div>
+
+        <div class="toolbar-bottom">
+            <div class="toolbar bottom">
+                <?= $block->getPagerHtml(); ?>
+            </div>
+        </div>
+    <?php else : ?>
+        <p><?= __('Have no news!'); ?></p>
+    <?php endif; ?>
+</div>
