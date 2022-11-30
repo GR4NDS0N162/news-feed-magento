@@ -33,8 +33,10 @@ use Oggetto\News\Block\News\ListNews;
                                  loading="lazy"
                                  alt="<?= $escaper->escapeHtmlAttr(__('News Image')) ?>"/>
                         <?php endif; ?>
-                        <a class="news-title" href="<?= $this->getUrl('news/news/view',
-                            [NewsInterface::ID => $news->getId()]); ?>"><?= $escaper->escapeHtml($news->getTitle()); ?></a>
+                        <a class="news-title"
+                           href="<?= $escaper->escapeUrl($block->getViewNewsUrl($news->getId())); ?>">
+                            <?= $escaper->escapeHtml($news->getTitle()); ?>
+                        </a>
                         <div class="news-list-creation-time">
                             <?= $escaper->escapeHtml(__('Creation date:')); ?>
                             <?= $escaper->escapeHtml($block->convertDateFormat($news->getCreationTime())); ?>

@@ -106,6 +106,20 @@ class ListNews extends Template
     }
 
     /**
+     * Get view news url
+     *
+     * @param string $newsId
+     * @return string
+     */
+    public function getViewNewsUrl(string $newsId): string
+    {
+        return $this->getUrl(
+            'news/news/view',
+            [NewsInterface::ID => $newsId],
+        );
+    }
+
+    /**
      * Convert date format
      *
      * @param string $date
