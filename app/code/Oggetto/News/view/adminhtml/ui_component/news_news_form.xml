@@ -5,7 +5,6 @@
         <item name="js_config" xsi:type="array">
             <item name="provider" xsi:type="string">news_news_form.news_form_data_source</item>
         </item>
-        <item name="label" xsi:type="string" translate="true">General Information</item>
         <item name="reverseMetadataMerge" xsi:type="boolean">true</item>
         <item name="template" xsi:type="string">templates/form/collapsible</item>
         <item name="config" xsi:type="array">
@@ -21,6 +20,7 @@
         </buttons>
         <namespace>news_news_form</namespace>
         <dataScope>data</dataScope>
+        <label translate="true">News Information</label>
         <deps>
             <dep>news_news_form.news_form_data_source</dep>
         </deps>
