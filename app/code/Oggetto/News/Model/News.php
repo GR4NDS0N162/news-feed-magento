@@ -80,6 +80,30 @@ class News extends AbstractModel implements NewsInterface
     /**
      * @inheritDoc
      */
+    public function getMetaTitle()
+    {
+        return $this->getData(self::META_TITLE);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getMetaKeywords()
+    {
+        return $this->getData(self::META_KEYWORDS);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getMetaDescription()
+    {
+        return $this->getData(self::META_DESCRIPTION);
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function setTitle($title)
     {
         return $this->setData(self::TITLE, $title);
@@ -131,6 +155,30 @@ class News extends AbstractModel implements NewsInterface
     public function setImage($image)
     {
         return $this->setData(self::IMAGE, $image);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setMetaTitle($metaTitle)
+    {
+        return $this->setData(self::META_TITLE, $metaTitle);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setMetaKeywords($metaKeywords)
+    {
+        return $this->setData(self::META_KEYWORDS, $metaKeywords);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setMetaDescription($metaDescription)
+    {
+        return $this->setData(self::META_DESCRIPTION, $metaDescription);
     }
 
     /**

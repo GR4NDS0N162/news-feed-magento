@@ -14,8 +14,16 @@
         <column xsi:type="smallint" name="status" unsigned="false" nullable="false" identity="false"
                 default="1" comment="News Status" />
         <column xsi:type="varchar" name="image" nullable="true" length="255" comment="News Image" />
+        <column xsi:type="varchar" name="meta_title" nullable="true" length="255" comment="News Meta Title" />
+        <column xsi:type="text" name="meta_keywords" nullable="true" comment="News Meta Keywords" />
+        <column xsi:type="text" name="meta_description" nullable="true" comment="News Meta Description" />
         <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="id" />
         </constraint>
+        <index referenceId="NEWS_NEWS_TITLE_META_KEYWORDS_META_DESCRIPTION" indexType="fulltext">
+            <column name="meta_title" />
+            <column name="meta_keywords" />
+            <column name="meta_description" />
+        </index>
     </table>
 </schema>
