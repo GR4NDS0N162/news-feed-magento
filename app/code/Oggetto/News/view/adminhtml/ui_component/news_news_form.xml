@@ -43,7 +43,9 @@
     </dataSource>
     <fieldset name="general">
         <settings>
-            <label />
+            <collapsible>true</collapsible>
+            <opened>true</opened>
+            <label translate="true">General</label>
         </settings>
         <field name="id" formElement="input">
             <argument name="data" xsi:type="array">
