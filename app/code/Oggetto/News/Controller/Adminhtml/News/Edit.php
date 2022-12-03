@@ -45,9 +45,7 @@ class Edit extends NewsAction implements HttpGetActionInterface
      */
     public function execute()
     {
-        $id = $this->getRequest()->getParam(NewsInterface::ID);
-
-        if ($id) {
+        if ($id = $this->getRequest()->getParam(NewsInterface::ID)) {
             try {
                 $model = $this->newsRepository->getById($id);
             } catch (NoSuchEntityException) {

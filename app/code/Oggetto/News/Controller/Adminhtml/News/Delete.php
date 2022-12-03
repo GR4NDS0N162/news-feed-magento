@@ -39,8 +39,7 @@ class Delete extends NewsAction implements HttpPostActionInterface
         /** @var Redirect $resultRedirect */
         $resultRedirect = $this->resultRedirectFactory->create();
 
-        $id = $this->getRequest()->getParam(NewsInterface::ID);
-        if ($id) {
+        if ($id = $this->getRequest()->getParam(NewsInterface::ID)) {
             try {
                 $this->newsRepository->deleteById($id);
                 $this->messageManager->addSuccessMessage(__('You deleted the news.'));

@@ -68,10 +68,13 @@ class View implements HttpGetActionInterface
     public function execute()
     {
         $resultRedirect = $this->resultRedirectFactory->create();
-        $newsId = $this->request->getParam(NewsInterface::ID);
-        try {
-            $news = $this->newsRepository->getById($newsId);
-        } catch (NoSuchEntityException) {
+        if ($newsId = $this->request->getParam(NewsInterface::ID)) {
+            try {
+                $news = $this->newsRepository->getById($newsId);
+            } catch (NoSuchEntityException) {
+                return $resultRedirect->setPath('*/*/');
+            }
+        } else {
             return $resultRedirect->setPath('*/*/');
         }
 
