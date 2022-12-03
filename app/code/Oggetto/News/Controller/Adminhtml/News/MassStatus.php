@@ -61,7 +61,7 @@ class MassStatus extends Action implements HttpPostActionInterface
     public function execute()
     {
         $collection = $this->filter->getCollection($this->collectionFactory->create());
-        $status = (int)$this->getRequest()->getParam(NewsInterface::STATUS);
+        $status = (int) $this->getRequest()->getParam(NewsInterface::STATUS);
         $countSuccess = 0;
 
         /** @var NewsInterface $news */

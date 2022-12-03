@@ -85,7 +85,7 @@ class View implements HttpGetActionInterface
             [
                 'label' => __('Home'),
                 'title' => __('Home'),
-                'link' => $this->url->getUrl(''),
+                'link'  => $this->url->getUrl(''),
             ],
         );
         $breadcrumbs->addCrumb(
@@ -93,7 +93,7 @@ class View implements HttpGetActionInterface
             [
                 'label' => __('News'),
                 'title' => __('News'),
-                'link' => $this->url->getUrl('news/news/index'),
+                'link'  => $this->url->getUrl('news/news/index'),
             ],
         );
         $breadcrumbs->addCrumb(

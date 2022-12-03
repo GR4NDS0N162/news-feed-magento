@@ -48,7 +48,7 @@ class Index implements HttpGetActionInterface
             [
                 'label' => __('Home'),
                 'title' => __('Home'),
-                'link' => $this->url->getUrl(''),
+                'link'  => $this->url->getUrl(''),
             ],
         );
         $breadcrumbs->addCrumb(

@@ -10,7 +10,7 @@ use Oggetto\News\Model\ResourceModel\News as NewsResourceModel;
 
 class News extends AbstractModel implements NewsInterface
 {
-    public const STATUS_ENABLED = 1;
+    public const STATUS_ENABLED  = 1;
     public const STATUS_DISABLED = 0;
 
     /**
@@ -66,7 +66,7 @@ class News extends AbstractModel implements NewsInterface
      */
     public function getStatus()
     {
-        return (int)$this->getData(self::STATUS);
+        return (int) $this->getData(self::STATUS);
     }
 
     /**

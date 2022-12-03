@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Oggetto\News\Controller\Adminhtml\News;
 
+use Exception;
 use Magento\Backend\App\Action\Context;
 use Magento\Backend\Model\View\Result\Redirect;
 use Magento\Framework\App\Action\HttpPostActionInterface;
@@ -24,7 +25,7 @@ use Psr\Log\LoggerInterface;
 
 class Save extends NewsAction implements HttpPostActionInterface
 {
-    public const PATH = 'imageUploader/images';
+    public const PATH           = 'imageUploader/images';
     public const PATH_SEPARATOR = '/';
 
     /**
@@ -113,7 +114,7 @@ class Save extends NewsAction implements HttpPostActionInterface
                 return $this->processNewsReturn($model, $data, $resultRedirect);
             } catch (LocalizedException $e) {
                 $this->messageManager->addErrorMessage($e->getMessage());
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 $this->logger->error($e->getMessage());
                 $this->messageManager->addExceptionMessage($e, __('Something went wrong while saving the news.'));
             }
@@ -155,7 +156,7 @@ class Save extends NewsAction implements HttpPostActionInterface
                 throw new LocalizedException(__(
                     'Image extension is not supported. Only extensions allowed are jpg, jpeg and png',
                 ));
-            } catch (\Exception) {
+            } catch (Exception) {
                 throw new LocalizedException(__('Image is required'));
             }
         }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Oggetto\News\Model;
 
+use Exception;
 use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\NoSuchEntityException;
@@ -65,7 +66,7 @@ class NewsRepository implements NewsRepositoryInterface
     {
         try {
             $this->resource->save($news);
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             throw new CouldNotSaveException(__($exception->getMessage()));
         }
         return $news;
@@ -86,7 +87,7 @@ class NewsRepository implements NewsRepositoryInterface
     {
         try {
             $this->resource->delete($news);
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             throw new CouldNotDeleteException(__($exception->getMessage()));
         }
         return true;

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Oggetto\News\Controller\Adminhtml\News;
 
+use Exception;
 use Magento\Backend\App\Action\Context;
 use Magento\Backend\Model\View\Result\Redirect;
 use Magento\Framework\App\Action\HttpPostActionInterface;
@@ -44,7 +45,7 @@ class Delete extends NewsAction implements HttpPostActionInterface
                 $this->newsRepository->deleteById($id);
                 $this->messageManager->addSuccessMessage(__('You deleted the news.'));
                 return $resultRedirect->setPath('*/*/');
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 $this->messageManager->addErrorMessage($e->getMessage());
                 return $resultRedirect->setPath('*/*/edit', [NewsInterface::ID => $id]);
             }

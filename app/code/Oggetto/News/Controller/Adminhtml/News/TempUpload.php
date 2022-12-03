@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Oggetto\News\Controller\Adminhtml\News;
 
+use Exception;
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Backend\Model\UrlInterface;
@@ -83,7 +84,7 @@ class TempUpload extends Action
             return $jsonResult->setData($result);
         } catch (LocalizedException $e) {
             return $jsonResult->setData(['errorcode' => 0, 'error' => $e->getMessage()]);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->logger->error($e->getMessage());
             return $jsonResult->setData([
                 'errorcode' => 0,
