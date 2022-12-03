@@ -87,4 +87,34 @@ class View extends Template
             return '';
         }
     }
+
+    /**
+     * Get news meta title
+     *
+     * @return string
+     */
+    public function getNewsMetaTitle(): string
+    {
+        return $this->news->getMetaTitle() ?? '';
+    }
+
+    /**
+     * Get news meta keywords
+     *
+     * @return string
+     */
+    public function getNewsMetaKeywords(): string
+    {
+        return $this->news->getMetaKeywords() ?? '';
+    }
+
+    /**
+     * Get news meta description
+     *
+     * @return string
+     */
+    public function getNewsMetaDescription(): string
+    {
+        return $this->news->getMetaDescription() ?? '';
+    }
 }

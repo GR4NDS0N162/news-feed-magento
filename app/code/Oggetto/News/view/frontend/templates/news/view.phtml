@@ -13,3 +13,17 @@ use Oggetto\News\Block\News\View;
 <div class="news-content">
     <?= $block->getNewsContent(); ?>
 </div>
+<div class="news-meta">
+    <div class="news-meta-title">
+        <?= $escaper->escapeHtml(__('Meta Title:')); ?>
+        <?= $escaper->escapeHtml($block->getNewsMetaTitle()); ?>
+    </div>
+    <div class="news-meta-keywords">
+        <?= $escaper->escapeHtml(__('Meta Keywords:')); ?>
+        <?= $escaper->escapeHtml($block->getNewsMetaKeywords()); ?>
+    </div>
+    <div class="news-meta-description">
+        <?= $escaper->escapeHtml(__('Meta Description:')); ?>
+        <?= $escaper->escapeHtml($block->getNewsMetaDescription()); ?>
+    </div>
+</div>
