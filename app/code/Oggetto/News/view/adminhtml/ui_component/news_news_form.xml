@@ -7,10 +7,6 @@
         </item>
         <item name="reverseMetadataMerge" xsi:type="boolean">true</item>
         <item name="template" xsi:type="string">templates/form/collapsible</item>
-        <item name="config" xsi:type="array">
-            <item name="dataScope" xsi:type="string">data</item>
-            <item name="namespace" xsi:type="string">news_news_form</item>
-        </item>
     </argument>
     <settings>
         <buttons>
