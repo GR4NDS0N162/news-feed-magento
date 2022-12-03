@@ -8,10 +8,16 @@
             "creation_time": true,
             "update_time": true,
             "status": true,
-            "image": true
+            "image": true,
+            "meta_title": true,
+            "meta_keywords": true,
+            "meta_description": true
         },
         "constraint": {
             "PRIMARY": true
+        },
+        "index": {
+            "NEWS_META_TITLE_META_KEYWORDS_META_DESCRIPTION": true
         }
     }
 }
