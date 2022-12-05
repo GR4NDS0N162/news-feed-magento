@@ -16,14 +16,6 @@ class News extends AbstractModel implements NewsInterface
     /**
      * @inheritDoc
      */
-    protected function _construct()
-    {
-        $this->_init(NewsResourceModel::class);
-    }
-
-    /**
-     * @inheritDoc
-     */
     public function getTitle()
     {
         return $this->getData(self::TITLE);
@@ -192,5 +184,13 @@ class News extends AbstractModel implements NewsInterface
             self::STATUS_ENABLED  => __('Enabled'),
             self::STATUS_DISABLED => __('Disabled'),
         ];
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function _construct()
+    {
+        $this->_init(NewsResourceModel::class);
     }
 }

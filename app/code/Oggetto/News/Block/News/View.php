@@ -56,6 +56,21 @@ class View extends Template
     }
 
     /**
+     * Get news content
+     *
+     * @return string
+     */
+    public function getNewsContent(): string
+    {
+        $content = $this->news->getContent() ?? '';
+        try {
+            return $this->templateProcessor->filter($content);
+        } catch (FilterException) {
+            return '';
+        }
+    }
+
+    /**
      * @inheritDoc
      */
     protected function _construct()
@@ -70,21 +85,6 @@ class View extends Template
             } catch (NoSuchEntityException) {
                 $this->news = $this->newsFactory->create();
             }
-        }
-    }
-
-    /**
-     * Get news content
-     *
-     * @return string
-     */
-    public function getNewsContent(): string
-    {
-        $content = $this->news->getContent() ?? '';
-        try {
-            return $this->templateProcessor->filter($content);
-        } catch (FilterException) {
-            return '';
         }
     }
 }

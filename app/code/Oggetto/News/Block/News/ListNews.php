@@ -52,22 +52,7 @@ class ListNews extends Template
     }
 
     /**
-     * @inheritDoc
-     *
-     * @throws LocalizedException
-     */
-    protected function _construct()
-    {
-        parent::_construct();
-        $orderDirection = $this->getOrderDirection();
-        $collection = $this->newsRepository->getList()
-            ->addFilter(NewsInterface::STATUS, News::STATUS_ENABLED)
-            ->setOrder(NewsInterface::CREATION_TIME, $orderDirection);
-        $this->setCollection($collection);
-    }
-
-    /**
-     * Get order by
+     * Get order direction
      *
      * @return string
      */
@@ -131,6 +116,31 @@ class ListNews extends Template
     }
 
     /**
+     * Get pager html
+     *
+     * @return string
+     */
+    public function getPagerHtml(): string
+    {
+        return $this->getChildHtml(self::PAGER_ALIAS);
+    }
+
+    /**
+     * @inheritDoc
+     *
+     * @throws LocalizedException
+     */
+    protected function _construct()
+    {
+        parent::_construct();
+        $orderDirection = $this->getOrderDirection();
+        $collection = $this->newsRepository->getList()
+            ->addFilter(NewsInterface::STATUS, News::STATUS_ENABLED)
+            ->setOrder(NewsInterface::CREATION_TIME, $orderDirection);
+        $this->setCollection($collection);
+    }
+
+    /**
      * @inheritDoc
      */
     protected function _prepareLayout(): ListNews
@@ -146,15 +156,5 @@ class ListNews extends Template
         $this->getCollection()->load();
 
         return $this;
-    }
-
-    /**
-     * Get pager html
-     *
-     * @return string
-     */
-    public function getPagerHtml(): string
-    {
-        return $this->getChildHtml(self::PAGER_ALIAS);
     }
 }

@@ -45,24 +45,6 @@ class Meta extends Template
     }
 
     /**
-     * @inheritDoc
-     */
-    protected function _construct()
-    {
-        parent::_construct();
-
-        $this->news = $this->newsFactory->create();
-
-        if ($newsId = $this->getRequest()->getParam(NewsInterface::ID)) {
-            try {
-                $this->news = $this->newsRepository->getById($newsId);
-            } catch (NoSuchEntityException) {
-                $this->news = $this->newsFactory->create();
-            }
-        }
-    }
-
-    /**
      * Get news meta title
      *
      * @return string
@@ -90,5 +72,23 @@ class Meta extends Template
     public function getNewsMetaDescription(): string
     {
         return $this->news->getMetaDescription() ?? '';
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function _construct()
+    {
+        parent::_construct();
+
+        $this->news = $this->newsFactory->create();
+
+        if ($newsId = $this->getRequest()->getParam(NewsInterface::ID)) {
+            try {
+                $this->news = $this->newsRepository->getById($newsId);
+            } catch (NoSuchEntityException) {
+                $this->news = $this->newsFactory->create();
+            }
+        }
     }
 }
