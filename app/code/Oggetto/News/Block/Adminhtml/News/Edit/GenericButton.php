@@ -22,7 +22,7 @@ class GenericButton
     protected NewsRepositoryInterface $newsRepository;
 
     /**
-     * @param Context $context
+     * @param Context                 $context
      * @param NewsRepositoryInterface $newsRepository
      */
     public function __construct(
@@ -55,7 +55,7 @@ class GenericButton
      * Generate url by route and parameters
      *
      * @param string $route
-     * @param array $params
+     * @param array  $params
      * @return string
      */
     public function getUrl(string $route = '', array $params = []): string

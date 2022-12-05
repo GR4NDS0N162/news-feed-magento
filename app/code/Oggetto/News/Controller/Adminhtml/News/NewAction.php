@@ -23,8 +23,8 @@ class NewAction extends NewsAction implements HttpGetActionInterface
     protected ForwardFactory $resultForwardFactory;
 
     /**
-     * @param Context $context
-     * @param PageFactory $resultPageFactory
+     * @param Context        $context
+     * @param PageFactory    $resultPageFactory
      * @param ForwardFactory $resultForwardFactory
      */
     public function __construct(

@@ -4,16 +4,16 @@ namespace Oggetto\News\Api\Data;
 
 interface NewsInterface
 {
-    public const ID               = 'id';
-    public const TITLE            = 'title';
-    public const DESCRIPTION      = 'description';
-    public const CONTENT          = 'content';
-    public const CREATION_TIME    = 'creation_time';
-    public const UPDATE_TIME      = 'update_time';
-    public const STATUS           = 'status';
-    public const IMAGE            = 'image';
-    public const META_TITLE       = 'meta_title';
-    public const META_KEYWORDS    = 'meta_keywords';
+    public const ID = 'id';
+    public const TITLE = 'title';
+    public const DESCRIPTION = 'description';
+    public const CONTENT = 'content';
+    public const CREATION_TIME = 'creation_time';
+    public const UPDATE_TIME = 'update_time';
+    public const STATUS = 'status';
+    public const IMAGE = 'image';
+    public const META_TITLE = 'meta_title';
+    public const META_KEYWORDS = 'meta_keywords';
     public const META_DESCRIPTION = 'meta_description';
 
     /**

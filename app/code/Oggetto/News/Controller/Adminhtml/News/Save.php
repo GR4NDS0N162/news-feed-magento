@@ -25,7 +25,7 @@ use Psr\Log\LoggerInterface;
 
 class Save extends NewsAction implements HttpPostActionInterface
 {
-    public const PATH           = 'imageUploader/images';
+    public const PATH = 'imageUploader/images';
     public const PATH_SEPARATOR = '/';
 
     /**
@@ -54,12 +54,12 @@ class Save extends NewsAction implements HttpPostActionInterface
     protected LoggerInterface $logger;
 
     /**
-     * @param Context $context
-     * @param NewsFactory $newsFactory
+     * @param Context                 $context
+     * @param NewsFactory             $newsFactory
      * @param NewsRepositoryInterface $newsRepository
-     * @param UploaderFactory $uploaderFactory
-     * @param Filesystem $fileSystem
-     * @param LoggerInterface $logger
+     * @param UploaderFactory         $uploaderFactory
+     * @param Filesystem              $fileSystem
+     * @param LoggerInterface         $logger
      * @throws FileSystemException
      */
     public function __construct(
@@ -171,8 +171,8 @@ class Save extends NewsAction implements HttpPostActionInterface
     /**
      * Process and set the news return
      *
-     * @param News $model
-     * @param array $data
+     * @param News     $model
+     * @param array    $data
      * @param Redirect $resultRedirect
      * @return Redirect
      * @throws CouldNotSaveException

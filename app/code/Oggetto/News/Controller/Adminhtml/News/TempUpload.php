@@ -43,11 +43,11 @@ class TempUpload extends Action
     protected LoggerInterface $logger;
 
     /**
-     * @param Context $context
-     * @param UploaderFactory $uploaderFactory
-     * @param Filesystem $filesystem
+     * @param Context               $context
+     * @param UploaderFactory       $uploaderFactory
+     * @param Filesystem            $filesystem
      * @param StoreManagerInterface $storeManager
-     * @param LoggerInterface $logger
+     * @param LoggerInterface       $logger
      * @throws FileSystemException
      */
     public function __construct(

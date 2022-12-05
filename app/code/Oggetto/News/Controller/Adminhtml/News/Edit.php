@@ -26,8 +26,8 @@ class Edit extends NewsAction implements HttpGetActionInterface
     protected NewsRepositoryInterface $newsRepository;
 
     /**
-     * @param Context $context
-     * @param PageFactory $resultPageFactory
+     * @param Context                 $context
+     * @param PageFactory             $resultPageFactory
      * @param NewsRepositoryInterface $newsRepository
      */
     public function __construct(

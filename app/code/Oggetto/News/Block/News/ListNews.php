@@ -21,7 +21,7 @@ use Oggetto\News\Model\ResourceModel\News\Collection as NewsCollection;
  */
 class ListNews extends Template
 {
-    public const PAGER_ALIAS         = 'pager';
+    public const PAGER_ALIAS = 'pager';
     public const KEY_ORDER_DIRECTION = 'order_direction';
 
     /**
@@ -35,10 +35,10 @@ class ListNews extends Template
     protected Data $dataHelper;
 
     /**
-     * @param Template\Context $context
+     * @param Template\Context        $context
      * @param NewsRepositoryInterface $newsRepository
-     * @param Data $dataHelper
-     * @param array $data
+     * @param Data                    $dataHelper
+     * @param array                   $data
      */
     public function __construct(
         Template\Context $context,

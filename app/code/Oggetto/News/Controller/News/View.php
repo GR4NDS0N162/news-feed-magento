@@ -42,11 +42,11 @@ class View implements HttpGetActionInterface
     protected UrlInterface $url;
 
     /**
-     * @param PageFactory $resultPageFactory
-     * @param RedirectFactory $resultRedirectFactory
+     * @param PageFactory             $resultPageFactory
+     * @param RedirectFactory         $resultRedirectFactory
      * @param NewsRepositoryInterface $newsRepository
-     * @param RequestInterface $request
-     * @param UrlInterface $url
+     * @param RequestInterface        $request
+     * @param UrlInterface            $url
      */
     public function __construct(
         PageFactory $resultPageFactory,
@@ -68,13 +68,12 @@ class View implements HttpGetActionInterface
     public function execute()
     {
         $resultRedirect = $this->resultRedirectFactory->create();
-        if ($newsId = $this->request->getParam(NewsInterface::ID)) {
-            try {
-                $news = $this->newsRepository->getById($newsId);
-            } catch (NoSuchEntityException) {
-                return $resultRedirect->setPath('*/*/');
-            }
-        } else {
+        if (!($newsId = $this->request->getParam(NewsInterface::ID))) {
+            return $resultRedirect->setPath('*/*/');
+        }
+        try {
+            $news = $this->newsRepository->getById($newsId);
+        } catch (NoSuchEntityException) {
             return $resultRedirect->setPath('*/*/');
         }
 

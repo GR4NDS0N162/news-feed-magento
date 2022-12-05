@@ -36,11 +36,11 @@ class View extends Template
     protected NewsInterface $news;
 
     /**
-     * @param Context $context
+     * @param Context                 $context
      * @param NewsRepositoryInterface $newsRepository
-     * @param NewsFactory $newsFactory
-     * @param FilterInterface $templateProcessor
-     * @param array $data
+     * @param NewsFactory             $newsFactory
+     * @param FilterInterface         $templateProcessor
+     * @param array                   $data
      */
     public function __construct(
         Template\Context $context,

@@ -36,9 +36,9 @@ class MassDelete extends Action implements HttpPostActionInterface
     protected NewsRepositoryInterface $newsRepository;
 
     /**
-     * @param Context $context
-     * @param Filter $filter
-     * @param CollectionFactory $collectionFactory
+     * @param Context                 $context
+     * @param Filter                  $filter
+     * @param CollectionFactory       $collectionFactory
      * @param NewsRepositoryInterface $newsRepository
      */
     public function __construct(

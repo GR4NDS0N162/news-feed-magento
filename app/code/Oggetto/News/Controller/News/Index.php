@@ -22,7 +22,7 @@ class Index implements HttpGetActionInterface
     protected UrlInterface $url;
 
     /**
-     * @param PageFactory $resultPageFactory
+     * @param PageFactory  $resultPageFactory
      * @param UrlInterface $url
      */
     public function __construct(

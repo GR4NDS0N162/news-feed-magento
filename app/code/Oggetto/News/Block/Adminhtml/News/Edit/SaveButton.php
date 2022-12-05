@@ -9,10 +9,10 @@ use Magento\Ui\Component\Control\Container;
 
 class SaveButton extends GenericButton implements ButtonProviderInterface
 {
-    public const REDIRECT_KEY       = 'back';
-    public const REDIRECT_CONTINUE  = 'continue';
+    public const REDIRECT_KEY = 'back';
+    public const REDIRECT_CONTINUE = 'continue';
     public const REDIRECT_DUPLICATE = 'duplicate';
-    public const REDIRECT_CLOSE     = 'close';
+    public const REDIRECT_CLOSE = 'close';
 
     /**
      * @inheritDoc

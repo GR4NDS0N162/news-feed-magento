@@ -31,14 +31,14 @@ class DataProvider extends ModifierPoolDataProvider
     /**
      * Constructor
      *
-     * @param string $name
-     * @param string $primaryFieldName
-     * @param string $requestFieldName
-     * @param CollectionFactory $newsCollectionFactory
+     * @param string                 $name
+     * @param string                 $primaryFieldName
+     * @param string                 $requestFieldName
+     * @param CollectionFactory      $newsCollectionFactory
      * @param DataPersistorInterface $dataPersistor
-     * @param array $meta
-     * @param array $data
-     * @param PoolInterface|null $pool
+     * @param array                  $meta
+     * @param array                  $data
+     * @param PoolInterface|null     $pool
      */
     public function __construct(
         $name,

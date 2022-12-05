@@ -32,8 +32,8 @@ class NewsRepository implements NewsRepositoryInterface
     protected CollectionFactory $newsCollectionFactory;
 
     /**
-     * @param ResourceNews $resource
-     * @param NewsFactory $newsFactory
+     * @param ResourceNews      $resource
+     * @param NewsFactory       $newsFactory
      * @param CollectionFactory $newsCollectionFactory
      */
     public function __construct(
