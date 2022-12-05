@@ -1,0 +1,15 @@
+<?php
+/**
+ * @var Meta               $block
+ * @var Escaper            $escaper
+ * @var SecureHtmlRenderer $secureRenderer
+ */
+
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Helper\SecureHtmlRenderer;
+use Oggetto\News\Block\News\Meta;
+
+?>
+<meta name="title" content="<?= $escaper->escapeHtmlAttr($block->getNewsMetaTitle()); ?>"/>
+<meta name="keywords" content="<?= $escaper->escapeHtmlAttr($block->getNewsMetaKeywords()); ?>"/>
+<meta name="description" content="<?= $escaper->escapeHtmlAttr($block->getNewsMetaDescription()); ?>"/>
