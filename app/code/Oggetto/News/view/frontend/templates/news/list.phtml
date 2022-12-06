@@ -14,7 +14,7 @@ use Oggetto\News\Block\News\ListNews;
 ?>
 <div class="news">
     <?php $newsCollection = $block->getCollection(); ?>
-    <?php if ($newsCollection->getSize() > 0) : ?>
+    <?php if ($newsCollection->getSize() > 0): ?>
         <div class="toolbar-sorter sorter">
             <span class="sorter-label"><?= $escaper->escapeHtml(__('Sort Direction')) ?></span>
             <a href="<?= $escaper->escapeUrl($block->getSorterUrl()); ?>"
@@ -24,10 +24,10 @@ use Oggetto\News\Block\News\ListNews;
         </div>
         <ul>
             <?php /** @var NewsInterface $news */
-            foreach ($newsCollection as $news) : ?>
+            foreach ($newsCollection as $news): ?>
                 <li>
                     <div class="news-list">
-                        <?php if ($news->getImage()) : ?>
+                        <?php if ($news->getImage()): ?>
                             <img class="photo image news-list-image"
                                  src="<?= $escaper->escapeUrl($block->getImageUrl($news->getImage())); ?>"
                                  loading="lazy"
@@ -57,7 +57,7 @@ use Oggetto\News\Block\News\ListNews;
                 <?= $block->getPagerHtml(); ?>
             </div>
         </div>
-    <?php else : ?>
+    <?php else: ?>
         <p><?= __('Have no news!'); ?></p>
     <?php endif; ?>
 </div>
