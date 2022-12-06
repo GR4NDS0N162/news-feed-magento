@@ -56,9 +56,7 @@ class DataProvider extends ModifierPoolDataProvider
     }
 
     /**
-     * Get data
-     *
-     * @return array
+     * @inheritDoc
      */
     public function getData()
     {

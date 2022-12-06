@@ -55,11 +55,6 @@ class View extends Template
         parent::__construct($context, $data);
     }
 
-    /**
-     * Get news content
-     *
-     * @return string
-     */
     public function getNewsContent(): string
     {
         $content = $this->news->getContent() ?? '';

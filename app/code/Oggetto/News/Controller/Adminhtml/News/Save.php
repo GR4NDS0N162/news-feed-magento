@@ -124,13 +124,6 @@ class Save extends NewsAction implements HttpPostActionInterface
         return $resultRedirect->setPath('*/*/');
     }
 
-    /**
-     * Validate image
-     *
-     * @param array $data
-     * @return array
-     * @throws LocalizedException
-     */
     private function validateImage(array $data): array
     {
         if (isset($data[NewsInterface::IMAGE])

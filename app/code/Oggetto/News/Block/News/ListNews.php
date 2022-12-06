@@ -51,11 +51,6 @@ class ListNews extends Template
         parent::__construct($context, $data);
     }
 
-    /**
-     * Get order direction
-     *
-     * @return string
-     */
     public function getOrderDirection(): string
     {
         $orderBy = $this->getRequest()->getParam(self::KEY_ORDER_DIRECTION);
@@ -64,11 +59,6 @@ class ListNews extends Template
             : Collection::SORT_ORDER_DESC;
     }
 
-    /**
-     * Get sorter url
-     *
-     * @return string
-     */
     public function getSorterUrl(): string
     {
         return $this->getUrl(
@@ -79,23 +69,11 @@ class ListNews extends Template
         );
     }
 
-    /**
-     * Get image url
-     *
-     * @param string $imagePath
-     * @return string
-     */
     public function getImageUrl(string $imagePath): string
     {
         return $this->_urlBuilder->getBaseUrl(['_type' => UrlInterface::URL_TYPE_MEDIA]) . $imagePath;
     }
 
-    /**
-     * Get view news url
-     *
-     * @param string $newsId
-     * @return string
-     */
     public function getViewNewsUrl(string $newsId): string
     {
         return $this->getUrl(
@@ -105,7 +83,9 @@ class ListNews extends Template
     }
 
     /**
-     * Convert date format
+     * Convert date to 'l, F d, Y' format.
+     *
+     * Example: Tuesday, December 06, 2022
      *
      * @param string $date
      * @return string
@@ -115,11 +95,6 @@ class ListNews extends Template
         return date("l, F d, Y", strtotime($date));
     }
 
-    /**
-     * Get pager html
-     *
-     * @return string
-     */
     public function getPagerHtml(): string
     {
         return $this->getChildHtml(self::PAGER_ALIAS);

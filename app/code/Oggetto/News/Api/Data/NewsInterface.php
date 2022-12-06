@@ -17,167 +17,57 @@ interface NewsInterface
     public const META_DESCRIPTION = 'meta_description';
 
     /**
-     * Get id
+     * Get entity id
      *
      * @return string|null
      */
     public function getId();
 
-    /**
-     * Get title
-     *
-     * @return string|null
-     */
-    public function getTitle();
+    public function getTitle(): ?string;
+
+    public function getDescription(): ?string;
+
+    public function getContent(): ?string;
+
+    public function getCreationTime(): ?string;
+
+    public function getUpdateTime(): ?string;
+
+    public function getStatus(): ?int;
+
+    public function getImage(): ?string;
+
+    public function getMetaTitle(): ?string;
+
+    public function getMetaKeywords(): ?string;
+
+    public function getMetaDescription(): ?string;
 
     /**
-     * Get description
+     * Set entity id
      *
-     * @return string|null
-     */
-    public function getDescription();
-
-    /**
-     * Get content
-     *
-     * @return string|null
-     */
-    public function getContent();
-
-    /**
-     * Get creation time
-     *
-     * @return string|null
-     */
-    public function getCreationTime();
-
-    /**
-     * Get update time
-     *
-     * @return string|null
-     */
-    public function getUpdateTime();
-
-    /**
-     * Get status
-     *
-     * @return int|null
-     */
-    public function getStatus();
-
-    /**
-     * Get image
-     *
-     * @return string|null
-     */
-    public function getImage();
-
-    /**
-     * Get meta title
-     *
-     * @return string|null
-     */
-    public function getMetaTitle();
-
-    /**
-     * Get meta keywords
-     *
-     * @return string|null
-     */
-    public function getMetaKeywords();
-
-    /**
-     * Get meta description
-     *
-     * @return string|null
-     */
-    public function getMetaDescription();
-
-    /**
-     * Set id
-     *
-     * @param int $id
+     * @param string $id
      * @return NewsInterface
      */
     public function setId($id);
 
-    /**
-     * Set title
-     *
-     * @param string $title
-     * @return NewsInterface
-     */
-    public function setTitle($title);
+    public function setTitle(string $title): NewsInterface;
 
-    /**
-     * Set description
-     *
-     * @param string $description
-     * @return NewsInterface
-     */
-    public function setDescription($description);
+    public function setDescription(string $description): NewsInterface;
 
-    /**
-     * Set content
-     *
-     * @param string $content
-     * @return NewsInterface
-     */
-    public function setContent($content);
+    public function setContent(string $content): NewsInterface;
 
-    /**
-     * Set creation time
-     *
-     * @param string $creationTime
-     * @return NewsInterface
-     */
-    public function setCreationTime($creationTime);
+    public function setCreationTime(string $creationTime): NewsInterface;
 
-    /**
-     * Set update time
-     *
-     * @param string $updateTime
-     * @return NewsInterface
-     */
-    public function setUpdateTime($updateTime);
+    public function setUpdateTime(string $updateTime): NewsInterface;
 
-    /**
-     * Set status
-     *
-     * @param int $status
-     * @return NewsInterface
-     */
-    public function setStatus($status);
+    public function setStatus(int $status): NewsInterface;
 
-    /**
-     * Set image
-     *
-     * @param string $image
-     * @return NewsInterface
-     */
-    public function setImage($image);
+    public function setImage(string $image): NewsInterface;
 
-    /**
-     * Set meta title
-     *
-     * @param string $metaTitle
-     * @return NewsInterface
-     */
-    public function setMetaTitle($metaTitle);
+    public function setMetaTitle(string $metaTitle): NewsInterface;
 
-    /**
-     * Set meta keywords
-     *
-     * @param string $metaKeywords
-     * @return NewsInterface
-     */
-    public function setMetaKeywords($metaKeywords);
+    public function setMetaKeywords(string $metaKeywords): NewsInterface;
 
-    /**
-     * Set meta description
-     *
-     * @param string $metaDescription
-     * @return NewsInterface
-     */
-    public function setMetaDescription($metaDescription);
+    public function setMetaDescription(string $metaDescription): NewsInterface;
 }

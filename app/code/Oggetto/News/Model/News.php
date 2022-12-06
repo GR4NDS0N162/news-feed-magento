@@ -13,162 +13,102 @@ class News extends AbstractModel implements NewsInterface
     public const STATUS_ENABLED = 1;
     public const STATUS_DISABLED = 0;
 
-    /**
-     * @inheritDoc
-     */
-    public function getTitle()
+    public function getTitle(): ?string
     {
         return $this->getData(self::TITLE);
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->getData(self::DESCRIPTION);
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function getContent()
+    public function getContent(): ?string
     {
         return $this->getData(self::CONTENT);
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function getCreationTime()
+    public function getCreationTime(): ?string
     {
         return $this->getData(self::CREATION_TIME);
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function getUpdateTime()
+    public function getUpdateTime(): ?string
     {
         return $this->getData(self::UPDATE_TIME);
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function getStatus()
+    public function getStatus(): ?int
     {
         return (int) $this->getData(self::STATUS);
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function getImage()
+    public function getImage(): ?string
     {
         return $this->getData(self::IMAGE);
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function getMetaTitle()
+    public function getMetaTitle(): ?string
     {
         return $this->getData(self::META_TITLE);
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function getMetaKeywords()
+    public function getMetaKeywords(): ?string
     {
         return $this->getData(self::META_KEYWORDS);
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function getMetaDescription()
+    public function getMetaDescription(): ?string
     {
         return $this->getData(self::META_DESCRIPTION);
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function setTitle($title)
+    public function setTitle(string $title): News
     {
         return $this->setData(self::TITLE, $title);
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function setDescription($description)
+    public function setDescription(string $description): News
     {
         return $this->setData(self::DESCRIPTION, $description);
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function setContent($content)
+    public function setContent(string $content): News
     {
         return $this->setData(self::CONTENT, $content);
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function setCreationTime($creationTime)
+    public function setCreationTime(string $creationTime): News
     {
         return $this->setData(self::CREATION_TIME, $creationTime);
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function setUpdateTime($updateTime)
+    public function setUpdateTime(string $updateTime): News
     {
         return $this->setData(self::UPDATE_TIME, $updateTime);
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function setStatus($status)
+    public function setStatus(int $status): News
     {
         return $this->setData(self::STATUS, $status);
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function setImage($image)
+    public function setImage(string $image): News
     {
         return $this->setData(self::IMAGE, $image);
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function setMetaTitle($metaTitle)
+    public function setMetaTitle(string $metaTitle): News
     {
         return $this->setData(self::META_TITLE, $metaTitle);
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function setMetaKeywords($metaKeywords)
+    public function setMetaKeywords(string $metaKeywords): News
     {
         return $this->setData(self::META_KEYWORDS, $metaKeywords);
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function setMetaDescription($metaDescription)
+    public function setMetaDescription(string $metaDescription): News
     {
         return $this->setData(self::META_DESCRIPTION, $metaDescription);
     }
