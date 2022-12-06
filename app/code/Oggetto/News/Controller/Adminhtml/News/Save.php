@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Oggetto\News\Controller\Adminhtml\News;
 
+use Exception;
 use Magento\Backend\App\Action\Context;
 use Magento\Backend\Model\View\Result\Redirect;
 use Magento\Framework\App\Action\HttpPostActionInterface;
@@ -53,12 +54,12 @@ class Save extends NewsAction implements HttpPostActionInterface
     protected LoggerInterface $logger;
 
     /**
-     * @param Context $context
-     * @param NewsFactory $newsFactory
+     * @param Context                 $context
+     * @param NewsFactory             $newsFactory
      * @param NewsRepositoryInterface $newsRepository
-     * @param UploaderFactory $uploaderFactory
-     * @param Filesystem $fileSystem
-     * @param LoggerInterface $logger
+     * @param UploaderFactory         $uploaderFactory
+     * @param Filesystem              $fileSystem
+     * @param LoggerInterface         $logger
      * @throws FileSystemException
      */
     public function __construct(
@@ -113,7 +114,7 @@ class Save extends NewsAction implements HttpPostActionInterface
                 return $this->processNewsReturn($model, $data, $resultRedirect);
             } catch (LocalizedException $e) {
                 $this->messageManager->addErrorMessage($e->getMessage());
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 $this->logger->error($e->getMessage());
                 $this->messageManager->addExceptionMessage($e, __('Something went wrong while saving the news.'));
             }
@@ -123,13 +124,6 @@ class Save extends NewsAction implements HttpPostActionInterface
         return $resultRedirect->setPath('*/*/');
     }
 
-    /**
-     * Validate image
-     *
-     * @param array $data
-     * @return array
-     * @throws LocalizedException
-     */
     private function validateImage(array $data): array
     {
         if (isset($data[NewsInterface::IMAGE])
@@ -155,7 +149,7 @@ class Save extends NewsAction implements HttpPostActionInterface
                 throw new LocalizedException(__(
                     'Image extension is not supported. Only extensions allowed are jpg, jpeg and png',
                 ));
-            } catch (\Exception) {
+            } catch (Exception) {
                 throw new LocalizedException(__('Image is required'));
             }
         }
@@ -170,8 +164,8 @@ class Save extends NewsAction implements HttpPostActionInterface
     /**
      * Process and set the news return
      *
-     * @param News $model
-     * @param array $data
+     * @param News     $model
+     * @param array    $data
      * @param Redirect $resultRedirect
      * @return Redirect
      * @throws CouldNotSaveException

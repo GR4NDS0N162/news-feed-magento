@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Oggetto\News\Controller\Adminhtml\News;
 
+use Exception;
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Backend\Model\UrlInterface;
@@ -42,11 +43,11 @@ class TempUpload extends Action
     protected LoggerInterface $logger;
 
     /**
-     * @param Context $context
-     * @param UploaderFactory $uploaderFactory
-     * @param Filesystem $filesystem
+     * @param Context               $context
+     * @param UploaderFactory       $uploaderFactory
+     * @param Filesystem            $filesystem
      * @param StoreManagerInterface $storeManager
-     * @param LoggerInterface $logger
+     * @param LoggerInterface       $logger
      * @throws FileSystemException
      */
     public function __construct(
@@ -83,7 +84,7 @@ class TempUpload extends Action
             return $jsonResult->setData($result);
         } catch (LocalizedException $e) {
             return $jsonResult->setData(['errorcode' => 0, 'error' => $e->getMessage()]);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->logger->error($e->getMessage());
             return $jsonResult->setData([
                 'errorcode' => 0,

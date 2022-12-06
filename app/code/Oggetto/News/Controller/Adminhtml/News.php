@@ -16,12 +16,6 @@ abstract class News extends Action
      */
     public const ADMIN_RESOURCE = 'Oggetto_News::news';
 
-    /**
-     * Init page
-     *
-     * @param Page $resultPage
-     * @return Page
-     */
     protected function initPage(Page $resultPage): Page
     {
         $resultPage->setActiveMenu('Oggetto_News::news')

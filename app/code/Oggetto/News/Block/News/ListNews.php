@@ -21,7 +21,7 @@ use Oggetto\News\Model\ResourceModel\News\Collection as NewsCollection;
  */
 class ListNews extends Template
 {
-    public const PAGER_ALIAS         = 'pager';
+    public const PAGER_ALIAS = 'pager';
     public const KEY_ORDER_DIRECTION = 'order_direction';
 
     /**
@@ -35,10 +35,10 @@ class ListNews extends Template
     protected Data $dataHelper;
 
     /**
-     * @param Template\Context $context
+     * @param Template\Context        $context
      * @param NewsRepositoryInterface $newsRepository
-     * @param Data $dataHelper
-     * @param array $data
+     * @param Data                    $dataHelper
+     * @param array                   $data
      */
     public function __construct(
         Template\Context $context,
@@ -49,6 +49,55 @@ class ListNews extends Template
         $this->newsRepository = $newsRepository;
         $this->dataHelper = $dataHelper;
         parent::__construct($context, $data);
+    }
+
+    public function getOrderDirection(): string
+    {
+        $orderBy = $this->getRequest()->getParam(self::KEY_ORDER_DIRECTION);
+        return ($orderBy === Collection::SORT_ORDER_ASC)
+            ? Collection::SORT_ORDER_ASC
+            : Collection::SORT_ORDER_DESC;
+    }
+
+    public function getSorterUrl(): string
+    {
+        return $this->getUrl(
+            'news/news/index',
+            ($this->getOrderDirection() === Collection::SORT_ORDER_DESC)
+                ? [self::KEY_ORDER_DIRECTION => Collection::SORT_ORDER_ASC]
+                : [],
+        );
+    }
+
+    public function getImageUrl(string $imagePath): string
+    {
+        return $this->_urlBuilder->getBaseUrl(['_type' => UrlInterface::URL_TYPE_MEDIA]) . $imagePath;
+    }
+
+    public function getViewNewsUrl(string $newsId): string
+    {
+        return $this->getUrl(
+            'news/news/view',
+            [NewsInterface::ID => $newsId],
+        );
+    }
+
+    /**
+     * Convert date to 'l, F d, Y' format.
+     *
+     * Example: Tuesday, December 06, 2022
+     *
+     * @param string $date
+     * @return string
+     */
+    public function convertDateFormat(string $date): string
+    {
+        return date("l, F d, Y", strtotime($date));
+    }
+
+    public function getPagerHtml(): string
+    {
+        return $this->getChildHtml(self::PAGER_ALIAS);
     }
 
     /**
@@ -67,70 +116,6 @@ class ListNews extends Template
     }
 
     /**
-     * Get order by
-     *
-     * @return string
-     */
-    public function getOrderDirection(): string
-    {
-        $orderBy = $this->getRequest()->getParam(self::KEY_ORDER_DIRECTION);
-        return ($orderBy === Collection::SORT_ORDER_ASC)
-            ? Collection::SORT_ORDER_ASC
-            : Collection::SORT_ORDER_DESC;
-    }
-
-    /**
-     * Get sorter url
-     *
-     * @return string
-     */
-    public function getSorterUrl(): string
-    {
-        return $this->getUrl(
-            'news/news/index',
-            ($this->getOrderDirection() === Collection::SORT_ORDER_DESC)
-                ? [self::KEY_ORDER_DIRECTION => Collection::SORT_ORDER_ASC]
-                : [],
-        );
-    }
-
-    /**
-     * Get image url
-     *
-     * @param string $imagePath
-     * @return string
-     */
-    public function getImageUrl(string $imagePath): string
-    {
-        return $this->_urlBuilder->getBaseUrl(['_type' => UrlInterface::URL_TYPE_MEDIA]) . $imagePath;
-    }
-
-    /**
-     * Get view news url
-     *
-     * @param string $newsId
-     * @return string
-     */
-    public function getViewNewsUrl(string $newsId): string
-    {
-        return $this->getUrl(
-            'news/news/view',
-            [NewsInterface::ID => $newsId],
-        );
-    }
-
-    /**
-     * Convert date format
-     *
-     * @param string $date
-     * @return string
-     */
-    public function convertDateFormat(string $date): string
-    {
-        return date("l, F d, Y", strtotime($date));
-    }
-
-    /**
      * @inheritDoc
      */
     protected function _prepareLayout(): ListNews
@@ -146,15 +131,5 @@ class ListNews extends Template
         $this->getCollection()->load();
 
         return $this;
-    }
-
-    /**
-     * Get pager html
-     *
-     * @return string
-     */
-    public function getPagerHtml(): string
-    {
-        return $this->getChildHtml(self::PAGER_ALIAS);
     }
 }

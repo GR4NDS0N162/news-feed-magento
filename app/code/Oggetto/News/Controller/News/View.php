@@ -42,11 +42,11 @@ class View implements HttpGetActionInterface
     protected UrlInterface $url;
 
     /**
-     * @param PageFactory $resultPageFactory
-     * @param RedirectFactory $resultRedirectFactory
+     * @param PageFactory             $resultPageFactory
+     * @param RedirectFactory         $resultRedirectFactory
      * @param NewsRepositoryInterface $newsRepository
-     * @param RequestInterface $request
-     * @param UrlInterface $url
+     * @param RequestInterface        $request
+     * @param UrlInterface            $url
      */
     public function __construct(
         PageFactory $resultPageFactory,
@@ -68,7 +68,9 @@ class View implements HttpGetActionInterface
     public function execute()
     {
         $resultRedirect = $this->resultRedirectFactory->create();
-        $newsId = $this->request->getParam(NewsInterface::ID);
+        if (!($newsId = $this->request->getParam(NewsInterface::ID))) {
+            return $resultRedirect->setPath('*/*/');
+        }
         try {
             $news = $this->newsRepository->getById($newsId);
         } catch (NoSuchEntityException) {
@@ -85,7 +87,7 @@ class View implements HttpGetActionInterface
             [
                 'label' => __('Home'),
                 'title' => __('Home'),
-                'link' => $this->url->getUrl(''),
+                'link'  => $this->url->getUrl(''),
             ],
         );
         $breadcrumbs->addCrumb(
@@ -93,7 +95,7 @@ class View implements HttpGetActionInterface
             [
                 'label' => __('News'),
                 'title' => __('News'),
-                'link' => $this->url->getUrl('news/news/index'),
+                'link'  => $this->url->getUrl('news/news/index'),
             ],
         );
         $breadcrumbs->addCrumb(

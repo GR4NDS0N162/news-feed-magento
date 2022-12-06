@@ -22,7 +22,7 @@ class Index implements HttpGetActionInterface
     protected UrlInterface $url;
 
     /**
-     * @param PageFactory $resultPageFactory
+     * @param PageFactory  $resultPageFactory
      * @param UrlInterface $url
      */
     public function __construct(
@@ -48,7 +48,7 @@ class Index implements HttpGetActionInterface
             [
                 'label' => __('Home'),
                 'title' => __('Home'),
-                'link' => $this->url->getUrl(''),
+                'link'  => $this->url->getUrl(''),
             ],
         );
         $breadcrumbs->addCrumb(

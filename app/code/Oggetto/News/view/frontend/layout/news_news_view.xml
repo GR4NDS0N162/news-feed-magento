@@ -3,6 +3,10 @@
       xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <update handle="news_news" />
     <body>
+        <referenceBlock name="head.additional">
+            <block class="Oggetto\News\Block\News\Meta" name="news_meta"
+                   template="Oggetto_News::news/meta.phtml" />
+        </referenceBlock>
         <referenceContainer name="content">
             <block class="Oggetto\News\Block\News\View"
                    name="oggetto_news_news_view"
