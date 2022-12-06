@@ -58,6 +58,6 @@ use Oggetto\News\Block\News\ListNews;
             </div>
         </div>
     <?php else: ?>
-        <p><?= __('Have no news!'); ?></p>
+        <p><?= $escaper->escapeHtml(__('Have no news!')); ?></p>
     <?php endif; ?>
 </div>
