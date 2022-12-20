@@ -193,4 +193,10 @@
             </settings>
         </field>
     </fieldset>
+    <fieldset name="related_products">
+        <settings>
+            <collapsible>true</collapsible>
+            <label translate="true">Related Products</label>
+        </settings>
+    </fieldset>
 </form>
