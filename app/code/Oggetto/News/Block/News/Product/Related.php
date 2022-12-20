@@ -6,7 +6,6 @@ namespace Oggetto\News\Block\News\Product;
 
 use Magento\Catalog\Api\CategoryRepositoryInterface;
 use Magento\Catalog\Block\Product\Context;
-use Magento\Catalog\Block\Product\Image;
 use Magento\Catalog\Block\Product\ListProduct;
 use Magento\Catalog\Helper\Image as ImageHelper;
 use Magento\Catalog\Helper\Output as OutputHelper;
@@ -117,45 +116,9 @@ class Related extends ListProduct
     protected function _getProductCollection(): ProductCollection
     {
         if ($this->_productCollection === null) {
-            $collection = $this->productCollectionFactory->create();
-
-            $collection->addAttributeToSelect(
-                'image'
-            )->addAttributeToSelect(
-                'name'
-            )->addAttributeToSelect(
-                'sku'
-            )->addAttributeToSelect(
-                'visibility'
-            )->addAttributeToSelect(
-                'status'
-            )->addAttributeToSelect(
-                'price'
-            )->joinField(
-                'position',
-                'news_product',
-                'position',
-                'product_id=entity_id',
-                'news_id=' . $this->news->getId(),
-                'inner'
-            );
-
-            $this->_productCollection = $collection;
+            $this->_productCollection = $this->initializeProductCollection();
         }
         return $this->_productCollection;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getImage($product, $imageId, $attributes = []): Image
-    {
-        $image = parent::getImage($product, $imageId, $attributes);
-
-        $imageUrl = $this->imageHelper->init($product, self::TYPE_PRODUCT_BASE_IMAGE)->getUrl();
-        $image->setData('image_url', $imageUrl);
-
-        return $image;
     }
 
     /**
@@ -167,5 +130,35 @@ class Related extends ListProduct
         $displayIfNoReviews = false,
     ): string {
         return '';
+    }
+
+    /**
+     * Configures product collection and returns its instance.
+     *
+     * @return ProductCollection
+     * @throws LocalizedException
+     */
+    private function initializeProductCollection(): ProductCollection
+    {
+        $collection = $this->productCollectionFactory->create();
+
+        $collection->addAttributeToSelect(
+            'small_image'
+        )->addAttributeToSelect(
+            'name'
+        )->addAttributeToSelect(
+            'sku'
+        )->addAttributeToSelect(
+            'price'
+        )->joinField(
+            'position',
+            'news_product',
+            'position',
+            'product_id=entity_id',
+            'news_id=' . $this->news->getId(),
+            'inner'
+        );
+
+        return $collection;
     }
 }
