@@ -198,5 +198,16 @@
             <collapsible>true</collapsible>
             <label translate="true">Related Products</label>
         </settings>
+        <insertListing name="news_product_listing">
+            <settings>
+                <dataLinks>
+                    <exports>false</exports>
+                    <imports>true</imports>
+                </dataLinks>
+                <autoRender>true</autoRender>
+                <dataScope>news_product_listing</dataScope>
+                <ns>news_product_listing</ns>
+            </settings>
+        </insertListing>
     </fieldset>
 </form>
