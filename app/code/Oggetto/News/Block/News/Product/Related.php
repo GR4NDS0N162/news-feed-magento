@@ -149,10 +149,6 @@ class Related extends ListProduct
         )->addAttributeToSelect(
             'sku'
         )->addAttributeToSelect(
-            'visibility'
-        )->addAttributeToSelect(
-            'status'
-        )->addAttributeToSelect(
             'price'
         )->joinField(
             'position',
