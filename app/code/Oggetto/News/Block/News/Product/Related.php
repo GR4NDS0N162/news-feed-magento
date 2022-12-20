@@ -6,7 +6,6 @@ namespace Oggetto\News\Block\News\Product;
 
 use Magento\Catalog\Api\CategoryRepositoryInterface;
 use Magento\Catalog\Block\Product\Context;
-use Magento\Catalog\Block\Product\Image;
 use Magento\Catalog\Block\Product\ListProduct;
 use Magento\Catalog\Helper\Image as ImageHelper;
 use Magento\Catalog\Helper\Output as OutputHelper;
@@ -120,7 +119,7 @@ class Related extends ListProduct
             $collection = $this->productCollectionFactory->create();
 
             $collection->addAttributeToSelect(
-                'image'
+                'small_image'
             )->addAttributeToSelect(
                 'name'
             )->addAttributeToSelect(
@@ -143,19 +142,6 @@ class Related extends ListProduct
             $this->_productCollection = $collection;
         }
         return $this->_productCollection;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getImage($product, $imageId, $attributes = []): Image
-    {
-        $image = parent::getImage($product, $imageId, $attributes);
-
-        $imageUrl = $this->imageHelper->init($product, self::TYPE_PRODUCT_BASE_IMAGE)->getUrl();
-        $image->setData('image_url', $imageUrl);
-
-        return $image;
     }
 
     /**
