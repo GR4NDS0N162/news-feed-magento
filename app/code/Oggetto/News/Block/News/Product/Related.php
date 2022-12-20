@@ -116,30 +116,7 @@ class Related extends ListProduct
     protected function _getProductCollection(): ProductCollection
     {
         if ($this->_productCollection === null) {
-            $collection = $this->productCollectionFactory->create();
-
-            $collection->addAttributeToSelect(
-                'small_image'
-            )->addAttributeToSelect(
-                'name'
-            )->addAttributeToSelect(
-                'sku'
-            )->addAttributeToSelect(
-                'visibility'
-            )->addAttributeToSelect(
-                'status'
-            )->addAttributeToSelect(
-                'price'
-            )->joinField(
-                'position',
-                'news_product',
-                'position',
-                'product_id=entity_id',
-                'news_id=' . $this->news->getId(),
-                'inner'
-            );
-
-            $this->_productCollection = $collection;
+            $this->_productCollection = $this->initializeProductCollection();
         }
         return $this->_productCollection;
     }
@@ -153,5 +130,39 @@ class Related extends ListProduct
         $displayIfNoReviews = false,
     ): string {
         return '';
+    }
+
+    /**
+     * Configures product collection and returns its instance.
+     *
+     * @return ProductCollection
+     * @throws LocalizedException
+     */
+    private function initializeProductCollection(): ProductCollection
+    {
+        $collection = $this->productCollectionFactory->create();
+
+        $collection->addAttributeToSelect(
+            'small_image'
+        )->addAttributeToSelect(
+            'name'
+        )->addAttributeToSelect(
+            'sku'
+        )->addAttributeToSelect(
+            'visibility'
+        )->addAttributeToSelect(
+            'status'
+        )->addAttributeToSelect(
+            'price'
+        )->joinField(
+            'position',
+            'news_product',
+            'position',
+            'product_id=entity_id',
+            'news_id=' . $this->news->getId(),
+            'inner'
+        );
+
+        return $collection;
     }
 }
