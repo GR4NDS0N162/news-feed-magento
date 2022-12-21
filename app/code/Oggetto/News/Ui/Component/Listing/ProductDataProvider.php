@@ -42,16 +42,14 @@ class ProductDataProvider extends AbstractDataProvider
      */
     public function getData(): array
     {
-        if (!$this->getCollection()->isLoaded()) {
-            $this->getCollection()->load();
+        if (!$this->collection->isLoaded()) {
+            $this->collection->load();
         }
-        $items = $this->getCollection()->toArray();
+        $items = $this->collection->toArray();
 
-        $data = [
-            'totalRecords' => $this->getCollection()->getSize(),
+        return [
+            'totalRecords' => $this->collection->getSize(),
             'items'        => array_values($items),
         ];
-
-        return $data;
     }
 }
