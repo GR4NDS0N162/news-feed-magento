@@ -204,6 +204,7 @@
                     <exports>false</exports>
                     <imports>true</imports>
                 </dataLinks>
+                <selectionsProvider>news_product_listing.news_product_listing.news_product_columns.ids</selectionsProvider>
                 <autoRender>true</autoRender>
                 <dataScope>news_product_listing</dataScope>
                 <ns>news_product_listing</ns>
