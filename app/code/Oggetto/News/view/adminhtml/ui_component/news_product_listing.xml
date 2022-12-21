@@ -31,7 +31,7 @@
         <paging name="listing_paging" />
     </listingToolbar>
     <columns name="news_product_columns" class="Magento\Catalog\Ui\Component\Listing\Columns">
-        <selectionsColumn name="ids">
+        <selectionsColumn name="ids" class="Oggetto\News\Ui\Component\Listing\Columns\NewsProducts">
             <settings>
                 <indexField>entity_id</indexField>
             </settings>
