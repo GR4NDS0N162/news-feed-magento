@@ -17,7 +17,7 @@
             <updateUrl path="mui/index/render" />
         </settings>
         <aclResource>Magento_Catalog::products</aclResource>
-        <dataProvider class="Magento\Catalog\Ui\DataProvider\Product\ProductDataProvider"
+        <dataProvider class="Oggetto\News\Ui\Component\Listing\ProductDataProvider"
                       name="news_product_listing_data_source">
             <settings>
                 <requestFieldName>id</requestFieldName>
