@@ -27,4 +27,36 @@ class ProductNews extends AbstractEntity
         );
         return $this->getConnection()->fetchCol($query);
     }
+
+    /**
+     * Save products in link table
+     *
+     * @param string[] $productsIds
+     * @param string   $newsId
+     */
+    public function setProductIds(array $productsIds, string $newsId)
+    {
+        // TODO: Implement setProductIds() method.
+    }
+
+    /**
+     * Calculate arrays to save changes in the table.
+     *
+     * This intersects arrays, and returns array in the format:
+     * [$insert, $delete, $update].
+     *
+     * @param array $newArray
+     * @param array $oldArray
+     * @return array
+     */
+    private function calculateDiffs(array $newArray, array $oldArray): array
+    {
+        $insert = array_diff_key($newArray, $oldArray);
+        $delete = array_diff_key($oldArray, $newArray);
+
+        $update = array_intersect_key($newArray, $oldArray);
+        $update = array_diff_assoc($update, $oldArray);
+
+        return [$insert, $delete, $update];
+    }
 }
