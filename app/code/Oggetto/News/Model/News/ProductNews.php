@@ -10,7 +10,11 @@ class ProductNews extends AbstractEntity
 {
     public const PRODUCT_TABLE_NAME = 'news_product';
     public const PRODUCT_ID = 'product_id';
-    public const POSITION = 'position';
+
+    /**
+     * @var string
+     */
+    protected $newsProductTable;
 
     /**
      * Get products data associated with news
@@ -18,16 +22,16 @@ class ProductNews extends AbstractEntity
      * @param string $newsId
      * @return string[]
      */
-    public function getProductsDataById(string $newsId): array
+    public function getProductIdsById(string $newsId): array
     {
         $select = $this->getConnection()->select()->from(
             self::PRODUCT_TABLE_NAME,
-            [self::PRODUCT_ID, self::POSITION]
+            [self::PRODUCT_ID]
         )->where(
             'news_id = ?',
             $newsId
         );
-        return $this->getConnection()->fetchAll($select);
+        return $this->getConnection()->fetchCol($select);
     }
 
     /**
@@ -36,41 +40,40 @@ class ProductNews extends AbstractEntity
      * @param string[] $productsIds
      * @param string   $newsId
      */
-    public function setProductIds(array $productsIds, string $newsId)
+    public function setProductIds(?array $productsIds, ?string $newsId)
     {
-        // TODO: Implement setProductIds() method.
+        if (is_null($productsIds) || is_null($newsId)) {
+            return;
+        }
+
+        $oldProductIds = $this->getProductIdsById($newsId);
+        $insert = array_diff($productsIds, $oldProductIds);
+        $delete = array_diff($oldProductIds, $productsIds);
+
+        $connection = $this->getConnection();
+
+        if (!empty($delete)) {
+            $cond = ['product_id IN (?)' => array_values($delete), 'news_id = ?' => $newsId];
+            $connection->delete($this->getNewsProductTable(), $cond);
+        }
+
+        if (!empty($insert)) {
+            $data = [];
+            foreach ($insert as $productId) {
+                $data[] = [
+                    'news_id'    => (int) $newsId,
+                    'product_id' => (int) $productId,
+                ];
+            }
+            $connection->insertMultiple($this->getNewsProductTable(), $data);
+        }
     }
 
-    /**
-     * Calculate arrays to save changes in the table.
-     *
-     * This intersects arrays, and returns array in the format:
-     * [$insert, $delete, $update].
-     *
-     * @param array $newArray
-     * @param array $oldArray
-     * @return array
-     */
-    private function calculateDiffs(array $newArray, array $oldArray): array
+    public function getNewsProductTable(): string
     {
-        $insert = array_diff_key($newArray, $oldArray);
-        $delete = array_diff_key($oldArray, $newArray);
-
-        $update = array_intersect_key($newArray, $oldArray);
-        $update = array_diff_assoc($update, $oldArray);
-
-        return [$insert, $delete, $update];
-    }
-
-    /**
-     * Get product ids associated with news
-     *
-     * @param string $newsId
-     * @return string[]
-     */
-    public function getProductIdsById(string $newsId): array
-    {
-        $productsData = $this->getProductsDataById($newsId);
-        return array_column($productsData, self::PRODUCT_ID);
+        if (!$this->newsProductTable) {
+            $this->newsProductTable = $this->getTable(self::PRODUCT_TABLE_NAME);
+        }
+        return $this->newsProductTable;
     }
 }

@@ -20,7 +20,6 @@ use Oggetto\News\Api\NewsRepositoryInterface;
 use Oggetto\News\Block\Adminhtml\News\Edit\SaveButton;
 use Oggetto\News\Controller\Adminhtml\News as NewsAction;
 use Oggetto\News\Model\News;
-use Oggetto\News\Model\News\ProductNews;
 use Oggetto\News\Model\NewsFactory;
 use Psr\Log\LoggerInterface;
 
@@ -140,13 +139,11 @@ class Save extends NewsAction implements HttpPostActionInterface
         $listingData = $data[self::KEY_LISTING_DATA];
         unset($data[self::KEY_LISTING_DATA]);
         if (is_array($listingData)) {
-            $products = [];
+            $productsIds = [];
             foreach ($listingData as $row) {
-                $products[] = [
-                    ProductNews::PRODUCT_ID => $row[self::LISTING_PRODUCT_ID],
-                ];
+                $productsIds[] = $row[self::LISTING_PRODUCT_ID];
             }
-            $data[self::KEY_PRODUCTS_DATA] = $products;
+            $data[self::KEY_PRODUCTS_DATA] = $productsIds;
         }
         return $data;
     }
