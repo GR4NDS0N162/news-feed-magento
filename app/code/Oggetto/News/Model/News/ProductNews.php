@@ -8,6 +8,8 @@ use Magento\Eav\Model\Entity\AbstractEntity;
 
 class ProductNews extends AbstractEntity
 {
+    public const PRODUCT_TABLE_NAME = 'news_product';
+
     /**
      * Get product ids associated with news
      *
@@ -16,6 +18,13 @@ class ProductNews extends AbstractEntity
      */
     public function getProductIdsById(string $newsId): array
     {
-        return ['1', '5', '3', '7']; // TODO: Implement getProductIdsById() method.
+        $query = $this->getConnection()->select()->from(
+            self::PRODUCT_TABLE_NAME,
+            ['product_id']
+        )->where(
+            'news_id = ?',
+            $newsId
+        );
+        return $this->getConnection()->fetchCol($query);
     }
 }
