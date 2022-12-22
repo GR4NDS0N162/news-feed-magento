@@ -20,6 +20,7 @@ use Oggetto\News\Api\NewsRepositoryInterface;
 use Oggetto\News\Block\Adminhtml\News\Edit\SaveButton;
 use Oggetto\News\Controller\Adminhtml\News as NewsAction;
 use Oggetto\News\Model\News;
+use Oggetto\News\Model\News\ProductNews;
 use Oggetto\News\Model\NewsFactory;
 use Psr\Log\LoggerInterface;
 
@@ -29,7 +30,7 @@ class Save extends NewsAction implements HttpPostActionInterface
     public const PATH_SEPARATOR = '/';
     public const KEY_LISTING_DATA = 'news_product_listing';
     public const KEY_PRODUCTS_DATA = 'products';
-    public const PRODUCT_ID = 'entity_id';
+    public const LISTING_PRODUCT_ID = 'entity_id';
 
     /**
      * @var NewsFactory
@@ -142,7 +143,7 @@ class Save extends NewsAction implements HttpPostActionInterface
             $products = [];
             foreach ($listingData as $row) {
                 $products[] = [
-                    self::PRODUCT_ID => $row[self::PRODUCT_ID],
+                    ProductNews::PRODUCT_ID => $row[self::LISTING_PRODUCT_ID],
                 ];
             }
             $data[self::KEY_PRODUCTS_DATA] = $products;

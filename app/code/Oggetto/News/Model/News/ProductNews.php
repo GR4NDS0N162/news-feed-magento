@@ -9,23 +9,25 @@ use Magento\Eav\Model\Entity\AbstractEntity;
 class ProductNews extends AbstractEntity
 {
     public const PRODUCT_TABLE_NAME = 'news_product';
+    public const PRODUCT_ID = 'product_id';
+    public const POSITION = 'position';
 
     /**
-     * Get product ids associated with news
+     * Get products data associated with news
      *
      * @param string $newsId
      * @return string[]
      */
-    public function getProductIdsById(string $newsId): array
+    public function getProductsDataById(string $newsId): array
     {
-        $query = $this->getConnection()->select()->from(
+        $select = $this->getConnection()->select()->from(
             self::PRODUCT_TABLE_NAME,
-            ['product_id']
+            [self::PRODUCT_ID, self::POSITION]
         )->where(
             'news_id = ?',
             $newsId
         );
-        return $this->getConnection()->fetchCol($query);
+        return $this->getConnection()->fetchAll($select);
     }
 
     /**
@@ -58,5 +60,17 @@ class ProductNews extends AbstractEntity
         $update = array_diff_assoc($update, $oldArray);
 
         return [$insert, $delete, $update];
+    }
+
+    /**
+     * Get product ids associated with news
+     *
+     * @param string $newsId
+     * @return string[]
+     */
+    public function getProductIdsById(string $newsId): array
+    {
+        $productsData = $this->getProductsDataById($newsId);
+        return array_column($productsData, self::PRODUCT_ID);
     }
 }
