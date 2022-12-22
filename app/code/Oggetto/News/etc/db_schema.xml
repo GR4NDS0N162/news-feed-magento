@@ -22,12 +22,11 @@
         </constraint>
     </table>
     <table name="news_product" resource="default" engine="innodb" comment="Catalog Product To News Linkage Table">
-        <column xsi:type="int" name="entity_id" unsigned="false" nullable="false" identity="true" comment="Entity ID" />
         <column xsi:type="int" name="news_id" unsigned="false" nullable="false" comment="News ID" />
         <column xsi:type="int" name="product_id" unsigned="true" nullable="false" comment="Product ID" />
-        <column xsi:type="int" name="position" unsigned="false" nullable="false" default="0" comment="Position" />
         <constraint xsi:type="primary" referenceId="PRIMARY">
-            <column name="entity_id" />
+            <column name="news_id" />
+            <column name="product_id" />
         </constraint>
         <constraint xsi:type="foreign" referenceId="NEWS_PRD_NEWS_ID_NEWS_ID" table="news_product"
                     column="news_id" referenceTable="news" referenceColumn="id" onDelete="CASCADE" />
