@@ -33,6 +33,7 @@
     <columns name="news_product_columns" class="Magento\Catalog\Ui\Component\Listing\Columns">
         <selectionsColumn name="ids" class="Oggetto\News\Ui\Component\Listing\Columns\NewsProducts">
             <settings>
+                <preserveSelectionsOnFilter>true</preserveSelectionsOnFilter>
                 <indexField>entity_id</indexField>
             </settings>
         </selectionsColumn>
