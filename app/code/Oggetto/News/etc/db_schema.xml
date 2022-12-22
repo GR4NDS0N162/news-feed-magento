@@ -24,6 +24,7 @@
     <table name="news_product" resource="default" engine="innodb" comment="Catalog Product To News Linkage Table">
         <column xsi:type="int" name="news_id" unsigned="false" nullable="false" comment="News ID" />
         <column xsi:type="int" name="product_id" unsigned="true" nullable="false" comment="Product ID" />
+        <column xsi:type="int" name="position" unsigned="false" nullable="false" default="0" comment="Position" />
         <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="news_id" />
             <column name="product_id" />
