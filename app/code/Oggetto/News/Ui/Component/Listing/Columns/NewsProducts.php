@@ -8,7 +8,9 @@ use Magento\Framework\App\Request\DataPersistorInterface;
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Framework\View\Element\UiComponentFactory;
 use Magento\Ui\Component\Listing\Columns\Column;
+use Oggetto\News\Api\Data\NewsInterface;
 use Oggetto\News\Controller\Adminhtml\News\Edit;
+use Oggetto\News\Model\News\ProductNews;
 
 class NewsProducts extends Column
 {
@@ -18,9 +20,15 @@ class NewsProducts extends Column
     protected DataPersistorInterface $dataPersistor;
 
     /**
+     * @var ProductNews
+     */
+    protected ProductNews $productNews;
+
+    /**
      * @param ContextInterface       $context
      * @param UiComponentFactory     $uiComponentFactory
      * @param DataPersistorInterface $dataPersistor
+     * @param ProductNews            $productNews
      * @param array                  $components
      * @param array                  $data
      */
@@ -28,10 +36,12 @@ class NewsProducts extends Column
         ContextInterface $context,
         UiComponentFactory $uiComponentFactory,
         DataPersistorInterface $dataPersistor,
+        ProductNews $productNews,
         array $components = [],
         array $data = [],
     ) {
         $this->dataPersistor = $dataPersistor;
+        $this->productNews = $productNews;
         parent::__construct($context, $uiComponentFactory, $components, $data);
     }
 
@@ -40,8 +50,12 @@ class NewsProducts extends Column
      */
     public function prepare()
     {
-        if ($news = $this->dataPersistor->get(Edit::KEY_NEWS)) {
-            // TODO: Implement the checkmark setting
+        $news = $this->dataPersistor->get(Edit::KEY_NEWS);
+        if ($news instanceof NewsInterface) {
+            $selectedIds = $this->productNews->getProductIdsById($news->getId());
+            $customConfig = ['selected' => $selectedIds];
+            $config = array_merge($this->getData('config'), $customConfig);
+            $this->setData('config', $config);
         }
         parent::prepare();
     }
