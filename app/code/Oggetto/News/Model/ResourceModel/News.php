@@ -43,12 +43,12 @@ class News extends AbstractDb
     /**
      * @inheritDoc
      */
-    protected function _afterSave(AbstractModel $object): News
+    protected function _afterSave(AbstractModel $news): News
     {
-        parent::_afterSave($object);
+        parent::_afterSave($news);
         $this->productNews->setProductIds(
-            $object->getData(Save::KEY_PRODUCTS_DATA),
-            $object->getId()
+            $news->getData(Save::KEY_PRODUCTS_DATA),
+            $news->getId()
         );
         return $this;
     }
