@@ -10,6 +10,8 @@ class ProductNews extends AbstractEntity
 {
     public const PRODUCT_TABLE_NAME = 'news_product';
     public const PRODUCT_ID = 'product_id';
+    public const NEWS_ID = 'news_id';
+    public const POSITION = 'position';
 
     /**
      * @var string
@@ -28,8 +30,7 @@ class ProductNews extends AbstractEntity
             self::PRODUCT_TABLE_NAME,
             [self::PRODUCT_ID]
         )->where(
-            'news_id = ?',
-            $newsId
+            $this->getConnection()->prepareSqlCondition(self::NEWS_ID, ['eq' => $newsId])
         );
         return $this->getConnection()->fetchCol($select);
     }
@@ -53,7 +54,8 @@ class ProductNews extends AbstractEntity
         $connection = $this->getConnection();
 
         if (!empty($delete)) {
-            $cond = ['product_id IN (?)' => array_values($delete), 'news_id = ?' => $newsId];
+            $cond = $connection->prepareSqlCondition(self::NEWS_ID, ['eq' => $newsId]);
+            $cond .= ' AND ' . $connection->prepareSqlCondition(self::PRODUCT_ID, ['in' => array_values($delete)]);
             $connection->delete($this->getNewsProductTable(), $cond);
         }
 
@@ -61,8 +63,8 @@ class ProductNews extends AbstractEntity
             $data = [];
             foreach ($insert as $productId) {
                 $data[] = [
-                    'news_id'    => (int) $newsId,
-                    'product_id' => (int) $productId,
+                    self::NEWS_ID    => (int) $newsId,
+                    self::PRODUCT_ID => (int) $productId,
                 ];
             }
             $connection->insertMultiple($this->getNewsProductTable(), $data);

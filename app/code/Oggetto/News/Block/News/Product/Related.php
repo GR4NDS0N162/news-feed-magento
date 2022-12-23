@@ -16,9 +16,11 @@ use Magento\Catalog\Model\ResourceModel\Product\CollectionFactory as ProductColl
 use Magento\Framework\Data\Helper\PostHelper;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
+use Magento\Framework\Model\ResourceModel\AbstractResource;
 use Magento\Framework\Url\Helper\Data;
 use Oggetto\News\Api\Data\NewsInterface;
 use Oggetto\News\Api\NewsRepositoryInterface;
+use Oggetto\News\Model\News\ProductNews;
 use Oggetto\News\Model\NewsFactory;
 
 class Related extends ListProduct
@@ -51,6 +53,11 @@ class Related extends ListProduct
     protected ImageHelper $imageHelper;
 
     /**
+     * @var AbstractResource
+     */
+    protected AbstractResource $resource;
+
+    /**
      * @param Context                     $context
      * @param PostHelper                  $postDataHelper
      * @param Resolver                    $layerResolver
@@ -60,6 +67,7 @@ class Related extends ListProduct
      * @param NewsFactory                 $newsFactory
      * @param ProductCollectionFactory    $productCollectionFactory
      * @param ImageHelper                 $imageHelper
+     * @param AbstractResource            $resource
      * @param array                       $data
      * @param OutputHelper|null           $outputHelper
      */
@@ -73,6 +81,7 @@ class Related extends ListProduct
         NewsFactory $newsFactory,
         ProductCollectionFactory $productCollectionFactory,
         ImageHelper $imageHelper,
+        AbstractResource $resource,
         array $data = [],
         ?OutputHelper $outputHelper = null,
     ) {
@@ -80,6 +89,7 @@ class Related extends ListProduct
         $this->newsFactory = $newsFactory;
         $this->productCollectionFactory = $productCollectionFactory;
         $this->imageHelper = $imageHelper;
+        $this->resource = $resource;
         parent::__construct(
             $context,
             $postDataHelper,
@@ -151,11 +161,11 @@ class Related extends ListProduct
         )->addAttributeToSelect(
             'price'
         )->joinField(
-            'position',
-            'news_product',
-            'position',
+            ProductNews::POSITION,
+            ProductNews::PRODUCT_TABLE_NAME,
+            ProductNews::POSITION,
             'product_id=entity_id',
-            'news_id=' . $this->news->getId(),
+            $this->resource->getConnection()->prepareSqlCondition(ProductNews::NEWS_ID, ['eq' => $this->news->getId()]),
             'inner'
         );
 
