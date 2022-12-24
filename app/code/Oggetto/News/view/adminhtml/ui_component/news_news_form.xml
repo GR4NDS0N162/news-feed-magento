@@ -109,7 +109,7 @@
                 <dataScope>description</dataScope>
             </settings>
         </field>
-        <field name="store_views" formElement="multiselect" class="Magento\Store\Ui\Component\Form\Field\StoreView">
+        <field name="stores" formElement="multiselect" class="Magento\Store\Ui\Component\Form\Field\StoreView">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="source" xsi:type="string">news</item>
@@ -126,7 +126,7 @@
                     <description>What is this?</description>
                 </tooltip>
                 <label translate="true">Store View</label>
-                <dataScope>store_id</dataScope>
+                <dataScope>stores</dataScope>
             </settings>
             <formElements>
                 <multiselect>

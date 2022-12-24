@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Oggetto\News\Model\ResourceModel\News\Relation\Store;
 
 use Magento\Framework\EntityManager\Operation\ExtensionInterface;
+use Oggetto\News\Api\Data\NewsInterface;
 use Oggetto\News\Model\ResourceModel\News;
 
 class ReadHandler implements ExtensionInterface
@@ -26,12 +27,12 @@ class ReadHandler implements ExtensionInterface
     /**
      * @inheritDoc
      */
-    public function execute($entity, $arguments = [])
+    public function execute($news, $arguments = [])
     {
-        if ($entity->getId()) {
-            $stores = $this->resourceNews->lookupStoreIds((int) $entity->getId());
-            $entity->setData('stores', $stores);
+        if ($news->getId()) {
+            $stores = $this->resourceNews->lookupStoreIds((int) $news->getId());
+            $news->setData(NewsInterface::STORES, $stores);
         }
-        return $entity;
+        return $news;
     }
 }
