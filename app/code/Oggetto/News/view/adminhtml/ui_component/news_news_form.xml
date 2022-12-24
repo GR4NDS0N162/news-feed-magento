@@ -120,7 +120,7 @@
                 <validation>
                     <rule name="required-entry" xsi:type="boolean">true</rule>
                 </validation>
-                <dataType>int</dataType>
+                <dataType>select</dataType>
                 <tooltip>
                     <link>https://docs.magento.com/user-guide/configuration/scope.html</link>
                     <description>What is this?</description>
