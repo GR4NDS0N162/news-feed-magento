@@ -4,6 +4,7 @@
     <module name="Oggetto_News">
         <sequence>
             <module name="Magento_Catalog" />
+            <module name="Magento_Store" />
         </sequence>
     </module>
 </config>

@@ -21,6 +21,20 @@
             <column name="id" />
         </constraint>
     </table>
+    <table name="news_store" resource="default" engine="innodb" comment="News To Store Linkage Table">
+        <column xsi:type="int" name="news_id" unsigned="false" nullable="false" identity="false"
+                comment="Entity ID" />
+        <column xsi:type="smallint" name="store_id" unsigned="true" nullable="false" identity="false"
+                comment="Store ID" />
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="news_id" />
+            <column name="store_id" />
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="NEWS_STORE_NEWS_ID_NEWS_ID" table="news_store"
+                    column="news_id" referenceTable="news" referenceColumn="id" onDelete="CASCADE" />
+        <constraint xsi:type="foreign" referenceId="NEWS_STORE_STORE_ID_STORE_STORE_ID" table="news_store"
+                    column="store_id" referenceTable="store" referenceColumn="store_id" onDelete="CASCADE" />
+    </table>
     <table name="news_product" resource="default" engine="innodb" comment="Catalog Product To News Linkage Table">
         <column xsi:type="int" name="news_id" unsigned="false" nullable="false" comment="News ID" />
         <column xsi:type="int" name="product_id" unsigned="true" nullable="false" comment="Product ID" />
