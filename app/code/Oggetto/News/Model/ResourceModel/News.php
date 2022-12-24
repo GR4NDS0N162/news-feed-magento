@@ -51,6 +51,17 @@ class News extends AbstractDb
     /**
      * @inheritDoc
      */
+    public function load(AbstractModel $news, $value, $field = null): News
+    {
+        if ($value) {
+            $this->entityManager->load($news, $value);
+        }
+        return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function save(AbstractModel $news): News
     {
         $this->entityManager->save($news);
