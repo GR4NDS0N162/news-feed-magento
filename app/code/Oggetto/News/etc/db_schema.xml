@@ -11,8 +11,7 @@
                 comment="News Creation Time" />
         <column xsi:type="timestamp" name="update_time" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
                 comment="News Modification Time" />
-        <column xsi:type="smallint" name="status" unsigned="false" nullable="false" identity="false"
-                default="1" comment="News Status" />
+        <column xsi:type="smallint" name="status" unsigned="false" nullable="false" default="1" comment="News Status" />
         <column xsi:type="varchar" name="image" nullable="true" length="255" comment="News Image" />
         <column xsi:type="varchar" name="meta_title" nullable="true" length="255" comment="News Meta Title" />
         <column xsi:type="varchar" name="meta_keywords" nullable="true" length="255" comment="News Meta Keywords" />
@@ -21,5 +20,19 @@
         <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="id" />
         </constraint>
+    </table>
+    <table name="news_product" resource="default" engine="innodb" comment="Catalog Product To News Linkage Table">
+        <column xsi:type="int" name="news_id" unsigned="false" nullable="false" comment="News ID" />
+        <column xsi:type="int" name="product_id" unsigned="true" nullable="false" comment="Product ID" />
+        <column xsi:type="int" name="position" unsigned="false" nullable="false" default="0" comment="Position" />
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="news_id" />
+            <column name="product_id" />
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="NEWS_PRD_NEWS_ID_NEWS_ID" table="news_product"
+                    column="news_id" referenceTable="news" referenceColumn="id" onDelete="CASCADE" />
+        <constraint xsi:type="foreign" referenceId="NEWS_PRD_PRD_ID_CAT_PRD_ENTT_ENTT_ID" table="news_product"
+                    column="product_id" referenceTable="catalog_product_entity" referenceColumn="entity_id"
+                    onDelete="CASCADE" />
     </table>
 </schema>

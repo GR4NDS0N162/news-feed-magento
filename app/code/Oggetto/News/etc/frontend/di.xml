@@ -6,4 +6,9 @@
             <argument name="templateProcessor" xsi:type="object">Magento\Widget\Model\Template\Filter</argument>
         </arguments>
     </type>
+    <type name="Oggetto\News\Block\News\Product\Related">
+        <arguments>
+            <argument name="resource" xsi:type="object">Oggetto\News\Model\News\ProductNews</argument>
+        </arguments>
+    </type>
 </config>

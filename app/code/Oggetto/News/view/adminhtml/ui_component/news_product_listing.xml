@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">news_product_listing.news_product_listing_data_source</item>
+        </item>
+    </argument>
+    <settings>
+        <spinner>news_product_columns</spinner>
+        <deps>
+            <dep>news_product_listing.news_product_listing_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="news_product_listing_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <updateUrl path="mui/index/render" />
+        </settings>
+        <aclResource>Magento_Catalog::products</aclResource>
+        <dataProvider class="Oggetto\News\Ui\Component\Listing\ProductDataProvider"
+                      name="news_product_listing_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>entity_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <filterSearch name="fulltext" />
+        <filters name="listing_filters" />
+        <paging name="listing_paging" />
+    </listingToolbar>
+    <columns name="news_product_columns" class="Magento\Catalog\Ui\Component\Listing\Columns">
+        <selectionsColumn name="ids" class="Oggetto\News\Ui\Component\Listing\Columns\NewsProducts">
+            <settings>
+                <preserveSelectionsOnFilter>true</preserveSelectionsOnFilter>
+                <indexField>entity_id</indexField>
+            </settings>
+        </selectionsColumn>
+        <column name="entity_id">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">ID</label>
+                <sorting>asc</sorting>
+            </settings>
+        </column>
+        <column name="name">
+            <settings>
+                <addField>true</addField>
+                <filter>text</filter>
+                <bodyTmpl>Magento_Catalog/grid/cells/preserved</bodyTmpl>
+                <label translate="true">Name</label>
+            </settings>
+        </column>
+        <column name="sku">
+            <settings>
+                <filter>text</filter>
+                <bodyTmpl>Magento_Catalog/grid/cells/preserved</bodyTmpl>
+                <label translate="true">SKU</label>
+            </settings>
+        </column>
+        <column name="visibility" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <addField>true</addField>
+                <options class="Magento\Catalog\Model\Product\Visibility" />
+                <filter>select</filter>
+                <dataType>select</dataType>
+                <label translate="true">Visibility</label>
+            </settings>
+        </column>
+        <column name="status" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <addField>true</addField>
+                <options class="Magento\Catalog\Model\Product\Attribute\Source\Status" />
+                <filter>select</filter>
+                <dataType>select</dataType>
+                <label translate="true">Status</label>
+            </settings>
+        </column>
+        <column name="price" class="Magento\Catalog\Ui\Component\Listing\Columns\Price">
+            <settings>
+                <addField>true</addField>
+                <filter>textRange</filter>
+                <label translate="true">Price</label>
+            </settings>
+        </column>
+    </columns>
+</listing>

@@ -16,4 +16,9 @@
             <argument name="pool" xsi:type="object">Oggetto\News\DataProvider\Modifier\Pool</argument>
         </arguments>
     </type>
+    <type name="Oggetto\News\Ui\Component\Listing\ProductDataProvider">
+        <arguments>
+            <argument name="collectionFactory" xsi:type="object">Magento\Catalog\Ui\DataProvider\Product\ProductCollectionFactory</argument>
+        </arguments>
+    </type>
 </config>

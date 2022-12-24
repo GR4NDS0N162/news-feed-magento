@@ -27,6 +27,9 @@ class Save extends NewsAction implements HttpPostActionInterface
 {
     public const PATH = 'imageUploader/images';
     public const PATH_SEPARATOR = '/';
+    public const KEY_LISTING_DATA = 'news_product_listing';
+    public const KEY_PRODUCTS_DATA = 'products';
+    public const LISTING_PRODUCT_ID = 'entity_id';
 
     /**
      * @var NewsFactory
@@ -105,6 +108,7 @@ class Save extends NewsAction implements HttpPostActionInterface
             }
 
             $data = $this->validateImage($data);
+            $data = $this->prepareListingData($data);
 
             $model->setData($data);
 
@@ -122,6 +126,26 @@ class Save extends NewsAction implements HttpPostActionInterface
             return $resultRedirect->setPath('*/*/edit', [NewsInterface::ID => $id]);
         }
         return $resultRedirect->setPath('*/*/');
+    }
+
+    /**
+     * Prepare the data to save the news-product link
+     *
+     * @param array $data
+     * @return array
+     */
+    private function prepareListingData(array $data): array
+    {
+        $listingData = $data[self::KEY_LISTING_DATA];
+        unset($data[self::KEY_LISTING_DATA]);
+        if (is_array($listingData)) {
+            $productsIds = [];
+            foreach ($listingData as $row) {
+                $productsIds[] = $row[self::LISTING_PRODUCT_ID];
+            }
+            $data[self::KEY_PRODUCTS_DATA] = $productsIds;
+        }
+        return $data;
     }
 
     private function validateImage(array $data): array

@@ -16,5 +16,19 @@
         "constraint": {
             "PRIMARY": true
         }
+    },
+    "news_product": {
+        "column": {
+            "id": true,
+            "news_id": true,
+            "product_id": true,
+            "position": true,
+            "entity_id": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "NEWS_PRODUCT_NEWS_ID_NEWS_ID": true,
+            "NEWS_PRODUCT_PRODUCT_ID_CATALOG_PRODUCT_ENTITY_ENTITY_ID": true
+        }
     }
 }
