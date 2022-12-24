@@ -44,6 +44,8 @@ interface NewsInterface
 
     public function getMetaDescription(): ?string;
 
+    public function getStores(): ?array;
+
     /**
      * Set entity id
      *
