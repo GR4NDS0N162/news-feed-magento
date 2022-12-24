@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Oggetto\News\Model\ResourceModel;
 
+use Magento\Framework\EntityManager\EntityManager;
 use Magento\Framework\Model\AbstractModel;
 use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
 use Magento\Framework\Model\ResourceModel\Db\Context;
@@ -19,6 +20,11 @@ class News extends AbstractDb
     protected ProductNews $productNews;
 
     /**
+     * @var EntityManager
+     */
+    protected EntityManager $entityManager;
+
+    /**
      * @param Context     $context
      * @param ProductNews $productNews
      * @param string      $connectionName
@@ -26,9 +32,11 @@ class News extends AbstractDb
     public function __construct(
         Context $context,
         ProductNews $productNews,
+        EntityManager $entityManager,
         $connectionName = null,
     ) {
         $this->productNews = $productNews;
+        $this->entityManager = $entityManager;
         parent::__construct($context, $connectionName);
     }
 
@@ -43,6 +51,15 @@ class News extends AbstractDb
     /**
      * @inheritDoc
      */
+    public function save(AbstractModel $news): News
+    {
+        $this->entityManager->save($news);
+        return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
     protected function _afterSave(AbstractModel $news): News
     {
         parent::_afterSave($news);
@@ -50,6 +67,15 @@ class News extends AbstractDb
             $news->getData(Save::KEY_PRODUCTS_DATA),
             $news->getId()
         );
+        return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function delete(AbstractModel $news): News
+    {
+        $this->entityManager->delete($news);
         return $this;
     }
 }
