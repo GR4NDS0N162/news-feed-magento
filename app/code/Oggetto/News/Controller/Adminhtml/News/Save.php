@@ -136,6 +136,9 @@ class Save extends NewsAction implements HttpPostActionInterface
      */
     private function prepareListingData(array $data): array
     {
+        if (!isset($data[self::KEY_LISTING_DATA])) {
+            return $data;
+        }
         $listingData = $data[self::KEY_LISTING_DATA];
         unset($data[self::KEY_LISTING_DATA]);
         if (is_array($listingData)) {
