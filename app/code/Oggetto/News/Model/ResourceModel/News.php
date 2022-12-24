@@ -14,6 +14,10 @@ use Oggetto\News\Model\News\ProductNews;
 
 class News extends AbstractDb
 {
+    public const NEWS_ID = 'news_id';
+    public const STORE_ID = 'store_id';
+    public const NEWS_STORE_TABLE_NAME = 'news_store';
+
     /**
      * @var ProductNews
      */
@@ -25,9 +29,10 @@ class News extends AbstractDb
     protected EntityManager $entityManager;
 
     /**
-     * @param Context     $context
-     * @param ProductNews $productNews
-     * @param string      $connectionName
+     * @param Context       $context
+     * @param ProductNews   $productNews
+     * @param EntityManager $entityManager
+     * @param string        $connectionName
      */
     public function __construct(
         Context $context,
@@ -57,6 +62,24 @@ class News extends AbstractDb
             $this->entityManager->load($news, $value);
         }
         return $this;
+    }
+
+    /**
+     * Get store ids to which specified item is assigned
+     *
+     * @param int $newsId
+     * @return array
+     */
+    public function lookupStoreIds(int $newsId): array
+    {
+        $connection = $this->getConnection();
+        $select = $connection->select()->from(
+            $this->getTable(self::NEWS_STORE_TABLE_NAME),
+            [self::STORE_ID]
+        )->where(
+            $connection->prepareSqlCondition(self::NEWS_ID, ['eq' => $newsId])
+        );
+        return $connection->fetchCol($select);
     }
 
     /**
