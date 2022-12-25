@@ -8,6 +8,8 @@ use Magento\Framework\Data\Collection;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\UrlInterface;
 use Magento\Framework\View\Element\Template;
+use Magento\Framework\View\Element\Template\Context;
+use Magento\Store\Model\StoreManagerInterface;
 use Magento\Theme\Block\Html\Pager;
 use Oggetto\News\Api\Data\NewsInterface;
 use Oggetto\News\Api\NewsRepositoryInterface;
@@ -35,19 +37,27 @@ class ListNews extends Template
     protected Data $dataHelper;
 
     /**
-     * @param Template\Context        $context
+     * @var StoreManagerInterface
+     */
+    protected StoreManagerInterface $storeManager;
+
+    /**
+     * @param Context                 $context
      * @param NewsRepositoryInterface $newsRepository
      * @param Data                    $dataHelper
+     * @param StoreManagerInterface   $storeManager
      * @param array                   $data
      */
     public function __construct(
         Template\Context $context,
         NewsRepositoryInterface $newsRepository,
         Data $dataHelper,
+        StoreManagerInterface $storeManager,
         array $data = [],
     ) {
         $this->newsRepository = $newsRepository;
         $this->dataHelper = $dataHelper;
+        $this->storeManager = $storeManager;
         parent::__construct($context, $data);
     }
 
@@ -109,7 +119,7 @@ class ListNews extends Template
     {
         parent::_construct();
         $orderDirection = $this->getOrderDirection();
-        $collection = $this->newsRepository->getList()
+        $collection = $this->newsRepository->getList($this->storeManager->getStore()->getId())
             ->addFilter(NewsInterface::STATUS, News::STATUS_ENABLED)
             ->setOrder(NewsInterface::CREATION_TIME, $orderDirection);
         $this->setCollection($collection);
