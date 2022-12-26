@@ -102,6 +102,17 @@ class Related extends ListProduct
     /**
      * @inheritDoc
      */
+    public function getReviewsSummaryHtml(
+        Product $product,
+        $templateType = false,
+        $displayIfNoReviews = false,
+    ): string {
+        return '';
+    }
+
+    /**
+     * @inheritDoc
+     */
     protected function _construct()
     {
         parent::_construct();
@@ -126,17 +137,6 @@ class Related extends ListProduct
             $this->_productCollection = $this->initializeProductCollection();
         }
         return $this->_productCollection;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getReviewsSummaryHtml(
-        Product $product,
-        $templateType = false,
-        $displayIfNoReviews = false,
-    ): string {
-        return '';
     }
 
     /**

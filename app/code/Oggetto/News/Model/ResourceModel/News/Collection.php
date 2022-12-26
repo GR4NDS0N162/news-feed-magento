@@ -48,14 +48,6 @@ class Collection extends AbstractCollection
     }
 
     /**
-     * @inheritDoc
-     */
-    protected function _construct()
-    {
-        $this->_init(News::class, NewsResource::class);
-    }
-
-    /**
      * Filter out news that does not match the store
      *
      * @param string $storeId
@@ -74,6 +66,14 @@ class Collection extends AbstractCollection
             $where,
             []
         );
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function _construct()
+    {
+        $this->_init(News::class, NewsResource::class);
     }
 
     /**

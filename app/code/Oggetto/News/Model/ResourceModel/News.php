@@ -48,14 +48,6 @@ class News extends AbstractDb
     /**
      * @inheritDoc
      */
-    protected function _construct()
-    {
-        $this->_init('news', NewsInterface::ID);
-    }
-
-    /**
-     * @inheritDoc
-     */
     public function load(AbstractModel $news, $value, $field = null): News
     {
         if ($value) {
@@ -94,6 +86,23 @@ class News extends AbstractDb
     /**
      * @inheritDoc
      */
+    public function delete(AbstractModel $news): News
+    {
+        $this->entityManager->delete($news);
+        return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function _construct()
+    {
+        $this->_init('news', NewsInterface::ID);
+    }
+
+    /**
+     * @inheritDoc
+     */
     protected function _afterSave(AbstractModel $news): News
     {
         parent::_afterSave($news);
@@ -101,15 +110,6 @@ class News extends AbstractDb
             $news->getData(Save::KEY_PRODUCTS_DATA),
             $news->getId()
         );
-        return $this;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function delete(AbstractModel $news): News
-    {
-        $this->entityManager->delete($news);
         return $this;
     }
 }
