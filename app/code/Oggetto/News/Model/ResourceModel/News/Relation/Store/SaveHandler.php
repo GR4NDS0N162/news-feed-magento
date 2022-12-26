@@ -52,8 +52,10 @@ class SaveHandler implements ExtensionInterface
 
         $delete = array_diff($oldStores, $newStores);
         if ($delete) {
-            $where = $connection->prepareSqlCondition(News::NEWS_ID, ['eq' => $newsId]);
-            $where .= ' AND ' . $connection->prepareSqlCondition(News::STORE_ID, ['in' => $delete]);
+            $where = implode(' AND ', [
+                $connection->prepareSqlCondition(News::NEWS_ID, ['eq' => $newsId]),
+                $connection->prepareSqlCondition(News::STORE_ID, ['in' => $delete]),
+            ]);
             $connection->delete($table, $where);
         }
 
