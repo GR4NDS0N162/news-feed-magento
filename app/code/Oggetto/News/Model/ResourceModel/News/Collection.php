@@ -56,38 +56,57 @@ class Collection extends AbstractCollection
     }
 
     /**
+     * Filter out news that does not match the store
+     *
+     * @param string $storeId
+     */
+    public function filterByStore($storeId)
+    {
+        $where = implode(' AND ', [
+            'id=news_id',
+            $this->getConnection()->prepareSqlCondition(
+                NewsResource::STORE_ID,
+                ['eq' => $storeId]
+            ),
+        ]);
+        $this->join(
+            NewsResource::NEWS_STORE_TABLE_NAME,
+            $where,
+            []
+        );
+    }
+
+    /**
      * @inheritDoc
      *
      * @throws NoSuchEntityException
      */
     protected function _afterLoad()
     {
-        $this->performAfterLoad(NewsResource::NEWS_STORE_TABLE_NAME, NewsResource::NEWS_ID);
+        $this->performAfterLoad();
         return parent::_afterLoad();
     }
 
     /**
      * Perform operations after collection load
      *
-     * @param string $tableName
-     * @param string $linkField
      * @throws NoSuchEntityException
      */
-    protected function performAfterLoad(string $tableName, string $linkField)
+    private function performAfterLoad()
     {
         $linkedIds = $this->getColumnValues(NewsInterface::ID);
         if (count($linkedIds)) {
             $connection = $this->getConnection();
             $select = $connection->select()->from(
-                $this->getTable($tableName)
+                $this->getTable(NewsResource::NEWS_STORE_TABLE_NAME)
             )->where(
-                $connection->prepareSqlCondition($linkField, ['in' => $linkedIds])
+                $connection->prepareSqlCondition(NewsResource::NEWS_ID, ['in' => $linkedIds])
             );
             $result = $connection->fetchAll($select);
             if ($result) {
                 $storesData = [];
                 foreach ($result as $storeData) {
-                    $storesData[$storeData[$linkField]][] = $storeData[NewsResource::STORE_ID];
+                    $storesData[$storeData[NewsResource::NEWS_ID]][] = $storeData[NewsResource::STORE_ID];
                 }
 
                 foreach ($this as $item) {

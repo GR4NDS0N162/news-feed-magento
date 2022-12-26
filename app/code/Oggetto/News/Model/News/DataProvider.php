@@ -90,14 +90,12 @@ class DataProvider extends ModifierPoolDataProvider
     private function getCurrentNews(): NewsInterface
     {
         $news = $this->newsFactory->create();
-
         if ($newsId = $this->request->getParam(NewsInterface::ID)) {
             try {
                 $news = $this->newsRepository->getById($newsId);
             } catch (NoSuchEntityException) {
             }
         }
-
         return $news;
     }
 }

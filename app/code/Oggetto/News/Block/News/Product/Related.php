@@ -25,8 +25,6 @@ use Oggetto\News\Model\NewsFactory;
 
 class Related extends ListProduct
 {
-    public const TYPE_PRODUCT_BASE_IMAGE = 'product_base_image';
-
     /**
      * @var NewsRepositoryInterface
      */

@@ -100,9 +100,9 @@ class Save extends NewsAction implements HttpPostActionInterface
 
         $model = $this->newsFactory->create();
 
-        if ($id = $this->getRequest()->getParam(NewsInterface::ID)) {
+        if ($newsId = $this->getRequest()->getParam(NewsInterface::ID)) {
             try {
-                $model = $this->newsRepository->getById($id);
+                $model = $this->newsRepository->getById($newsId);
             } catch (LocalizedException) {
                 $this->messageManager->addErrorMessage(__('This news no longer exists.'));
                 return $resultRedirect->setPath('*/*/');
@@ -125,7 +125,7 @@ class Save extends NewsAction implements HttpPostActionInterface
             $this->messageManager->addExceptionMessage($e, __('Something went wrong while saving the news.'));
         }
 
-        return $resultRedirect->setPath('*/*/edit', [NewsInterface::ID => $id]);
+        return $resultRedirect->setPath('*/*/edit', [NewsInterface::ID => $newsId]);
     }
 
     /**

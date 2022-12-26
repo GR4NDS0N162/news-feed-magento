@@ -79,18 +79,7 @@ class NewsRepository implements NewsRepositoryInterface
     {
         $collection = $this->newsCollectionFactory->create();
         if ($storeId) {
-            $where = implode(' AND ', [
-                'id=news_id',
-                $this->resource->getConnection()->prepareSqlCondition(
-                    ResourceNews::STORE_ID,
-                    ['eq' => $storeId]
-                ),
-            ]);
-            $collection->join(
-                ResourceNews::NEWS_STORE_TABLE_NAME,
-                $where,
-                []
-            );
+            $collection->filterByStore($storeId);
         }
         return $collection;
     }

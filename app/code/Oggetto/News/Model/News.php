@@ -63,11 +63,6 @@ class News extends AbstractModel implements NewsInterface
         return $this->getData(self::META_DESCRIPTION);
     }
 
-    public function getStores(): ?array
-    {
-        return $this->getData(self::STORES);
-    }
-
     public function setTitle(string $title): News
     {
         return $this->setData(self::TITLE, $title);

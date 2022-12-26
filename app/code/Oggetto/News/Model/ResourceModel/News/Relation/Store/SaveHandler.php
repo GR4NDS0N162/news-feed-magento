@@ -48,9 +48,11 @@ class SaveHandler implements ExtensionInterface
         $oldStores = $this->resourceNews->lookupStoreIds((int) $newsId);
         $newStores = (array) $news->getData(NewsInterface::STORES);
 
+        $delete = array_diff($oldStores, $newStores);
+        $insert = array_diff($newStores, $oldStores);
+
         $table = $this->resourceNews->getTable(News::NEWS_STORE_TABLE_NAME);
 
-        $delete = array_diff($oldStores, $newStores);
         if ($delete) {
             $where = implode(' AND ', [
                 $connection->prepareSqlCondition(News::NEWS_ID, ['eq' => $newsId]),
@@ -59,7 +61,6 @@ class SaveHandler implements ExtensionInterface
             $connection->delete($table, $where);
         }
 
-        $insert = array_diff($newStores, $oldStores);
         if ($insert) {
             $data = [];
             foreach ($insert as $storeId) {
