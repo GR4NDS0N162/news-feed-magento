@@ -95,7 +95,6 @@ class DataProvider extends ModifierPoolDataProvider
             try {
                 $news = $this->newsRepository->getById($newsId);
             } catch (NoSuchEntityException) {
-                $news = $this->newsFactory->create();
             }
         }
 

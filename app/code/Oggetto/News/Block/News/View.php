@@ -78,7 +78,6 @@ class View extends Template
             try {
                 $this->news = $this->newsRepository->getById($newsId);
             } catch (NoSuchEntityException) {
-                $this->news = $this->newsFactory->create();
             }
         }
     }
