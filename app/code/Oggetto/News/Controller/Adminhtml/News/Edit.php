@@ -56,9 +56,9 @@ class Edit extends NewsAction implements HttpGetActionInterface
      */
     public function execute()
     {
-        if ($id = $this->getRequest()->getParam(NewsInterface::ID)) {
+        if ($newsId = $this->getRequest()->getParam(NewsInterface::ID)) {
             try {
-                $model = $this->newsRepository->getById($id);
+                $model = $this->newsRepository->getById($newsId);
                 $this->dataPersistor->set(self::KEY_NEWS, $model);
             } catch (NoSuchEntityException) {
                 $this->messageManager->addErrorMessage(__('This news no longer exists.'));
@@ -72,11 +72,11 @@ class Edit extends NewsAction implements HttpGetActionInterface
         /** @var Page $resultPage */
         $resultPage = $this->resultPageFactory->create();
         $this->initPage($resultPage)->addBreadcrumb(
-            $id ? __('Edit News') : __('Add News'),
-            $id ? __('Edit News') : __('Add News'),
+            $newsId ? __('Edit News') : __('Add News'),
+            $newsId ? __('Edit News') : __('Add News'),
         );
         $resultPage->getConfig()->getTitle()->prepend(__('News'));
-        $resultPage->getConfig()->getTitle()->prepend($id ? $model->getTitle() : __('Add News'));
+        $resultPage->getConfig()->getTitle()->prepend($newsId ? $model->getTitle() : __('Add News'));
         return $resultPage;
     }
 }

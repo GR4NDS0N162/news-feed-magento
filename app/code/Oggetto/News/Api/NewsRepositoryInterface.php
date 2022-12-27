@@ -32,10 +32,11 @@ interface NewsRepositoryInterface
     /**
      * Retrieve news collection
      *
+     * @param string|null $storeId
      * @return Collection
      * @throws LocalizedException
      */
-    public function getList(): Collection;
+    public function getList($storeId = null): Collection;
 
     /**
      * Delete news

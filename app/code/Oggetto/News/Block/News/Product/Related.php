@@ -25,8 +25,6 @@ use Oggetto\News\Model\NewsFactory;
 
 class Related extends ListProduct
 {
-    public const TYPE_PRODUCT_BASE_IMAGE = 'product_base_image';
-
     /**
      * @var NewsRepositoryInterface
      */
@@ -104,6 +102,17 @@ class Related extends ListProduct
     /**
      * @inheritDoc
      */
+    public function getReviewsSummaryHtml(
+        Product $product,
+        $templateType = false,
+        $displayIfNoReviews = false,
+    ): string {
+        return '';
+    }
+
+    /**
+     * @inheritDoc
+     */
     protected function _construct()
     {
         parent::_construct();
@@ -113,7 +122,6 @@ class Related extends ListProduct
             try {
                 $this->news = $this->newsRepository->getById($newsId);
             } catch (NoSuchEntityException) {
-                $this->news = $this->newsFactory->create();
             }
         }
     }
@@ -129,17 +137,6 @@ class Related extends ListProduct
             $this->_productCollection = $this->initializeProductCollection();
         }
         return $this->_productCollection;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getReviewsSummaryHtml(
-        Product $product,
-        $templateType = false,
-        $displayIfNoReviews = false,
-    ): string {
-        return '';
     }
 
     /**

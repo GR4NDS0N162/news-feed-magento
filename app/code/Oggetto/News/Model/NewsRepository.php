@@ -75,9 +75,13 @@ class NewsRepository implements NewsRepositoryInterface
     /**
      * @inheritDoc
      */
-    public function getList(): Collection
+    public function getList($storeId = null): Collection
     {
-        return $this->newsCollectionFactory->create();
+        $collection = $this->newsCollectionFactory->create();
+        if ($storeId) {
+            $collection->filterByStore($storeId);
+        }
+        return $collection;
     }
 
     /**

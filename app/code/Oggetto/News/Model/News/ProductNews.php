@@ -54,8 +54,10 @@ class ProductNews extends AbstractEntity
         $connection = $this->getConnection();
 
         if (!empty($delete)) {
-            $cond = $connection->prepareSqlCondition(self::NEWS_ID, ['eq' => $newsId]);
-            $cond .= ' AND ' . $connection->prepareSqlCondition(self::PRODUCT_ID, ['in' => array_values($delete)]);
+            $cond = implode(' AND ', [
+                $connection->prepareSqlCondition(self::NEWS_ID, ['eq' => $newsId]),
+                $connection->prepareSqlCondition(self::PRODUCT_ID, ['in' => array_values($delete)]),
+            ]);
             $connection->delete($this->getNewsProductTable(), $cond);
         }
 

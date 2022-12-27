@@ -30,5 +30,16 @@
             "NEWS_PRODUCT_NEWS_ID_NEWS_ID": true,
             "NEWS_PRODUCT_PRODUCT_ID_CATALOG_PRODUCT_ENTITY_ENTITY_ID": true
         }
+    },
+    "news_store": {
+        "column": {
+            "news_id": true,
+            "store_id": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "NEWS_STORE_NEWS_ID_NEWS_ID": true,
+            "NEWS_STORE_STORE_ID_STORE_STORE_ID": true
+        }
     }
 }

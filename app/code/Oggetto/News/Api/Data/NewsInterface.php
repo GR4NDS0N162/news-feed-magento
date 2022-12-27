@@ -15,6 +15,7 @@ interface NewsInterface
     public const META_TITLE = 'meta_title';
     public const META_KEYWORDS = 'meta_keywords';
     public const META_DESCRIPTION = 'meta_description';
+    public const STORES = 'stores';
 
     /**
      * Get entity id

@@ -90,42 +90,42 @@ class Save extends NewsAction implements HttpPostActionInterface
     {
         /** @var Redirect $resultRedirect */
         $resultRedirect = $this->resultRedirectFactory->create();
-        $data = $this->getRequest()->getPostValue();
-        if ($data) {
-            if (empty($data[NewsInterface::ID])) {
-                $data[NewsInterface::ID] = null;
-            }
-
-            $model = $this->newsFactory->create();
-
-            if ($id = $this->getRequest()->getParam(NewsInterface::ID)) {
-                try {
-                    $model = $this->newsRepository->getById($id);
-                } catch (LocalizedException) {
-                    $this->messageManager->addErrorMessage(__('This news no longer exists.'));
-                    return $resultRedirect->setPath('*/*/');
-                }
-            }
-
-            $data = $this->validateImage($data);
-            $data = $this->prepareListingData($data);
-
-            $model->setData($data);
-
-            try {
-                $this->newsRepository->save($model);
-                $this->messageManager->addSuccessMessage(__('You saved the news.'));
-                return $this->processNewsReturn($model, $data, $resultRedirect);
-            } catch (LocalizedException $e) {
-                $this->messageManager->addErrorMessage($e->getMessage());
-            } catch (Exception $e) {
-                $this->logger->error($e->getMessage());
-                $this->messageManager->addExceptionMessage($e, __('Something went wrong while saving the news.'));
-            }
-
-            return $resultRedirect->setPath('*/*/edit', [NewsInterface::ID => $id]);
+        if (empty($data = $this->getRequest()->getPostValue())) {
+            return $resultRedirect->setPath('*/*/');
         }
-        return $resultRedirect->setPath('*/*/');
+
+        if (empty($data[NewsInterface::ID])) {
+            $data[NewsInterface::ID] = null;
+        }
+
+        $model = $this->newsFactory->create();
+
+        if ($newsId = $this->getRequest()->getParam(NewsInterface::ID)) {
+            try {
+                $model = $this->newsRepository->getById($newsId);
+            } catch (LocalizedException) {
+                $this->messageManager->addErrorMessage(__('This news no longer exists.'));
+                return $resultRedirect->setPath('*/*/');
+            }
+        }
+
+        $data = $this->validateImage($data);
+        $data = $this->prepareListingData($data);
+
+        $model->setData($data);
+
+        try {
+            $this->newsRepository->save($model);
+            $this->messageManager->addSuccessMessage(__('You saved the news.'));
+            return $this->processNewsReturn($model, $data, $resultRedirect);
+        } catch (LocalizedException $e) {
+            $this->messageManager->addErrorMessage($e->getMessage());
+        } catch (Exception $e) {
+            $this->logger->error($e->getMessage());
+            $this->messageManager->addExceptionMessage($e, __('Something went wrong while saving the news.'));
+        }
+
+        return $resultRedirect->setPath('*/*/edit', [NewsInterface::ID => $newsId]);
     }
 
     /**
@@ -136,6 +136,9 @@ class Save extends NewsAction implements HttpPostActionInterface
      */
     private function prepareListingData(array $data): array
     {
+        if (!isset($data[self::KEY_LISTING_DATA])) {
+            return $data;
+        }
         $listingData = $data[self::KEY_LISTING_DATA];
         unset($data[self::KEY_LISTING_DATA]);
         if (is_array($listingData)) {

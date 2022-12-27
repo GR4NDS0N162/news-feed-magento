@@ -73,12 +73,10 @@ class View extends Template
         parent::_construct();
 
         $this->news = $this->newsFactory->create();
-
         if ($newsId = $this->getRequest()->getParam(NewsInterface::ID)) {
             try {
                 $this->news = $this->newsRepository->getById($newsId);
             } catch (NoSuchEntityException) {
-                $this->news = $this->newsFactory->create();
             }
         }
     }

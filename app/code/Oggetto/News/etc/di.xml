@@ -6,18 +6,14 @@
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">
-                <item name="news_grid_listing_data_source" xsi:type="string">
-                    Oggetto\News\Model\ResourceModel\News\Grid\Collection
-                </item>
+                <item name="news_grid_listing_data_source" xsi:type="string">Oggetto\News\Model\ResourceModel\News\Grid\Collection</item>
             </argument>
         </arguments>
     </type>
     <type name="Magento\Framework\Model\Entity\RepositoryFactory">
         <arguments>
             <argument name="entities" xsi:type="array">
-                <item name="Oggetto\News\Api\Data\NewsInterface" xsi:type="string">
-                    Oggetto\News\Api\NewsRepositoryInterface
-                </item>
+                <item name="Oggetto\News\Api\Data\NewsInterface" xsi:type="string">Oggetto\News\Api\NewsRepositoryInterface</item>
             </argument>
         </arguments>
     </type>
@@ -34,15 +30,30 @@
     <type name="Magento\Framework\EntityManager\HydratorPool">
         <arguments>
             <argument name="hydrators" xsi:type="array">
-                <item name="Oggetto\News\Api\Data\NewsInterface" xsi:type="string">
-                    Magento\Framework\EntityManager\AbstractModelHydrator
-                </item>
+                <item name="Oggetto\News\Api\Data\NewsInterface" xsi:type="string">Magento\Framework\EntityManager\AbstractModelHydrator</item>
             </argument>
         </arguments>
     </type>
     <type name="Oggetto\News\Model\NewsRepository">
         <arguments>
             <argument name="hydrator" xsi:type="object">Magento\Framework\EntityManager\AbstractModelHydrator</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\EntityManager\Operation\ExtensionPool">
+        <arguments>
+            <argument name="extensionActions" xsi:type="array">
+                <item name="Oggetto\News\Api\Data\NewsInterface" xsi:type="array">
+                    <item name="read" xsi:type="array">
+                        <item name="storeReader" xsi:type="string">Oggetto\News\Model\ResourceModel\News\Relation\Store\ReadHandler</item>
+                    </item>
+                    <item name="create" xsi:type="array">
+                        <item name="storeCreator" xsi:type="string">Oggetto\News\Model\ResourceModel\News\Relation\Store\SaveHandler</item>
+                    </item>
+                    <item name="update" xsi:type="array">
+                        <item name="storeUpdater" xsi:type="string">Oggetto\News\Model\ResourceModel\News\Relation\Store\SaveHandler</item>
+                    </item>
+                </item>
+            </argument>
         </arguments>
     </type>
 </config>
