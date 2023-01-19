@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="product_attribute_form_build_front_tab">
+        <observer name="layered_navigation_multiple_choice"
+                  instance="Oggetto\MultipleChoice\Observer\AddFieldsToAttributeObserver" />
+    </event>
+</config>
