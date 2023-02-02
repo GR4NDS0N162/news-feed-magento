@@ -5,4 +5,7 @@
                 type="Oggetto\MultipleChoice\Model\CatalogSearch\Model\Layer\Filter\Attribute" />
     <preference for="Magento\Catalog\Model\Layer\Filter\Item"
                 type="Oggetto\MultipleChoice\Model\Catalog\Model\Layer\Filter\Item" />
+    <type name="Magento\Framework\Api\Search\SearchCriteriaBuilder">
+        <plugin name="multiple_ranges" type="Oggetto\MultipleChoice\Model\MultipleRangesFilterPlugin" sortOrder="100" />
+    </type>
 </config>
