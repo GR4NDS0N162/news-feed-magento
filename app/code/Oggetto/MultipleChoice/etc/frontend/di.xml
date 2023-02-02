@@ -7,7 +7,8 @@
                 type="Oggetto\MultipleChoice\Model\CatalogSearch\Model\Layer\Filter\Price" />
     <preference for="Magento\Catalog\Model\Layer\Filter\Item"
                 type="Oggetto\MultipleChoice\Model\Catalog\Model\Layer\Filter\Item" />
-    <type name="Magento\Framework\Api\Search\SearchCriteriaBuilder">
-        <plugin name="multiple_ranges" type="Oggetto\MultipleChoice\Model\MultipleRangesFilterPlugin" sortOrder="100" />
+    <type name="\Magento\Framework\Search\Request\Mapper">
+        <plugin name="price_filter_to_bool_expression"
+                type="Oggetto\MultipleChoice\Plugin\PriceFilterToBoolExpressionPlugin" sortOrder="100" />
     </type>
 </config>

@@ -100,18 +100,20 @@ class Price extends FilterPrice
             $this->_createItem($label, $filters)
         );
 
-        $condition = [];
+        $condition = [
+            'from' => [],
+            'to'   => [],
+        ];
         foreach ($validFilters as $item) {
             [$from, $to] = $item;
 
-            $condition[] = [
-                'from' => $from,
-                'to'   => empty($to) || $from == $to ? $to : $to - self::PRICE_DELTA,
-            ];
+            $condition['from'][] = $from;
+            $condition['to'][] = empty($to) || $from == $to ? $to : $to - self::PRICE_DELTA;
         }
+        $condition['from'] = implode(self::SEPARATOR, $condition['from']);
+        $condition['to'] = implode(self::SEPARATOR, $condition['to']);
 
-        $this->getLayer()->getProductCollection()->clear()->getSize();
-        $this->getLayer()->getProductCollection()->addAttributeToFilter(
+        $this->getLayer()->getProductCollection()->addFieldToFilter(
             $this->getAttributeModel()->getAttributeCode(),
             $condition
         );
