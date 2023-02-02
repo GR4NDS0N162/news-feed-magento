@@ -3,6 +3,8 @@
         xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <preference for="Magento\CatalogSearch\Model\Layer\Filter\Attribute"
                 type="Oggetto\MultipleChoice\Model\CatalogSearch\Model\Layer\Filter\Attribute" />
+    <preference for="Magento\CatalogSearch\Model\Layer\Filter\Price"
+                type="Oggetto\MultipleChoice\Model\CatalogSearch\Model\Layer\Filter\Price" />
     <preference for="Magento\Catalog\Model\Layer\Filter\Item"
                 type="Oggetto\MultipleChoice\Model\Catalog\Model\Layer\Filter\Item" />
     <type name="Magento\Framework\Api\Search\SearchCriteriaBuilder">
