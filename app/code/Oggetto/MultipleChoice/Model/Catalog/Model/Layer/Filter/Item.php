@@ -24,7 +24,7 @@ class Item extends FilterItem
             }
         }
         $query = [
-            $this->getFilter()->getRequestVar()      => $values,
+            $this->getFilter()->getRequestVar()      => array_unique($values),
             $this->_htmlPagerBlock->getPageVarName() => null,
         ];
         return $this->_url->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true, '_query' => $query]);
