@@ -128,8 +128,6 @@ class PriceFilterToBoolExpressionPlugin
         $to = array_map(fn($value) => floatval($value), $to);
         sort($from);
         sort($to);
-        end($from);
-        end($to);
 
         $pairs = [];
         $i = 0;
