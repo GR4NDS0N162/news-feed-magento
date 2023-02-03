@@ -82,7 +82,7 @@ class Attribute extends FilterAttribute
             ->getState()
             ->addFilter($this->_createItem($label, $attributeValue));
 
-        if (!$this->getAllowMultipleFiltering()) {
+        if (!$this->isAllowedMultipleFiltering()) {
             $this->setItems([]); // set items to disable show filtering
         }
 
@@ -99,7 +99,7 @@ class Attribute extends FilterAttribute
         $productCollection = $this->getLayer()
             ->getProductCollection();
 
-        if ($this->getAllowMultipleFiltering()) {
+        if ($this->isAllowedMultipleFiltering()) {
             $productCollection = $this->collectionProvider->create();
             $productCollection = $productCollection
                 ->addCategoryFilter($this->getLayer()->getCurrentCategory())
@@ -215,7 +215,7 @@ class Attribute extends FilterAttribute
     /**
      * @throws LocalizedException
      */
-    private function getAllowMultipleFiltering(): bool
+    private function isAllowedMultipleFiltering(): bool
     {
         return (bool) $this->getAttributeModel()->getData('allow_multiple_filtering');
     }
