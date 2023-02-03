@@ -80,38 +80,14 @@ class Price extends FilterPrice
             return $this;
         }
 
-        $validFilters = [];
-        foreach ($filters as $filter) {
-            $filter = $this->dataProvider->validateFilter($filter);
-            if (!is_bool($filter) && $filter) {
-                $validFilters[] = $filter;
-            }
-        }
+        $validFilters = $this->getValidFilters($filters);
 
-        $labels = [];
-        foreach ($validFilters as $filter) {
-            $labels[] = $this->_renderRangeLabel(
-                empty($filter[0]) ? 0 : $filter[0],
-                $filter[1]
-            );
-        }
-        $label = implode(', ', $labels);
+        $label = $this->getLabel($validFilters);
         $this->getLayer()->getState()->addFilter(
             $this->_createItem($label, $filters)
         );
 
-        $condition = [
-            'from' => [],
-            'to'   => [],
-        ];
-        foreach ($validFilters as $item) {
-            [$from, $to] = $item;
-
-            $condition['from'][] = $from;
-            $condition['to'][] = empty($to) || $from == $to ? $to : $to - self::PRICE_DELTA;
-        }
-        $condition['from'] = implode(self::SEPARATOR, $condition['from']);
-        $condition['to'] = implode(self::SEPARATOR, $condition['to']);
+        $condition = $this->prepareCondition($validFilters);
 
         $this->getLayer()->getProductCollection()->addFieldToFilter(
             $this->getAttributeModel()->getAttributeCode(),
@@ -119,5 +95,58 @@ class Price extends FilterPrice
         );
 
         return $this;
+    }
+
+    /**
+     * @param string[] $filters
+     * @return array
+     */
+    private function getValidFilters(array $filters): array
+    {
+        $validFilters = [];
+        foreach ($filters as $filter) {
+            $filter = $this->dataProvider->validateFilter($filter);
+            if (!is_bool($filter) && $filter) {
+                $validFilters[] = $filter;
+            }
+        }
+        return $validFilters;
+    }
+
+    /**
+     * @param array $filterPairs
+     * @return string
+     */
+    private function getLabel(array $filterPairs): string
+    {
+        $labels = [];
+        foreach ($filterPairs as $filter) {
+            $labels[] = $this->_renderRangeLabel(
+                empty($filter[0]) ? 0 : $filter[0],
+                $filter[1]
+            );
+        }
+        return implode(', ', $labels);
+    }
+
+    /**
+     * @param array $filterPairs
+     * @return string[]
+     */
+    private function prepareCondition(array $filterPairs): array
+    {
+        $condition = [
+            'from' => [],
+            'to'   => [],
+        ];
+        foreach ($filterPairs as $pair) {
+            [$from, $to] = $pair;
+
+            $condition['from'][] = $from;
+            $condition['to'][] = empty($to) || $from == $to ? $to : $to - self::PRICE_DELTA;
+        }
+        $condition['from'] = implode(self::SEPARATOR, $condition['from']);
+        $condition['to'] = implode(self::SEPARATOR, $condition['to']);
+        return $condition;
     }
 }

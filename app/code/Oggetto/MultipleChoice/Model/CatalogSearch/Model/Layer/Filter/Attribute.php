@@ -8,6 +8,7 @@ use Magento\Catalog\Api\Data\ProductAttributeInterface;
 use Magento\Catalog\Model\Layer;
 use Magento\Catalog\Model\Layer\Filter\Item\DataBuilder;
 use Magento\Catalog\Model\Layer\Filter\ItemFactory;
+use Magento\Catalog\Model\ResourceModel\Eav\Attribute as EavAttribute;
 use Magento\Catalog\Model\ResourceModel\Product\CollectionFactory;
 use Magento\CatalogSearch\Model\Layer\Filter\Attribute as FilterAttribute;
 use Magento\CatalogSearch\Model\ResourceModel\Fulltext\Collection;
@@ -100,43 +101,7 @@ class Attribute extends FilterAttribute
             ->getProductCollection();
 
         if ($this->isAllowedMultipleFiltering()) {
-            $productCollection = $this->collectionProvider->create();
-            $productCollection = $productCollection
-                ->addCategoryFilter($this->getLayer()->getCurrentCategory())
-                ->setStoreId($this->getStoreId());
-
-            $optionForDelete = [];
-            foreach ($this->getLayer()->getState()->getFilters() as $filterItem) {
-                $filter = $filterItem->getFilter();
-                $value = $filterItem->getData('value');
-                if ($filter->getRequestVar() == $this->getRequestVar()) {
-                    $optionForDelete = is_array($value)
-                        ? array_merge($optionForDelete, array_values($value))
-                        : [$value];
-                    continue;
-                }
-                if ($filter instanceof FilterAttribute) {
-                    $productCollection = $productCollection->addFieldToFilter(
-                        $filter->getAttributeModel()->getAttributeCode(),
-                        $this->convertAttributeValue(
-                            $filter->getAttributeModel(),
-                            $value
-                        )
-                    );
-                }
-            }
-
-            $attributeValueCount = $productCollection->getAttributeValueCount($attribute->getAttributeCode());
-            $optionsFacetedData = [];
-            foreach ($attributeValueCount as $value => $count) {
-                if (in_array($value, $optionForDelete)) {
-                    continue;
-                }
-                $optionsFacetedData[$value] = [
-                    'value' => $value,
-                    'count' => (int) $count,
-                ];
-            }
+            $optionsFacetedData = $this->getOptionsFacetedData($attribute);
         } else {
             $optionsFacetedData = $productCollection->getFacetedData($attribute->getAttributeCode());
         }
@@ -233,5 +198,59 @@ class Attribute extends FilterAttribute
             return (int) $value;
         }
         return $value;
+    }
+
+    /**
+     * @param EavAttribute $attribute
+     * @return array
+     * @throws LocalizedException
+     */
+    private function getOptionsFacetedData(EavAttribute $attribute): array
+    {
+        $productCollection = $this->collectionProvider->create();
+        $productCollection = $productCollection
+            ->addCategoryFilter($this->getLayer()->getCurrentCategory())
+            ->setStoreId($this->getStoreId());
+
+        $optionForDelete = [];
+        foreach ($this->getLayer()->getState()->getFilters() as $filterItem) {
+            $filter = $filterItem->getFilter();
+            $value = $filterItem->getData('value');
+            if ($filter->getRequestVar() == $this->getRequestVar()) {
+                $optionForDelete = is_array($value)
+                    ? array_merge($optionForDelete, array_values($value))
+                    : [$value];
+                continue;
+            }
+            if ($filter instanceof FilterAttribute) {
+                $productCollection = $productCollection->addFieldToFilter(
+                    $filter->getAttributeModel()->getAttributeCode(),
+                    $this->convertAttributeValue($filter->getAttributeModel(), $value)
+                );
+            }
+        }
+
+        $attributeValueCount = $productCollection->getAttributeValueCount($attribute->getAttributeCode());
+        return $this->packOptionsFacetedData($attributeValueCount, $optionForDelete);
+    }
+
+    /**
+     * @param array $attributeValueCount
+     * @param array $optionForDelete
+     * @return array
+     */
+    private function packOptionsFacetedData(array $attributeValueCount, array $optionForDelete): array
+    {
+        $optionsFacetedData = [];
+        foreach ($attributeValueCount as $value => $count) {
+            if (in_array($value, $optionForDelete)) {
+                continue;
+            }
+            $optionsFacetedData[$value] = [
+                'value' => $value,
+                'count' => (int) $count,
+            ];
+        }
+        return $optionsFacetedData;
     }
 }
