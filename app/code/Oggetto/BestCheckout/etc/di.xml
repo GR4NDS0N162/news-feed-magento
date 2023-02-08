@@ -1,4 +1,14 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="BestFacade" type="Oggetto\BestCheckout\Model\Payment\Method\BestAdapter">
+        <arguments>
+            <argument name="code" xsi:type="const">PayPal\Braintree\Model\Ui\ConfigProvider::CODE</argument>
+            <argument name="formBlockType" xsi:type="string">PayPal\Braintree\Block\Form</argument>
+            <argument name="infoBlockType" xsi:type="string">PayPal\Braintree\Block\Info</argument>
+            <argument name="valueHandlerPool" xsi:type="object">BraintreeValueHandlerPool</argument>
+            <argument name="validatorPool" xsi:type="object">BraintreeValidatorPool</argument>
+            <argument name="commandPool" xsi:type="object">BraintreeCommandPool</argument>
+        </arguments>
+    </virtualType>
 </config>
