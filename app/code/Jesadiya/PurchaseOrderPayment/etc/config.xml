@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <payment>
+            <custompurchaseorder>
+                <active>1</active>
+                <title>Custom Purchase Order</title>
+                <order_status>pending</order_status>
+                <allowspecific>0</allowspecific>
+                <model>PurchaseOrderPaymentFacade</model>
+                <group>offline</group>
+                <can_use_internal>1</can_use_internal>
+                <can_use_checkout>1</can_use_checkout>
+                <is_offline>1</is_offline>
+            </custompurchaseorder>
+        </payment>
+    </default>
+</config>
