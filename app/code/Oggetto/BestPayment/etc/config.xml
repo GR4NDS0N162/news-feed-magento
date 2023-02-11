@@ -2,7 +2,7 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
     <default>
         <payment>
-            <bestpayment>
+            <best>
                 <active>1</active>
                 <title>Best Payment</title>
                 <order_status>pending</order_status>
@@ -12,7 +12,7 @@
                 <can_use_internal>1</can_use_internal>
                 <can_use_checkout>1</can_use_checkout>
                 <is_offline>1</is_offline>
-            </bestpayment>
+            </best>
         </payment>
     </default>
 </config>
