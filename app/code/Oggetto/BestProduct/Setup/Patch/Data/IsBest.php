@@ -18,6 +18,7 @@ use Zend_Validate_Exception as ValidateException;
 class IsBest implements DataPatchInterface
 {
     public const ATTRIBUTE_CODE = 'is_best';
+    public const DEFAULT_VALUE = YesNoMaybe::VALUE_NO;
 
     /**
      * @var EavSetup
@@ -77,7 +78,7 @@ class IsBest implements DataPatchInterface
                     'visible'                 => true,
                     'required'                => false,
                     'user_defined'            => true,
-                    'default'                 => YesNoMaybe::VALUE_NO,
+                    'default'                 => self::DEFAULT_VALUE,
                     'searchable'              => false,
                     'filterable'              => false,
                     'comparable'              => false,

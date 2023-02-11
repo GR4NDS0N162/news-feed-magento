@@ -8,8 +8,8 @@ use Magento\Eav\Model\Entity\Attribute\Source\AbstractSource;
 
 class YesNoMaybe extends AbstractSource
 {
-    public const VALUE_YES = 1;
     public const VALUE_NO = 0;
+    public const VALUE_YES = 1;
     public const VALUE_MAYBE = 2;
 
     /**
@@ -19,8 +19,8 @@ class YesNoMaybe extends AbstractSource
     {
         if ($this->_options === null) {
             $this->_options = [
-                ['label' => __('Yes'), 'value' => self::VALUE_YES],
                 ['label' => __('No'), 'value' => self::VALUE_NO],
+                ['label' => __('Yes'), 'value' => self::VALUE_YES],
                 ['label' => __('Maybe'), 'value' => self::VALUE_MAYBE],
             ];
         }
