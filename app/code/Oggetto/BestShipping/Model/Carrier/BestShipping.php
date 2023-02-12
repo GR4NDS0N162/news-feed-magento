@@ -74,30 +74,6 @@ class BestShipping extends AbstractCarrier implements CarrierInterface
         return $result;
     }
 
-    private function createResultMethod(float $shippingPrice): Method
-    {
-        $method = $this->resultMethodFactory->create();
-
-        $method->setCarrier($this->_code);
-        $method->setCarrierTitle($this->getConfigData('title'));
-
-        $method->setMethod($this->_code);
-        $method->setMethodTitle($this->getConfigData('name'));
-
-        $method->setPrice($shippingPrice);
-        $method->setCost($shippingPrice);
-
-        return $method;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getAllowedMethods(): array
-    {
-        return [$this->_code => $this->getConfigData('name')];
-    }
-
     /**
      * @param ItemInterface[] $allItems
      * @return bool
@@ -141,5 +117,29 @@ class BestShipping extends AbstractCarrier implements CarrierInterface
     private function getPriceCoefficient(): float
     {
         return (float) $this->getConfigData('price_coefficient');
+    }
+
+    private function createResultMethod(float $shippingPrice): Method
+    {
+        $method = $this->resultMethodFactory->create();
+
+        $method->setCarrier($this->_code);
+        $method->setCarrierTitle($this->getConfigData('title'));
+
+        $method->setMethod($this->_code);
+        $method->setMethodTitle($this->getConfigData('name'));
+
+        $method->setPrice($shippingPrice);
+        $method->setCost($shippingPrice);
+
+        return $method;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getAllowedMethods(): array
+    {
+        return [$this->_code => $this->getConfigData('name')];
     }
 }
