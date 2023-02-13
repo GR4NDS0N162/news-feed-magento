@@ -16,7 +16,7 @@ use Magento\Shipping\Model\Carrier\CarrierInterface;
 use Magento\Shipping\Model\Rate\Result;
 use Magento\Shipping\Model\Rate\ResultFactory;
 use Oggetto\BestProduct\Model\Config\Source\YesNoMaybe;
-use Oggetto\BestProduct\Setup\Patch\Data\IsBest;
+use Oggetto\BestProduct\Setup\Patch\Data\IsBestProductPatch;
 use Psr\Log\LoggerInterface;
 
 class BestShipping extends AbstractCarrier implements CarrierInterface
@@ -83,7 +83,7 @@ class BestShipping extends AbstractCarrier implements CarrierInterface
         $allMaybe = true;
         foreach ($allItems as $item) {
             $product = $item->getProduct();
-            $isBest = $product->getData(IsBest::ATTRIBUTE_CODE) ?? IsBest::DEFAULT_VALUE;
+            $isBest = $product->getData(IsBestProductPatch::ATTRIBUTE_CODE) ?? IsBestProductPatch::DEFAULT_VALUE;
             if ($isBest == YesNoMaybe::VALUE_YES) {
                 return true;
             }

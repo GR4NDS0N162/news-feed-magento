@@ -15,7 +15,7 @@ use Oggetto\BestProduct\Model\Config\Source\YesNoMaybe;
 use Psr\Log\LoggerInterface;
 use Zend_Validate_Exception as ValidateException;
 
-class IsBest implements DataPatchInterface
+class IsBestProductPatch implements DataPatchInterface
 {
     public const ATTRIBUTE_CODE = 'is_best';
     public const DEFAULT_VALUE = YesNoMaybe::VALUE_NO;
