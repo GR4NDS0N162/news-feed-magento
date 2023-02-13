@@ -14,7 +14,9 @@ use Zend_Validate_Exception as ValidateException;
 
 class IsBestProductPatch implements DataPatchInterface
 {
+    public const ENTITY_TYPE = Product::ENTITY;
     public const ATTRIBUTE_CODE = 'is_best';
+    public const TYPE = 'int';
     public const DEFAULT_VALUE = YesNoMaybe::VALUE_NO;
 
     /**
@@ -57,10 +59,10 @@ class IsBestProductPatch implements DataPatchInterface
         $eavSetup = $this->eavSetupFactory->create(['setup' => $this->moduleDataSetup]);
         try {
             $eavSetup->addAttribute(
-                Product::ENTITY,
+                self::ENTITY_TYPE,
                 self::ATTRIBUTE_CODE,
                 [
-                    'type'                    => 'int',
+                    'type'                    => self::TYPE,
                     'label'                   => 'Is Best',
                     'input'                   => 'select',
                     'source'                  => YesNoMaybe::class,
