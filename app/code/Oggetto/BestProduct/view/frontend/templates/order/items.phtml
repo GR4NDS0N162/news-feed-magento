@@ -1,0 +1,91 @@
+<?php
+/**
+ * @var Items   $block
+ * @var Escaper $escaper
+ */
+
+use Magento\Framework\Escaper;
+use Magento\GiftMessage\Helper\Message;
+use Magento\Sales\Block\Order\Items;
+
+?>
+<div class="table-wrapper order-items">
+    <table class="data table table-order-items" id="my-orders-table" summary="<?= $escaper->escapeHtml(__('Items Ordered')) ?>">
+        <caption class="table-caption"><?= $escaper->escapeHtml(__('Items Ordered')) ?></caption>
+        <thead>
+        <?php if ($block->isPagerDisplayed()) : ?>
+            <tr>
+                <td colspan="6" data-block="order-items-pager-top" class="order-pager-wrapper order-pager-wrapper-top">
+                    <?= $block->getPagerHtml() ?>
+                </td>
+            </tr>
+        <?php endif ?>
+        <tr>
+            <th class="col name"><?= $escaper->escapeHtml(__('Product Name')) ?></th>
+            <th class="col sku"><?= $escaper->escapeHtml(__('SKU')) ?></th>
+            <th class="col is-best"><?= $escaper->escapeHtml(__('Is Best')) ?></th>
+            <th class="col price"><?= $escaper->escapeHtml(__('Price')) ?></th>
+            <th class="col qty"><?= $escaper->escapeHtml(__('Qty')) ?></th>
+            <th class="col subtotal"><?= $escaper->escapeHtml(__('Subtotal')) ?></th>
+        </tr>
+        </thead>
+        <?php $items = $block->getItems(); ?>
+        <?php $giftMessage = '' ?>
+        <?php foreach ($items as $item) :
+            if ($item->getParentItem()) :
+                continue;
+            endif; ?>
+            <tbody>
+            <?= $block->getItemHtml($item) ?>
+            <?php if ($this->helper(Message::class)->isMessagesAllowed('order_item', $item) && $item->getGiftMessageId()) : ?>
+                <?php $giftMessage = $this->helper(Message::class)->getGiftMessageForEntity($item); ?>
+                <tr>
+                    <td class="col options" colspan="5">
+                        <a href="#"
+                           id="order-item-gift-message-link-<?= (int) $item->getId() ?>"
+                           class="action show"
+                           aria-controls="order-item-gift-message-<?= (int) $item->getId() ?>"
+                           data-item-id="<?= (int) $item->getId() ?>">
+                            <?= $escaper->escapeHtml(__('Gift Message')) ?>
+                        </a>
+                        <?php $giftMessage = $this->helper(Message::class)->getGiftMessageForEntity($item); ?>
+                        <div class="order-gift-message" id="order-item-gift-message-<?= (int) $item->getId() ?>" role="region" aria-expanded="false" tabindex="-1">
+                            <a href="#"
+                               title="<?= $escaper->escapeHtml(__('Close')) ?>"
+                               aria-controls="order-item-gift-message-<?= (int) $item->getId() ?>"
+                               data-item-id="<?= (int) $item->getId() ?>"
+                               class="action close">
+                                <?= $escaper->escapeHtml(__('Close')) ?>
+                            </a>
+                            <dl class="item-options">
+                                <dt class="item-sender"><strong class="label"><?= $escaper->escapeHtml(__('From')) ?></strong><?= $escaper->escapeHtml($giftMessage->getSender()) ?></dt>
+                                <dt class="item-recipient"><strong class="label"><?= $escaper->escapeHtml(__('To')) ?></strong><?= $escaper->escapeHtml($giftMessage->getRecipient()) ?></dt>
+                                <dd class="item-message"><?= /* @noEscape */ $this->helper(Message::class)->getEscapedGiftMessage($item) ?></dd>
+                            </dl>
+                        </div>
+                    </td>
+                </tr>
+            <?php endif ?>
+            </tbody>
+        <?php endforeach; ?>
+        <tfoot>
+        <?php if ($block->isPagerDisplayed()) : ?>
+            <tr>
+                <td colspan="6" data-block="order-items-pager-bottom" class="order-pager-wrapper order-pager-wrapper-bottom">
+                    <?= $block->getPagerHtml() ?>
+                </td>
+            </tr>
+        <?php endif ?>
+        <?= $block->getChildHtml('order_totals') ?>
+        </tfoot>
+    </table>
+</div>
+<?php if ($giftMessage) : ?>
+    <script type="text/x-magento-init">
+    {
+        "a.action.show, a.action.close": {
+            "giftMessage": {}
+        }
+    }
+    </script>
+<?php endif; ?>
