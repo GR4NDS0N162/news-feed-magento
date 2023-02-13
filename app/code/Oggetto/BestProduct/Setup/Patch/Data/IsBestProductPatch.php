@@ -6,8 +6,8 @@ namespace Oggetto\BestProduct\Setup\Patch\Data;
 
 use Magento\Catalog\Model\Product;
 use Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface;
-use Magento\Eav\Setup\EavSetup;
 use Magento\Eav\Setup\EavSetupFactory;
+use Magento\Framework\DB\Ddl\Table;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
 use Magento\Framework\Setup\Patch\DataPatchInterface;
@@ -17,13 +17,20 @@ use Zend_Validate_Exception as ValidateException;
 
 class IsBestProductPatch implements DataPatchInterface
 {
+    public const ENTITY_TYPE = Product::ENTITY;
     public const ATTRIBUTE_CODE = 'is_best';
+    public const ATTRIBUTE_TYPE = Table::TYPE_INTEGER;
     public const DEFAULT_VALUE = YesNoMaybe::VALUE_NO;
 
     /**
-     * @var EavSetup
+     * @var ModuleDataSetupInterface
      */
-    private EavSetup $eavSetup;
+    private ModuleDataSetupInterface $moduleDataSetup;
+
+    /**
+     * @var EavSetupFactory
+     */
+    private EavSetupFactory $eavSetupFactory;
 
     /**
      * @var LoggerInterface
@@ -31,33 +38,18 @@ class IsBestProductPatch implements DataPatchInterface
     private LoggerInterface $logger;
 
     /**
-     * @param EavSetupFactory          $eavSetupFactory
      * @param ModuleDataSetupInterface $moduleDataSetup
+     * @param EavSetupFactory          $eavSetupFactory
      * @param LoggerInterface          $logger
      */
     public function __construct(
-        EavSetupFactory $eavSetupFactory,
         ModuleDataSetupInterface $moduleDataSetup,
+        EavSetupFactory $eavSetupFactory,
         LoggerInterface $logger,
     ) {
-        $this->eavSetup = $eavSetupFactory->create(['setup' => $moduleDataSetup]);
+        $this->moduleDataSetup = $moduleDataSetup;
+        $this->eavSetupFactory = $eavSetupFactory;
         $this->logger = $logger;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public static function getDependencies(): array
-    {
-        return [];
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getAliases(): array
-    {
-        return [];
     }
 
     /**
@@ -65,12 +57,15 @@ class IsBestProductPatch implements DataPatchInterface
      */
     public function apply()
     {
+        $this->moduleDataSetup->getConnection()->startSetup();
+
+        $eavSetup = $this->eavSetupFactory->create(['setup' => $this->moduleDataSetup]);
         try {
-            $this->eavSetup->addAttribute(
-                Product::ENTITY,
+            $eavSetup->addAttribute(
+                self::ENTITY_TYPE,
                 self::ATTRIBUTE_CODE,
                 [
-                    'type'                    => 'int',
+                    'type'                    => self::ATTRIBUTE_TYPE,
                     'label'                   => 'Is Best',
                     'input'                   => 'select',
                     'source'                  => YesNoMaybe::class,
@@ -92,5 +87,23 @@ class IsBestProductPatch implements DataPatchInterface
         } catch (LocalizedException | ValidateException $e) {
             $this->logger->error($e->getMessage());
         }
+
+        $this->moduleDataSetup->getConnection()->endSetup();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getAliases(): array
+    {
+        return [];
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public static function getDependencies(): array
+    {
+        return [];
     }
 }
