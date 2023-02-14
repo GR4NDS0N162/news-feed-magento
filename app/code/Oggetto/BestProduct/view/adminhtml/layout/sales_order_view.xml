@@ -15,5 +15,8 @@
                 </argument>
             </arguments>
         </referenceBlock>
+        <referenceBlock class="Magento\Bundle\Block\Adminhtml\Sales\Order\View\Items\Renderer"
+                        name="order_items.bundle"
+                        template="Oggetto_BestProduct::sales/order/view/items/renderer.phtml" />
     </body>
 </page>
