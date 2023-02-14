@@ -7,7 +7,7 @@
 
 use Magento\Framework\Escaper;
 use Magento\Framework\Locale\LocaleFormatter;
-use Magento\Sales\Block\Order\Item\Renderer\DefaultRenderer;
+use Oggetto\BestProduct\Block\Order\Item\Renderer\DefaultRenderer;
 
 $item = $block->getItem();
 ?>
@@ -46,6 +46,9 @@ $item = $block->getItem();
     </td>
     <td class="col sku" data-th="<?= $escaper->escapeHtml(__('SKU')) ?>">
         <?= /* @noEscape */ $block->prepareSku($block->getSku()) ?>
+    </td>
+    <td class="col is-best" data-th="<?= $escaper->escapeHtml(__('Is Best')) ?>">
+        <?= $escaper->escapeHtml($block->getIsBest()) ?>
     </td>
     <td class="col price" data-th="<?= $escaper->escapeHtml(__('Price')) ?>">
         <?= $block->getItemPriceHtml() ?>

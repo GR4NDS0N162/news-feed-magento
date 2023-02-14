@@ -1,13 +1,13 @@
 <?php
 /**
- * @var  Downloadable   $block
+ * @var Downloadable    $block
  * @var Escaper         $escaper
  * @var LocaleFormatter $localeFormatter
  */
 
-use Magento\Downloadable\Block\Sales\Order\Item\Renderer\Downloadable;
 use Magento\Framework\Escaper;
 use Magento\Framework\Locale\LocaleFormatter;
+use Oggetto\BestProduct\Block\Order\Item\Renderer\Downloadable;
 
 ?>
 <?php $_item = $block->getItem() ?>
@@ -53,6 +53,9 @@ use Magento\Framework\Locale\LocaleFormatter;
         <?= $escaper->escapeHtml($_item->getDescription()) ?>
     </td>
     <td class="col sku" data-th="<?= $escaper->escapeHtmlAttr(__('SKU')) ?>"><?= /* @noEscape */ $block->prepareSku($block->getSku()) ?></td>
+    <td class="col is-best" data-th="<?= $escaper->escapeHtml(__('Is Best')) ?>">
+        <?= $escaper->escapeHtml($block->getIsBest()) ?>
+    </td>
     <td class="col price" data-th="<?= $escaper->escapeHtmlAttr(__('Price')) ?>"><?= $block->getItemPriceHtml() ?></td>
     <td class="col qty" data-th="<?= $escaper->escapeHtmlAttr(__('Qty')) ?>">
         <ul class="items-qty">
