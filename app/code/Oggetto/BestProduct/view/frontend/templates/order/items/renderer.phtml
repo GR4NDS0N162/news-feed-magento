@@ -17,9 +17,7 @@ $items = $viewModel->getOrderItems((int)$parentItem->getOrderId(), (int)$parentI
 $index = 0;
 $prevOptionId = '';
 ?>
-
 <?php foreach ($items as $item): ?>
-
     <?php if ($block->getItemOptions()
         || $parentItem->getDescription()
         || $this->helper(Magento\GiftMessage\Helper\Message::class)->isMessagesAllowed('order_item', $parentItem)
@@ -28,13 +26,11 @@ $prevOptionId = '';
     <?php else: ?>
         <?php $showLastRow = false; ?>
     <?php endif; ?>
-
     <?php if ($item->getParentItem()): ?>
         <?php $attributes = $block->getSelectionAttributes($item) ?>
-
         <?php if (isset($attributes['option_id']) && $prevOptionId != $attributes['option_id']): ?>
             <tr class="options-label">
-                <td class="col label" colspan="5"><?= $escaper->escapeHtml($attributes['option_label']); ?></td>
+                <td class="col label" colspan="6"><?= $escaper->escapeHtml($attributes['option_label']); ?></td>
             </tr>
             <?php $prevOptionId = $attributes['option_id'] ?>
         <?php endif; ?>
@@ -61,7 +57,7 @@ $prevOptionId = '';
         <?= /* @noEscape */ $block->prepareSku($item->getSku()); ?>
     </td>
     <td class="col is-best" data-th="<?= $escaper->escapeHtmlAttr(__('Is Best')); ?>">
-        <?= $escaper->escapeHtml($block->getIsBest()); ?>
+        <?= $escaper->escapeHtml($block->getIsBest($item)); ?>
     </td>
     <td class="col price" data-th="<?= $escaper->escapeHtmlAttr(__('Price')); ?>">
         <?php if (!$item->getParentItem()): ?>

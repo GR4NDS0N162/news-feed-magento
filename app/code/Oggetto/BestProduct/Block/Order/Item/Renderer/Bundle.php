@@ -10,11 +10,11 @@ use Magento\Framework\DataObject;
 use Magento\Framework\Serialize\Serializer\Json;
 use Magento\Framework\Stdlib\StringUtils;
 use Magento\Framework\View\Element\Template\Context;
-use Oggetto\BestProduct\Api\BestOrderItemRenderer;
+use Oggetto\BestProduct\Api\BestBundleOrderItem;
 use Oggetto\BestProduct\Model\Config\Source\YesNoMaybe;
 use Oggetto\BestProduct\Setup\Patch\Data\IsBestOrderItemPatch;
 
-class Bundle extends BundleRenderer implements BestOrderItemRenderer
+class Bundle extends BundleRenderer implements BestBundleOrderItem
 {
     /**
      * @var YesNoMaybe
@@ -41,12 +41,10 @@ class Bundle extends BundleRenderer implements BestOrderItemRenderer
         parent::__construct($context, $string, $productOptionFactory, $data, $serializer);
     }
 
-    public function getIsBest(): string
+    public function getIsBest(DataObject $item): string
     {
-        /** @var DataObject $orderItem */
-        $orderItem = $this->getOrderItem();
         return (string) $this->source->getOptionText(
-            $orderItem->getData(IsBestOrderItemPatch::ATTRIBUTE_CODE)
+            $item->getData(IsBestOrderItemPatch::ATTRIBUTE_CODE)
         );
     }
 }
