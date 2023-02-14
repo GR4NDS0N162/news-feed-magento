@@ -159,12 +159,15 @@ $catalogHelper = $block->getData('catalogHelper');
                 &nbsp;
             <?php endif; ?>
         </td>
-        <td class="col-total last">
+        <td class="col-total">
             <?php if ($block->canShowPriceInfo($_item)): ?>
                 <?= $block->getColumnHtml($_item, 'total') ?>
             <?php else: ?>
                 &nbsp;
             <?php endif; ?>
+        </td>
+        <td class="col-is-best last">
+            <?= $block->getColumnHtml($_item, 'is-best') ?>
         </td>
     </tr>
 <?php endforeach; ?>
