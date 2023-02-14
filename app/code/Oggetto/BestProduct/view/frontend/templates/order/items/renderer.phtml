@@ -5,7 +5,7 @@
  */
 // phpcs:disable Magento2.Templates.ThisInTemplate
 /**
- * @var \Magento\Bundle\Block\Sales\Order\Items\Renderer $block
+ * @var \Oggetto\BestProduct\Block\Order\Item\Renderer\Bundle $block
  * @var \Magento\Framework\Locale\LocaleFormatter $localeFormatter
  * @var \Magento\Bundle\ViewModel\Sales\Order\Items\Renderer $viewModel
  */
@@ -57,6 +57,9 @@ $prevOptionId = '';
     <?php endif; ?>
     <td class="col sku" data-th="<?= $block->escapeHtmlAttr(__('SKU')); ?>">
         <?= /* @noEscape */ $block->prepareSku($item->getSku()); ?>
+    </td>
+    <td class="col is-best" data-th="<?= $block->escapeHtmlAttr(__('Is Best')); ?>">
+        <?= $block->escapeHtml($block->getIsBest()); ?>
     </td>
     <td class="col price" data-th="<?= $block->escapeHtmlAttr(__('Price')); ?>">
         <?php if (!$item->getParentItem()): ?>
@@ -135,7 +138,7 @@ $prevOptionId = '';
 
 <?php if ($showLastRow && (($options = $block->getItemOptions()) || $block->escapeHtml($item->getDescription()))): ?>
 <tr>
-    <td class="col options" colspan="5">
+    <td class="col options" colspan="6">
         <?php if ($options = $block->getItemOptions()): ?>
             <dl class="item-options">
                 <?php foreach ($options as $option): ?>
