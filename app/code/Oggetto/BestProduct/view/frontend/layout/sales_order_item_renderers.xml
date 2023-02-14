@@ -10,5 +10,8 @@
         <referenceBlock name="sales.order.items.renderer.downloadable"
                         class="Oggetto\BestProduct\Block\Order\Item\Renderer\Downloadable"
                         template="Oggetto_BestProduct::order/items/renderer/downloadable.phtml" />
+        <referenceBlock name="sales.order.items.renderers.bundle"
+                        class="Oggetto\BestProduct\Block\Order\Item\Renderer\Bundle"
+                        template="Oggetto_BestProduct::order/items/renderer.phtml" />
     </body>
 </page>
