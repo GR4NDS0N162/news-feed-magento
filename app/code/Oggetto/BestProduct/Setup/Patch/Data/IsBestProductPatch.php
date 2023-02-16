@@ -7,7 +7,6 @@ namespace Oggetto\BestProduct\Setup\Patch\Data;
 use Magento\Catalog\Model\Product;
 use Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface;
 use Magento\Eav\Setup\EavSetupFactory;
-use Magento\Framework\DB\Ddl\Table;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
 use Magento\Framework\Setup\Patch\DataPatchInterface;
@@ -19,7 +18,7 @@ class IsBestProductPatch implements DataPatchInterface
 {
     public const ENTITY_TYPE = Product::ENTITY;
     public const ATTRIBUTE_CODE = 'is_best';
-    public const ATTRIBUTE_TYPE = Table::TYPE_INTEGER;
+    public const ATTRIBUTE_TYPE = 'int';
     public const DEFAULT_VALUE = YesNoMaybe::VALUE_NO;
 
     /**
