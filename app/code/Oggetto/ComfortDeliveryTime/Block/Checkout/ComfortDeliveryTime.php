@@ -35,7 +35,6 @@ class ComfortDeliveryTime implements LayoutProcessorInterface
             'filterBy'    => null,
             'customEntry' => null,
             'visible'     => true,
-            'value'       => '',
         ];
 
         $jsLayout['components']['checkout']['children']['steps']['children']
