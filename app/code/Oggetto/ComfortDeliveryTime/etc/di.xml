@@ -3,4 +3,7 @@
     <type name="Magento\Checkout\Api\ShippingInformationManagementInterface">
         <plugin name="saveComfortDeliveryTimeInfo" type="Oggetto\ComfortDeliveryTime\Plugin\SaveComfortDeliveryTimeInfo" sortOrder="100" />
     </type>
+    <type name="Magento\Quote\Model\Quote\Address\ToOrderAddress">
+        <plugin name="setComfortDeliveryTimeData" type="Oggetto\ComfortDeliveryTime\Plugin\SetComfortDeliveryTimeData" sortOrder="100" />
+    </type>
 </config>

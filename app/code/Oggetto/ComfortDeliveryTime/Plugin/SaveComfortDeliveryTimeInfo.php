@@ -6,6 +6,8 @@ namespace Oggetto\ComfortDeliveryTime\Plugin;
 
 use Magento\Checkout\Api\Data\ShippingInformationInterface;
 use Magento\Checkout\Api\ShippingInformationManagementInterface;
+use Magento\Quote\Model\Quote\Address;
+use Oggetto\ComfortDeliveryTime\Block\Checkout\ComfortDeliveryTime;
 
 class SaveComfortDeliveryTimeInfo
 {
@@ -20,6 +22,13 @@ class SaveComfortDeliveryTimeInfo
         $cartId,
         ShippingInformationInterface $addressInformation,
     ): array {
+        /** @var Address $shippingAddress */
+        $shippingAddress = $addressInformation->getShippingAddress();
+        $comfortDeliveryTime = $shippingAddress->getExtensionAttributes()->getComfortDeliveryTime();
+        if ($comfortDeliveryTime) {
+            $shippingAddress->setData(ComfortDeliveryTime::ATTRIBUTE_CODE, $comfortDeliveryTime);
+        }
+        $addressInformation->setShippingAddress($shippingAddress);
         return [$cartId, $addressInformation];
     }
 }
