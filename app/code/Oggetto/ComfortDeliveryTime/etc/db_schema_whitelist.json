@@ -1,0 +1,12 @@
+{
+    "quote_address": {
+        "column": {
+            "comfort_delivery_time": true
+        }
+    },
+    "sales_order_address": {
+        "column": {
+            "comfort_delivery_time": true
+        }
+    }
+}
