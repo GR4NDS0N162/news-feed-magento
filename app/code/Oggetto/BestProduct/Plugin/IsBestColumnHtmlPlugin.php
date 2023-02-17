@@ -44,6 +44,6 @@ class IsBestColumnHtmlPlugin
                 $item->getData(IsBestOrderItemPatch::ATTRIBUTE_CODE)
             );
         }
-        return $result;
+        return (string) $result;
     }
 }
