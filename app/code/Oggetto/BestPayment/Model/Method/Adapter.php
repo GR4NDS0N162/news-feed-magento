@@ -25,7 +25,7 @@ class Adapter extends PaymentAdapter
         foreach ($quote->getAllItems() as $item) {
             $product = $item->getProduct();
             $isBest = $product->getData(IsBestProductPatch::ATTRIBUTE_CODE) ?? IsBestProductPatch::DEFAULT_VALUE;
-            if ($isBest != YesNoMaybe::VALUE_YES && $isBest != YesNoMaybe::VALUE_MAYBE) {
+            if ($isBest == YesNoMaybe::VALUE_NO) {
                 return false;
             }
         }

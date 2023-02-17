@@ -40,12 +40,10 @@ class IsBestColumnHtmlPlugin
         $column,
     ): string {
         if ($column == 'is-best') {
-            $html = $this->source->getOptionText(
+            $result = (string) $this->source->getOptionText(
                 $item->getData(IsBestOrderItemPatch::ATTRIBUTE_CODE)
             );
-        } else {
-            $html = $result;
         }
-        return (string) $html;
+        return $result;
     }
 }
